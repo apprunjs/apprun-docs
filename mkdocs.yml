@@ -1,5 +1,5 @@
 site_name: AppRun Docs
-repo_url: https://github.com/yysun/apprun-docs
+repo_url: https://github.com/apprunjs/apprun-docs
 edit_uri: edit/master/docs/
 theme:
   name: material
