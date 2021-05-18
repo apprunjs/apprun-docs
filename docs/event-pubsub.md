@@ -1,12 +1,10 @@
-# Architecture
-
-## Event Pub-Sub
+# Event Pub-Sub
 
 Event publication and subscription, also known as event emitter, is a commonly used pattern in JavaScript programming.
 
-* Publishing an event means to raise an event for some other code to handle. Publishing an event is also referred to as firing an event or
+* Publishing an event means raising an event for some other code to handle. Publishing an event is also referred to as firing an event or
 triggering an event.
-* Subscribing an event means to register an event handler function to the event. The event handler function executes when the correspondent event.
+* Subscribing an event means registering an event handler function to the event. The event handler function executes when the correspondent event.
 
 At the core, AppRun is an event pub-sub system.
 
@@ -44,18 +42,6 @@ app.start('my-app', state, view, update);
 ```
 
 When one of the buttons is clicked, it publishes AppRun event +1 or -1. The event handlers increase or decreases the state and return a new state. The view function creates the virtual DOM using the new state. Finally, AppRun renders the virtual DOM.
-
-## State Management
-
-The State is the application state at any given time of your applications. The State is the data flow between Update and View. It acts as the data transfer object (DTO) in traditional multilayered application architecture, where the DTO is an object that carries data between logical and physical layers.
-
-The benefits using events and DTO like the state is that there are no dependencies between the _view_ and _update (event handlers)_. It makes the AppRun applications easier to develop, test, and maintain. You can get more information about [unit testing](11-unit-testing) later.
-
-
-## State History
-
-The state can be stored in state history by AppRun. Once the state history is enabled, we can travel through the history back and forth to get the previous and next state. See the [Counter example](https://apprun.js.org/#counters) and [Todo - undo-redo example](https://apprun.js.org/#todo).
-
 
 ## Asynchronous Events
 

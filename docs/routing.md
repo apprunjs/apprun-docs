@@ -60,3 +60,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
 app["route"] = newRouter;
 ```
+
+## Disable Initial Route Event

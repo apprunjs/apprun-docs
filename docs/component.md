@@ -1,27 +1,8 @@
 # Component
 
-An AppRun component is a mini-application that has the elm architecture, which means inside a component, there are _state_, _view_, and _update_. Components provide a local scope.
-
 The component is a technique to decompose the large system into smaller, manageable, and reusable pieces. The component is the basic building block. Usually, a component is an autonomous and reusable module that encapsulates a set of data and functions.
 
-## Create Your First Component
-
-It is straightforward to create a component. You create a component class around the _state_, _view_, and _update_.
-
-### Component Class
-
-The component class is a subclass of AppRun Component class.
-
-```javascript
-import {app, Component} from 'apprun';
-class Counter extends Component {
-  state = '';
-  view = state => <div/>;
-  update = {};
-}
-```
-
-The counter component uses the _class fields_ to define the _state_, _view_, and _update_. Thanks to the TypeScript, _class fields_ are compiled into the code that browsers can run. Also, TypeScript compiles the JSX in the _view_ function.
+An AppRun component is a mini-application that has the elm architecture, which means inside a component, there are _state_, _view_, and _update_. Components provide a local scope.
 
 ### Render the Component
 
@@ -31,7 +12,7 @@ To use the components, you can render it to an element.
 const element = document.getElementById('my-app');
 app.render(element, <Counter />);
 ```
-When rendering the component, AppRun creates a component instance and render it to the element.
+When rendering the component, AppRun creates a component instance and renders it to the element.
 
 ### Mount and Start
 

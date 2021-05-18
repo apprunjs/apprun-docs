@@ -1,5 +1,12 @@
 # Getting Started
 
+This guide describes how to get up and running with AppRun in minutes
+
+> **AppRun Concepts**
+>
+> If you are looking for an introductory overview of AppRun technology, it is recommended to visit the concepts section.
+
+
 ## Installation
 
 AppRun is distributed on npm.
@@ -61,8 +68,6 @@ You can also load AppRun directly from the unpkg.com CDN:
 <body>
 <script type="module">
   import app from 'https://unpkg.com/apprun?module';
-  import { render, html } from 'https://unpkg.com/lit-html?module';
-  app.render = (e, vdom) => render(vdom, e);
   const view = state => html`<div>${state}</div>`;
   app.start(document.body, 'hello world', view);
 </script>
@@ -106,40 +111,28 @@ You can use JSX in the browser or compile JSX ahead of time. See AppRun CLI belo
 </head>
 <body>
 <script type="text/babel" data-presets="es2017, react">
-  const view = state => <div>${state}</div>;
+  const view = state => <div>{state}</div>;
   app.start(document.body, 'hello world', view);
 </script>
 </body>
 </html>
 ```
 
-## AppRun CLI
-
+## TypeScript and webpack
 
 AppRun includes a command-line tool (CLI) for creating a TypeScript and webpack configured project.
 
-### esbuild
-
-You can initialize a SPA project that uses [esbuild](https://esbuild.github.io/).
-
 ```sh
-npx apprun --init --spa --esbuild
+npx apprun --init
 ```
 
-### TypeScript and Webpack
+## esbuild
 
-You can initialize a SPA project that uses TypeScript and WebPack.
-
-```sh
-npx apprun --init --spa
-```
-
-To initialize a project that targets ES5, use the AppRun CLI with the --es5 flag:
+You can initialize a project that uses [esbuild](https://esbuild.github.io/).
 
 ```sh
-npx apprun --init --spa --es5
+npx apprun --init --esbuild
 ```
-
 
 After the command finishes execution, you can start the application and then navigate to https://localhost:8080 in a browser.
 

@@ -3,6 +3,72 @@ repo_url: https://github.com/apprunjs/apprun-docs
 edit_uri: edit/master/docs/
 theme:
   name: material
+  icon:
+    repo: fontawesome/brands/github
+  favicon: assets/favicon.ico
+  logo: assets/logo.png
   features:
     - navigation.sections
-    - navigation.expand
+
+markdown_extensions:
+  - toc:
+      permalink: true
+  - admonition
+  - md_in_html
+  - pymdownx.highlight
+  - pymdownx.magiclink
+  - pymdownx.superfences
+  - pymdownx.snippets
+
+extra_css:
+  - assets/vendor/codemirror/codemirror.css
+  - assets/style.css
+  -
+extra_javascript:
+  - assets/vendor/codemirror/codemirror.js
+  - assets/vendor/codemirror/mode/javascript/javascript.js
+  - assets/vendor/codemirror/mode/xml/xml.js
+  - assets/vendor/codemirror/mode/jsx/jsx.js
+  - https://unpkg.com/apprun/dist/apprun-html.js
+  - assets/play.js
+
+
+google_analytics:
+  - UA-123786786-1
+  - auto
+
+nav:
+  - Concepts:
+    - Architecture:
+      - Overview: architecture.md
+      - State Management: state-management.md
+      - Event Pubsub: event-pubsub.md
+      - Component: component.md
+    - Examples:
+      - Microservice wirh Dapr: dapr.md
+      - Firebase app: firebase-app.md
+      - Database and Websocket: db-websocket.md
+      - Webassembly app with Rust: rust-app.md
+      - State Machine: state-machine.md
+  - Getting started:
+    - Installation: installation.md
+    - Tutorial: tutorial.md
+    - Dev Tools:
+      - CLI: cli.md
+      - CLI in Browser: cli-in-browser.md
+      - Dev Server: dev-server.md
+  - Single Page Apps:
+    - Creating Project: spa.md
+    - Layout: spa-layout.md
+    - Pages: spa-pages.md
+    - Routing: routing.md
+  - View Pattern:
+    - JSX: view-patterns.md
+    - Directive: directive.md
+    - HTML: html.md
+    - 3rd Party Intergration: 3rd-party-libs.md
+  - Advanced:
+    - Server Side Rendering: ssr.md
+    - Strong Typing: strong-typing.md
+    - Unit Testing: unit-testing.md
+  - Resources: resources.md
