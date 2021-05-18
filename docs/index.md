@@ -1,4 +1,4 @@
-# Welcome AppRun Docs
+# Welcome to AppRun Docs
 
 Welcome to the AppRun user guide! This guide shows you how to get started creating web applications using [AppRun](https://github.com/yysun/apprun).
 

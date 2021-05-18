@@ -1,56 +1,38 @@
-# Introduction
+# Welcome to AppRun Docs
+
+Welcome to the AppRun user guide! This guide shows you how to get started creating web applications using [AppRun](https://github.com/yysun/apprun).
 
 ## What is AppRun
 
 AppRun is a JavaScript library for building applications using the [elm](https://guide.elm-lang.org/architecture) inspired architecture, events, and components.
 > AppRun is an MIT-licensed open source project. Please consider [supporting the project on Patreon](https://www.patreon.com/apprun). 👍❤️🙏
 
-## Why AppRun
+## Overview
+The AppRun Docs are built using [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/).
 
-### Best Developer Experiences
+## Run Locally
 
-* Write less code
-* No proprietary syntax to learn
-* Rich developer tools
+1. Install mkdocs-material
 
-### Flexible and Practical
-
-* State management and routing included
-* Web Components Support
-* Works well with other libraries, such as jQuery, chart.js, D3, lit-html ...
-
-### Best Application Quality
-
-Applications built with AppRun have **fewer lines of code**, **smaller js files**, and **better performance**. See a comparison from [A Real-World Comparison of Front-End Frameworks with Benchmarks (2019 update)](https://medium.freecodecamp.org/a-realworld-comparison-of-front-end-frameworks-with-benchmarks-2019-update-4be0d3c78075).
-
-You can also see the [performance results](https://rawgit.com/krausest/js-framework-benchmark/master/webdriver-ts-results/table.html) compared to other frameworks and libraries in the [js-framework-benchmark](https://github.com/krausest/js-framework-benchmark) project.
-
-
-## AppRun API
-
-You can build applications using the global _state_, _view_ function, and _update_ object.
-
-```javascript
-const state = any;
-const view = state => <div>{state}</div>;
-const update = {};
-app.start(document.body, state, view, update);
+```
+pip install mkdocs-material
 ```
 
-You can also build applications using [components](05-component).
+2. Run mkdocs
 
-```javascript
-import { app, Component } from 'apprun';
-
-class MyApp extends Component {
-  state = {};
-  view = state => <div></div>;
-  update = {};
-}
-
-app.render(document.body, <MyApp />);
+```
+mkdocs serve
 ```
 
-Ready to try it yourself?
+3. Navigate to http://localhost:8000
 
-Head over to [Getting Started](01-start).
+
+## Update docs
+
+1. Fork repo into your account
+2. Edit, commit, and push changes to the forked repo
+2. Submit pull requests
+
+
+Thank you. Have fun.
+
