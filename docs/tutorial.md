@@ -31,7 +31,7 @@ The easiest way is to include AppRun in the HTML file. Let's use the _Counter_ a
 </body>
 </html>
 ```
-
+<apprun-play></apprun-play>
 
 ## Create Your First Component
 
@@ -45,6 +45,7 @@ class Counter extends Component {
   view = state => <div/>;
   update = {};
 }
+```
 
 It is straightforward to re-create the _Counter_ app as a component.
 
@@ -75,7 +76,7 @@ It is straightforward to re-create the _Counter_ app as a component.
 </body>
 </html>
 ```
-
+<apprun-play></apprun-play>
 
 ## Create a Web Component
 
@@ -108,7 +109,7 @@ AppRun components can be defined as web components/custom elements.
 </body>
 </html>
 ```
-
+<apprun-play></apprun-play>
 
 
 Next, you will see a set of [Dev Tools](dev-tools) that can help you develop.

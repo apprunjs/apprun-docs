@@ -29,9 +29,7 @@ extra_javascript:
   - assets/vendor/codemirror/mode/javascript/javascript.js
   - assets/vendor/codemirror/mode/xml/xml.js
   - assets/vendor/codemirror/mode/jsx/jsx.js
-  - https://unpkg.com/apprun/dist/apprun-html.js
-  - assets/play.js
-
+  - assets/apprun-play.js
 
 google_analytics:
   - UA-123786786-1
@@ -53,6 +51,7 @@ nav:
   - Getting started:
     - Installation: installation.md
     - Tutorial: tutorial.md
+    - Play: play.md
     - Dev Tools:
       - CLI: cli.md
       - CLI in Browser: cli-in-browser.md
