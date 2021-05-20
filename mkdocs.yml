@@ -35,11 +35,12 @@ google_analytics:
   - auto
 
 nav:
+  - Home: index.md
   - Concepts:
     - Architecture:
       - Overview: architecture.md
-      - State Management: state-management.md
       - Event Pubsub: event-pubsub.md
+      - State Management: state-management.md
       - Component: component.md
       - Reactivity: reactivity.md
     - Examples:
@@ -49,7 +50,7 @@ nav:
       - Webassembly app with Rust: architecture-ideas/rust-app.md
       - State Machine: architecture-ideas/state-machine.md
   - Getting started:
-    - Installation: installation.md
+    - Installation: getting-started.md
     - Quick Start: tutorial.md
   - Single Page Apps:
     - Creating Project: spa.md

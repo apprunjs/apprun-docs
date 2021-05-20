@@ -1,8 +1,8 @@
 # 3rd Party Libraries
 
-Using jQuery and jQuery plugins is not an anti-pattern. It is welcomed and encouraged. AppRun embraces 3rd libraries and recommends you to use them in your AppRun application development.
+Using jQuery and jQuery plugins is not an anti-pattern. On the contrary, it is welcomed and encouraged. AppRun embraces 3rd libraries and recommends you to use them in your AppRun application development.
 
-AppRun was designed to support 3rd party libraries in mind. The AppRun VDOM is resilient to allow other libraries to change to DOM. The AppRun also has event life cycle callback functions to allow other libraries in AppRun applications.
+AppRun was designed to support 3rd party libraries in mind. The AppRun VDOM is resilient to allow other libraries to change to DOM. 
 
 You can embed a DOM element into JSX or use the JSX _ref_ attribute.
 
@@ -10,7 +10,7 @@ You can embed a DOM element into JSX or use the JSX _ref_ attribute.
 
 It is straightforward to create a DOM element and modify it using the 3rd party library. The DOM element can be embedded into JSX directly. e.g., the example of using chart.js below. The chart.js example above also demonstrates using the _unload_ function to destroy the Chart object.
 
-```javascript
+```js
 export default class extends Component {
   state = {
     data: {
@@ -40,7 +40,7 @@ export default class extends Component {
 
 The JSX _ref_ attribute is a call back function called when the specific DOM element is rendered. The DOM element can be any element in JSX. e.g., the d3 example below. The d3 example also demonstrates using the _mounted_ function to initialize the state as a _Promise_.
 
-```javascript
+```js
 const map = (element, features) => { /*...*/}
 export default class extends Component {
   state = {};

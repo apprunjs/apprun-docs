@@ -59,11 +59,11 @@ It is easy to have simple code in the HTML file. However, most of the time, we u
 
 ## Create Your First Component
 
-AppRun components are mini-applications that also have the  _state_, _view_, and _update_ architecture.
+AppRun components are mini-applications with the  _state_, _view_, and _update_ architecture.
 
-To create a component, you can make the component class extends the AppRun Component class and define the  _state_, _view_, and _update_ properties/fields.
+To create a component, the component class extends the AppRun Component class and defines the  _state_, _view_, and _update_ properties/fields.
 
-```javascript
+```js
 class Counter extends Component {
   state = '';
   view = state => <div/>;

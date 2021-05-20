@@ -1,6 +1,6 @@
 # Routing
 
-Routing in AppRun is event-driven. Handling routing using events is straightforward.
+Routing in AppRun is event-driven. Therefore, handling routing using events is straightforward.
 
 ## Routing Event
 
@@ -14,7 +14,7 @@ That's it. There is no other code for routing.
 
 When the AppRun router triggers an AppRun event with no listener for the route, the router will automatically generate a ROUTER_404_EVENT AppRun event giving the application a chance to degrade gracefully by, perhaps, displaying a 404 page. To bind to this event, here are a few examples of things you can do:
 
-```javascript
+```js
 import app, { Component, ROUTER_404_EVENT } from 'apprun';
 
 // Generate an error message when there's no handler for a URL.
@@ -45,7 +45,7 @@ If you would prefer to use pretty links (i.e., non-hash links) and have HTML5 br
 
 Replacing AppRun's default router couldn't be easier. Just overwrite _app.route_, and you're off to the races. You'll also want to bind to the _popstate_ events and trigger the first URL event (via the DOMContentLoaded event handler in the code example below):
 
-```javascript
+```js
 // A simplistic but not great router.
 function newRouter(url: string) {
   app.run(url);
@@ -61,4 +61,3 @@ document.addEventListener("DOMContentLoaded", () => {
 app["route"] = newRouter;
 ```
 
-## Disable Initial Route Event

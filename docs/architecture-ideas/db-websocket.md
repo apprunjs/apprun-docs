@@ -30,13 +30,13 @@ AppRun has two important functions: _app.run_ and _app.on_. _app.run_ fires even
 
 Module A handles the _print_ event:
 
-```javascript
+```js
 import app from 'apprun';
 export default () => app.on('print', e => console.log(e));
 ```
 Module B fires the _print_ event:
 
-```javascript
+```js
 import app from 'apprun';
 app.run('print', {});
 ```
@@ -72,7 +72,7 @@ We will create a database-driven todo application to demonstrate the new archite
 
 First, we create a WebSocket in the frontend app (_main.tsx_). Then, We define a special AppRun global event called _//ws:_, which sends the events to the server.
 
-```javascript
+```js
 const ws = new WebSocket(`wss://${location.host}`);
 app.on('//ws:', (event, state) => {
   const msg = { event, state };
@@ -84,7 +84,7 @@ app.on('//ws:', (event, state) => {
 
 We create the WebSockets on the webserver side (_index.js_). We listen to the WebSockets messages and convert them to AppRun events. AppRun runs on the webserver. Just like Module A and Module B example above, the AppRun events will be handled in the business logic module (_db.js_).
 
-```javascript
+```js
 const apprun = require('apprun').app;
 require('./db');
 
@@ -120,7 +120,7 @@ Notice the webserver also adds the WebSocket reference, _ws_ as the event parame
 
 We handle AppRun events in the business logic module (_db.js_) to complete the CRUD operations against the database.
 
-```javascript
+```js
 const app = require('apprun').app;
 const sqlite3 = require('sqlite3').verbose();
 const dbFile = "db/todo.db";
@@ -156,7 +156,7 @@ Once completed the database operations, we use the WebSocket reference, _ws_, to
 
 Receiving events from the backend in the frontend app (_main.tsx_) is straightforward.
 
-```javascript
+```js
 const ws = new WebSocket(`wss://${location.host}`);
 ws.onmessage = function (msg) {
   const {event, state} = JSON.parse(msg.data);
@@ -175,7 +175,7 @@ They are ready to serve the frontend application.
 The frontend Todo application is a typical AppRun application that has the Elm inspired architecture (_todo.tsx_). Listed below is the simplified code except.
 
 
-```javascript
+```js
 import app, { Component } from 'apprun';
 
 const state = {

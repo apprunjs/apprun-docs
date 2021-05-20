@@ -1,14 +1,14 @@
 # Directives
 
-AppRun directives are syntax sugars that help simplify the code. They are custom attributes in JSX that have names starting with $. AppRun two out of the box directives: $on and $bind.
+AppRun directives are syntax sugars that help simplify the code. They are custom attributes in JSX that have names starting with $. AppRun two out-of-the-box directives: $on and $bind.
 
 ## $on...
 
 The $on directive simplifies the code to convert the DOM events to AppRun events.
 
-### Convert Events
+### Publish Events
 
-```javascript
+```js
 class Counter extends Component {
   state = 0;
   view = state => <>
@@ -21,13 +21,16 @@ class Counter extends Component {
     '-1': state => state - 1
   };
 }
+new Counter().start(document.body);
 ```
+<apprun-play></apprun-play>
+
 
 ### Invoke Functions
 
 The $on directive can also invoke functions.
 
-```javascript
+```js
 class Counter extends Component {
   state = 0;
   view = state => <div>
@@ -36,20 +39,30 @@ class Counter extends Component {
     <button $onclick={state=>state+1}>+1</button>
   </div>;
 }
+new Counter().start(document.body);
 ```
-
-You can see more $on example from the [AppRun playground](https://apprun.js.org/#play).
+<apprun-play></apprun-play>
 
 ## $bind
 
 The $bind directive synchronizes the HTML input value to the _state_.
-You can see the $bind example from the [AppRun playground](https://apprun.js.org/#play/0).
+You can see the $bind example below.
+
+```js
+const state = '';
+const view = state => <div>
+  <h1>Hello {state}</h1>
+  <input autofocus $bind />
+</div>;
+app.start(document.body, state, view);
+```
+<apprun-play></apprun-play>
 
 ## Custom directive
 
-When AppRun is processing the JSX code, it publishes the $ event when it finds the custom attributes named like $X. You can subscribe to the $ event to provide your directives. E.g., if you create the $animation directive to attach the animation classes from the animation library, [animation.css](https://daneden.github.io/animate.css).
+When AppRun is processing the JSX code, it publishes the $ event when it finds the custom attributes like $X. Thus, you can subscribe to the $ event to provide your directives. E.g., if you create the $animation directive to attach the animation classes from the animation library, [animation.css](https://daneden.github.io/animate.css).
 
-```javascript
+```js
 app.on('$', ({key, props}) => {
   if (key === '$animation') {
     const value = props[key];
@@ -59,4 +72,34 @@ app.on('$', ({key, props}) => {
   }
 });
 ```
-You can see the $animation example from the [AppRun playground](https://apprun.js.org/#play/9).
+You can see the $animation example below.
+
+```js
+// Animation Directive Using animate.css
+app.on('$', ({key, props}) => {
+  if (key === '$animation') {
+    const value = props[key];
+    if (typeof value === 'string') {
+      props.class = `animated ${value}`;
+    }
+  }
+});
+
+const state = {
+  animation: true
+}
+
+const start_animation = state => ({ animation: true })
+const stop_animation = state => ({ animation: false })
+
+const view = state => <>
+  <img $animation={state.animation && 'bounce infinite'} src='/assets/logo.png' />
+  <div $animation='bounceInRight'>
+    <button disabled={state.animation} $onclick={start_animation}>start</button>
+    <button disabled={!state.animation} $onclick={stop_animation}>stop</button>
+  </div>
+</>
+
+app.start(document.body, state, view);
+```
+<apprun-play></apprun-play>

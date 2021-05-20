@@ -8,15 +8,15 @@ We have been using the command-line interface (CLI) in the terminal window and t
 
 In the console of the browser's developer tool (F12), you can type the command.
 
-```javascript
+```js
 _apprun `<command> [options]`
 ```
 
-Just like many other CLI, the *help* command lists all available commands. You can see three commands in the screenshot*components*, *events* and *log*.
+Just like many other CLI, the *help* command lists all available commands. For example, you can see three commands in the screenshot*components*, *events*, and *log*.
 
 ## Why do we need a CLI in the console?
 
-CLI in the console is convenient for watching runtime data. For example, during application development, we often need to debug and exam the internal data of the application. Using the *console.log* function is the easiest yet very powerful way to display the data because the console lets us drill down into the nested array and object structure.
+CLI in the console is convenient for watching runtime data. For example, during application development, we often need to debug and exam the application's internal data. Using the *console.log* function is the easiest yet compelling way to display the data because the console lets us drill down into the nested array and object structure.
 
 ![Drilldown](https://thepracticaldev.s3.amazonaws.com/i/fq37a5rjfoz4pqsi0f05.png)
 
@@ -28,13 +28,13 @@ It is relatively easy to create a CLI in the console than to create a dev-tool a
 
 We create the *_apprun* function in the *window* object.
 
-```javascript
+```js
 window['_apprun'] = (strings) => { }
 ```
 
 The *_apprun* function is called when we type the AppRun commands in the console. The command and the command parameters are passed into the *_apprun* function as the function parameter *strings*, which we can parse and then invoke the command functions.
 
-```javascript
+```js
 window['_apprun'] = (strings) => {
   const [cmd, ...p] = strings[0].split(' ').filter(c => !!c);
   const command = window[`_apprun-${cmd}`];
@@ -44,7 +44,7 @@ window['_apprun'] = (strings) => {
 ```
 It has an extensive architecture. We create the AppRun commands in the *window* object. The AppRun command is a tuple that includes the description of the command and the implementation function of the command. E.g. the help command look like this:
 
-```javascript
+```js
 window['_apprun-help'] = ['', () => {
   Object.keys(window).forEach(cmd => {
     if (cmd.startsWith('_apprun-')) {
@@ -72,7 +72,7 @@ The AppRun CLI in the console is one of the developer tools includes in the AppR
 
 # Conclusion
 
-Developers like CLI. CLI in the console is useful for getting runtime events and messages hard for the traditional CLI in the terminal. The AppRun CLI in the console even extended the CLI beyond watching the data to generate tests. Thus, it increases the development productivity for debugging and testing.
+Developers like CLI. CLI in the console helps get runtime events and messages hard for the traditional CLI in the terminal. The AppRun CLI in the console even extended the CLI beyond watching the data to generate tests. Thus, it increases the development productivity for debugging and testing.
 
 
 

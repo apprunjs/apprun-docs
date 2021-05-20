@@ -2,13 +2,13 @@
 
 The component is a technique to decompose the large system into smaller, manageable, and reusable pieces. The component is the basic building block. Usually, a component is an autonomous and reusable module that encapsulates a set of data and functions.
 
-An AppRun component is a mini-application that has the elm architecture, which means inside a component, there are _state_, _view_, and _update_. Components provide a local scope.
+An AppRun component is a mini-application with elm architecture, which means inside a component, there are _state_, _view_, and _update_. In addition, components provide a local scope.
 
 ### Render the Component
 
-To use the components, you can render it to an element.
+To use the components, you can render them to an element.
 
-```javascript
+```js
 const element = document.getElementById('my-app');
 app.render(element, <Counter />);
 ```
@@ -19,29 +19,29 @@ When rendering the component, AppRun creates a component instance and renders it
 Or you can create the component using the constructor and mount the component instance to an element or to an _element ID_. When the component is mounted to an _element ID_, It will render the element only when it exists.
 
 
-```javascript
+```js
 const element = document.getElementById('my-app');
 new Counter().mount(element);
 ```
 
-You can also pass the initial state in to the component's constructor directly:
+You can also pass the initial state into the component's constructor directly:
 
-```javascript
+```js
 new Counter(100).mount(element);
 ```
 
 
-When the component is mounted, by default, it won't display until the events come. It is useful in the single page application (SPA) scenario where you can mount all components at once. Each component is activated by the routing events.
+When the component is mounted, by default, it won't display until the events come. It is useful in the single-page application (SPA) scenario where you can mount all components at once. Each component is activated by the routing events.
 
 If you need the component to display the initial state, you can use the _start_ function.
 
-```javascript
+```js
 new Counter().start(document.body); // mount and display
 ```
 
 You can render, mount, or start the component to _document.body_.
 
-```javascript
+```js
 //
 app.render(document.body, <Counter />);
 //
@@ -54,7 +54,7 @@ new Counter().start(document.body);
 
 Components can have child components.
 
-```javascript
+```js
 class Child extends Component {
   state = {}
   view = state => <div></div>
@@ -68,11 +68,9 @@ class Parent extends Component {
   </div>
   update = {}
 }
-
 ```
 
-But, you are not forced into the nested component structure. Sometimes, mounting components are more flexible. Please read this post, [Redux vs. The React Context API vs. AppRun](https://medium.com/@yiyisun/redux-vs-the-react-context-api-vs-apprun-f324bee8cbbf).
-
+You are not forced into the nested component structure. Sometimes, mounting components are more flexible. Please read this post, [Redux vs. The React Context API vs. AppRun](https://medium.com/@yiyisun/redux-vs-the-react-context-api-vs-apprun-f324bee8cbbf).
 
 ## Component Events
 
@@ -80,7 +78,7 @@ A Component provides a local scope for events. The _update_ registers the local 
 
 > You can prefix the event name with #, / or @ to make it global.
 
-```javascript
+```js
 class Counter extends Component {
    update = {
       '+1': state=>state+1, // local event
@@ -91,13 +89,13 @@ class Counter extends Component {
 
 The _app.run_ fires the global events that can be picked up by all components.
 
-In addition to use the _update_ for defining event handlers, you can also use the @on decoratot or the $on directive.
+In addition, to use the _update_ for defining event handlers, you can also use the @on decorator or the $on directive.
 
 ### Event Handler Decorator
 
-In the component class we can use the TypeScript to compile the @on decorators to create the event handlers without using the _update_ object.
+In the component class, we can use TypeScript to compile the @on decorators to create the event handlers without using the _update_ object.
 
-```javascript
+```js
 import app, { Component, on } from 'apprun';
 class Counter extends Component {
   state = 0;
@@ -117,9 +115,9 @@ class Counter extends Component {
 
 ### Event Directive
 
-We can also use the [directive](07a-directive) to simplify the event handling.
+We can also use the [directive](directive.md) to simplify the event handling.
 
-```javascript
+```js
 import {app, Component} from 'apprun';
 class Counter extends Component {
   state = 0;
@@ -136,7 +134,7 @@ class Counter extends Component {
 
 Life Cycle Functions are call back functions that AppRun calls during the component life cycle. They are _mounted_, _rendered_, and _unload_.
 
-```javascript
+```js
 import { app, Component } from 'apprun';
 
 class MyApp extends Component {
@@ -156,13 +154,13 @@ app.render(document.body, <MyApp />);
 ### mounted
 
 The _mounted_ function is called after the component instance is mounted to a DOM element. The _mounted_ function can be used to set the initialize the state.
-```javascript
+```js
 mounted: (props: any, children: any[], state: T) => T | void;
 
 ```
 > Note: the _mounted_ function is only called in the child component.
 
-```javascript
+```js
 class Child extends Component {
   state = {} // you can define the initial state
   view = state => <div></div>
@@ -184,23 +182,22 @@ new Parent().start(document.body);
 ### rendered
 
 The _rendered_ function is called after AppRun renders the result of the _view_ function. The _rendered_ function can be used to modify the DOM element using 3rd party libraries.
-```javascript
+```js
 rendered: (state: T, props?: any[]) => void;
 ```
 
 ### unload
 
-The _unload function is called when the DOM element that component is mounted to is removed or reused by other components. The _unload function can be used to clean by the resources created by the 3rd party libraries.
+The _unload function is called when the DOM element that component is mounted to is removed or reused by other components. For example, the _unload function can be used to clean by the resources created by the 3rd party libraries.
 
-```javascript
+```js
 unload: (state: T) => void;
 ```
 
-You can see, the component life cycle functions are useful for integrating [3rd party libraries](08-3rd-party-libs).
-
+You can see, the component life cycle functions are useful for integrating [3rd party libraries](3rd-party-libs.md).
 ## Web Components
 
-You can convert AppRun components into [web components/custom elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components). AppRun components become the custom elements that also can handle AppRun events ([Online Demo](https://apprun.js.org/#play/7)).
+You can convert AppRun components into [web components/custom elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components). AppRun components become the custom elements that also can handle AppRun events.
 
 ```html
 <html>
@@ -235,6 +232,24 @@ You can convert AppRun components into [web components/custom elements](https://
 ```
 <apprun-play></apprun-play>
 
-We have started to mention JSX. Next, you will learn about the [view patterns](06-view-patterns) of using JSX to create a rich user interface.
+
+## HTML Child Components
+
+Unlike JSX, you can embed component class into JSX; when using HTML string components, you will need to make a web component/custom element. Then you can embed the components.
+
+```js
+import app from 'apprun';
+import MyComponent from './MyComponent';
+
+app.webComponent('my-component', MyComponent);
+
+const view = state => {
+  return `<div>
+    <my-component />
+  </div>`;
+};
+app.start('my-app', state, view);
+```
+
 
 

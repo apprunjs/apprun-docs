@@ -24,7 +24,7 @@ When an AppRun event is published, the following steps take place:
 
 AppRun Event Life Cycle connects the _state_, _view_, and _update (event handlers)_ together. Take a look at the _Counter_ example again.
 
-```javascript
+```js
 import app from 'apprun';
 const state = 0;
 const view = state => {
@@ -40,32 +40,120 @@ const update = {
 };
 app.start('my-app', state, view, update);
 ```
+<apprun-play></apprun-play>
 
 When one of the buttons is clicked, it publishes AppRun event +1 or -1. The event handlers increase or decreases the state and return a new state. The view function creates the virtual DOM using the new state. Finally, AppRun renders the virtual DOM.
 
+## Event Scope
+
+In AppRun global application mode, events are global events, which means that events are published and handled globally by all modules.
+
+In AppRun [components](component.md), events are limited within the component's local scope. Local events are only available inside the components.
+
+!!! note
+    _app.run_ publishes global events
+    _this.run_ publishes local events
+
+## Event Directives
+
+In addition to using _app.run_ and _this.run_ for publishing events
+
+[AppRun Directives](directive.md) provides syntax sugar to simplify the event publishing.
+
+
+### JSX Directives
+
+The directives are special HTML attributes with names starting with $, such as _$onclick_. They are the extensions to the JSX syntax to simplify the JSX or add extra features.
+
+We can use _$onclick_ to simplify the syntax of publishing AppRun events from
+
+```js
+<button onclick={()=>app.run('+1')}>+1</button>
+```
+
+to
+
+```js
+<button $onclick='+1'>+1</button>
+```
+
+We use tuple for passing event parameters.
+
+```js
+<button $onclick={['add', +1]}>+1</button>
+```
+
+Also, the _$onclick_ directive can call the event directly.
+
+```js
+const add = count => count + 1;
+const view = count => <button $onclick={add}>
+  Clicks: {count}
+</button>;
+app.start(document.body, 0, view);
+
+```
+<apprun-play></apprun-play>
+
+You can see, because there are no events in this case, we don't need the _update_ object anymore.
+
+### lit-html Directive
+
+[lit-html](https://lit-html.polymer-project.org) is the DOM rendering technology that lets us write HTML templates using [string literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals).
+
+
+Following the idea of using the JSX _event directive_ what can we do a similar thing with lit-html?
+
+
+The good news is that lit-html also has the directive concept to bring the _event directive_ to lit-html. The directive for lit-html is called _run_.
+
+The example below shows how to use the _run_ directive to trigger AppRun events. Also, similar to the JSX event directives, the _run_ directive can call the event lifecycle directly.
+
+```js
+const add = (state, delta) => state + delta;
+const view = state => {
+  return html`<div>
+    <h1>${state}</h1>
+      <button @click=${run('add', -1)}>-1</button>
+      <button @click=${run('add', +1)}>+1</button>
+    </div>`;
+};
+app.start(document.body, 0, view, {add});
+```
+<apprun-play></apprun-play>
+
+The _run_ directive will:
+
+* Call the _add_ function
+* Call the _view_ function
+* Render the HTML element (document.body)
+
+
 ## Asynchronous Events
 
-In the service/API oriented applications, the state is created by changed by the asynchronous operations. e.g., getting remote data from the server.
+In the service API-oriented applications, the state is created by changed by the asynchronous operations. e.g., getting remote data from the server.
 
 It is easy to handle asynchronous operations in the AppRun event handlers. We only need to add the _async_ keyword in front of the event handler and call the functions that return a _Promise_ object with the _await_ keyword.
 
-```javascript
-import app from 'apprun';
-const get = async (url) => { };
+```js
 const state = {};
-const view = (state) => <div>{state}</div>;
+const view = state => <>
+  <div><button $onclick="fetchComic">fetch ...</button></div>
+  {state.loading && <div>loading ... </div>}
+  {state.comic && <img src={state.comic.url}/>}
+</>;
 const update = {
-  '#': async (state) => {
-    try {
-      const data = await get('https://...');
-      return { ...state, data }
-    } catch (err) {
-    return { ...state, err }
-    }
-   }
+  'loading': (state, loading) => ({...state, loading }),
+  'fetchComic': async _ => {
+    app.run('loading', true);
+    const response = await fetch('https://xkcd-imgs.herokuapp.com/');
+    const comic = await response.json();
+    return {comic};
+  }
 };
-app.start('my-app', state, view, update);
+app.start(document.body, state, view, update);
 ```
+<apprun-play></apprun-play>
 
 ## Use Events for Everything
 
@@ -75,17 +163,13 @@ Web programming is event-driven. All we have to do is to convert DOM events to A
 DOM events => AppRun Events => (current state) => Update => (new state) => View => (HTML/Virtual DOM) => Render Web Page
 ```
 
-Events are not only used for handling user interactions. They are used for everything in AppRun.
+Events are not only for handling user interactions. They are used for everything in AppRun.
 
-* [Routing](07-routing) is through event.
-* [Directive](07a-directive) is through event.
+* [Routing](routing.md) is through event.
+* [Directive](directive.md) is through event.
 
-## Event Types
+## Event Typing
 
-Events can be strongly typed using TypeScript Discriminated Unions. If you are interested, please read this post: [Strong Typing in AppRun](https://medium.com/@yiyisun/strong-typing-in-apprun-78520be329c1).
+Events can be strongly typed using TypeScript Discriminated Unions. If you are interested, please read this post: [strong-typing](strong-typing.md).
 
 ![typed events](https://cdn-images-1.medium.com/max/1600/1*Z1y_-n7_Y1bzDUJuw0ORVw.png)
-
-## Event Scope
-
-So far, the AppRun events we see are global events, which means that the events are published and handled globally by all modules. Sometime, you may want to limit the events to a certain scope. You then can use [components](05-component).

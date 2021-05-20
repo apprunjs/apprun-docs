@@ -43,7 +43,7 @@ It has a grid of buttons that users can click at any time. It also displays:
 
 The initial state of the calculator looks like:
 
-```javascript
+```js
 const state = {
   display: '0',
   arg1: 0,
@@ -165,7 +165,7 @@ You can see the state machine is just a simple data structure. We can easily add
 
 We add a new property for tracking the state-machine state, called _*_state*_ into the application state.
 
-```javascript
+```js
 const state = {
   _state: 'START' as States,
   display: '0',

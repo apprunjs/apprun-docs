@@ -2,8 +2,8 @@ Getting links from: http://localhost:8000/
 ├───OK─── http://localhost:8000/assets/logo.png
 ├───OK─── https://github.com/apprunjs/apprun-docs/
 ├───OK─── http://localhost:8000/architecture/
-├───OK─── http://localhost:8000/state-management/
 ├───OK─── http://localhost:8000/event-pubsub/
+├───OK─── http://localhost:8000/state-management/
 ├───OK─── http://localhost:8000/component/
 ├───OK─── http://localhost:8000/reactivity/
 ├───OK─── http://localhost:8000/architecture-ideas/dapr/
@@ -11,7 +11,7 @@ Getting links from: http://localhost:8000/
 ├───OK─── http://localhost:8000/architecture-ideas/db-websocket/
 ├───OK─── http://localhost:8000/architecture-ideas/rust-app/
 ├───OK─── http://localhost:8000/architecture-ideas/state-machine/
-├───OK─── http://localhost:8000/installation/
+├───OK─── http://localhost:8000/getting-started/
 ├───OK─── http://localhost:8000/tutorial/
 ├───OK─── http://localhost:8000/spa/
 ├───OK─── http://localhost:8000/routing/
@@ -27,38 +27,43 @@ Getting links from: http://localhost:8000/
 ├───OK─── https://github.com/apprunjs/apprun-docs/edit/master/docs/index.md
 ├───OK─── https://github.com/yysun/apprun
 ├───OK─── https://guide.elm-lang.org/architecture
-├─BROKEN─ http://localhost:8000/01-start (HTTP_404)
 ├───OK─── https://squidfunk.github.io/mkdocs-material/
-Finished! 56 links found. 26 excluded. 1 broken.
+Finished! 60 links found. 31 excluded. 0 broken.
 
 Getting links from: http://localhost:8000/architecture/
 ├───OK─── https://github.com/apprunjs/apprun-docs/edit/master/docs/architecture.md
-Finished! 59 links found. 58 excluded. 0 broken.
-
-Getting links from: http://localhost:8000/state-management/
-├───OK─── https://github.com/apprunjs/apprun-docs/edit/master/docs/state-management.md
-├─BROKEN─ http://localhost:8000/state-management/11-unit-testing (HTTP_404)
-├───OK─── https://apprun.js.org/#counters
-Finished! 57 links found. 54 excluded. 1 broken.
+├───OK─── https://dev-to-uploads.s3.amazonaws.com/i/hdjy2w33ipeqdv9wxbea.png
+├───OK─── https://davesquared.net/2010/07/essence-and-ceremony-ruby-and-c.html
+├───OK─── http://bryanpendleton.blogspot.com/2010/02/ceremony-vs-essence.html
+├───OK─── https://dev-to-uploads.s3.amazonaws.com/i/7mo21xx84dlho7j9tybp.png
+├───OK─── https://dev-to-uploads.s3.amazonaws.com/i/7eypk2z64h5azepxnlbc.png
+├───OK─── https://svelte.dev/tutorial/reactive-assignments
+├───OK─── https://dev-to-uploads.s3.amazonaws.com/i/o5j864n6r89tvqzqbcev.png
+├───OK─── https://reactjs.org/docs/hooks-overview.html
+├───OK─── https://dev-to-uploads.s3.amazonaws.com/i/qtmjinxl7zqpoyz0og41.png
+├───OK─── https://vue-composition-api-rfc.netlify.com/#type-issues-with-class-api
+├───OK─── https://dev-to-uploads.s3.amazonaws.com/i/v44mpss7ysv5wwx4p45j.png
+├───OK─── https://medium.com/@yiyisun/strong-typing-in-apprun-78520be329c1
+Finished! 118 links found. 105 excluded. 0 broken.
 
 Getting links from: http://localhost:8000/event-pubsub/
 ├───OK─── https://github.com/apprunjs/apprun-docs/edit/master/docs/event-pubsub.md
 ├───OK─── http://localhost:8000/imgs/Figure_1-1.png
-├─BROKEN─ http://localhost:8000/event-pubsub/07-routing (HTTP_404)
-├─BROKEN─ http://localhost:8000/event-pubsub/07a-directive (HTTP_404)
-├───OK─── https://medium.com/@yiyisun/strong-typing-in-apprun-78520be329c1
+├───OK─── https://lit-html.polymer-project.org/
+├───OK─── https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals
 ├───OK─── https://cdn-images-1.medium.com/max/1600/1*Z1y_-n7_Y1bzDUJuw0ORVw.png
-├─BROKEN─ http://localhost:8000/event-pubsub/05-component (HTTP_404)
-Finished! 72 links found. 65 excluded. 3 broken.
+Finished! 85 links found. 80 excluded. 0 broken.
+
+Getting links from: http://localhost:8000/state-management/
+├───OK─── https://github.com/apprunjs/apprun-docs/edit/master/docs/state-management.md
+├───OK─── http://localhost:8000/imgs/Figure_3-1.png
+Finished! 63 links found. 61 excluded. 0 broken.
 
 Getting links from: http://localhost:8000/component/
 ├───OK─── https://github.com/apprunjs/apprun-docs/edit/master/docs/component.md
 ├───OK─── https://medium.com/@yiyisun/redux-vs-the-react-context-api-vs-apprun-f324bee8cbbf
-├─BROKEN─ http://localhost:8000/component/07a-directive (HTTP_404)
-├─BROKEN─ http://localhost:8000/component/08-3rd-party-libs (HTTP_404)
 ├───OK─── https://developer.mozilla.org/en-US/docs/Web/Web_Components
-├─BROKEN─ http://localhost:8000/component/06-view-patterns (HTTP_404)
-Finished! 90 links found. 84 excluded. 3 broken.
+Finished! 92 links found. 89 excluded. 0 broken.
 
 Getting links from: http://localhost:8000/reactivity/
 ├───OK─── https://github.com/apprunjs/apprun-docs/edit/master/docs/reactivity.md
@@ -72,19 +77,20 @@ Getting links from: http://localhost:8000/reactivity/
 ├───OK─── https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy
 ├───OK─── https://exploringjs.com/es6/ch_proxies.html#sec_programming-vs-metaprogramming
 ├───OK─── https://apprun.js.org/docs/#/04-architecture
-Finished! 83 links found. 72 excluded. 0 broken.
+Finished! 82 links found. 71 excluded. 0 broken.
 
 Getting links from: http://localhost:8000/architecture-ideas/dapr/
 ├───OK─── https://github.com/apprunjs/apprun-docs/edit/master/docs/architecture-ideas/dapr.md
 ├───OK─── https://dapr.io/
 ├───OK─── https://github.com/yysun/apprun-dapr/raw/master/public/apprun-dapr-1.png
 ├───OK─── https://github.com/yysun/apprun-dapr/
-Finished! 54 links found. 50 excluded. 0 broken.
+Finished! 55 links found. 51 excluded. 0 broken.
 
 Getting links from: http://localhost:8000/architecture-ideas/firebase-app/
 ├───OK─── https://github.com/apprunjs/apprun-docs/edit/master/docs/architecture-ideas/firebase-app.md
 ├───OK─── https://dev.to/yysun/create-a-phoenix-liveview-like-app-in-js-with-apprun-dc8
 ├───OK─── https://dev.to/yysun/database-driven-applications-using-websockets-2b9o
+├───OK─── https://apprun.js.org/
 ├───OK─── https://firebase.google.com/
 ├───OK─── https://github.com/yysun/apprun-firebase/raw/master/architecture.png
 ├───OK─── https://dev-to-uploads.s3.amazonaws.com/i/siavm31erdel8ea0asgj.png
@@ -93,7 +99,7 @@ Getting links from: http://localhost:8000/architecture-ideas/firebase-app/
 ├───OK─── https://github.com/yysun/apprun-firebase
 ├───OK─── https://github.com/yysun/apprun-apress-book/tree/master/Chapter_05
 ├───OK─── https://github.com/apprunjs/apprun-electron-forge
-Finished! 97 links found. 86 excluded. 0 broken.
+Finished! 98 links found. 86 excluded. 0 broken.
 
 Getting links from: http://localhost:8000/architecture-ideas/db-websocket/
 ├───OK─── https://github.com/apprunjs/apprun-docs/edit/master/docs/architecture-ideas/db-websocket.md
@@ -104,7 +110,7 @@ Getting links from: http://localhost:8000/architecture-ideas/db-websocket/
 ├───OK─── https://glitch.com/~apprun-websockets-sqlite
 ├───OK─── https://github.com/yysun/apprun-websockets-sqlite
 ├───OK─── https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API
-Finished! 90 links found. 82 excluded. 0 broken.
+Finished! 91 links found. 83 excluded. 0 broken.
 
 Getting links from: http://localhost:8000/architecture-ideas/rust-app/
 ├───OK─── https://github.com/apprunjs/apprun-docs/edit/master/docs/architecture-ideas/rust-app.md
@@ -121,7 +127,7 @@ Getting links from: http://localhost:8000/architecture-ideas/rust-app/
 ├───OK─── https://dev-to-uploads.s3.amazonaws.com/i/dmy2qkqqtlyxed4qovlf.png
 ├───OK─── https://dev-to-uploads.s3.amazonaws.com/i/atljaqot7q08qcu9rk9m.png
 ├───OK─── https://yysun.github.io/apprun-rust
-Finished! 100 links found. 86 excluded. 1 broken.
+Finished! 101 links found. 87 excluded. 1 broken.
 
 Getting links from: http://localhost:8000/architecture-ideas/state-machine/
 ├───OK─── https://github.com/apprunjs/apprun-docs/edit/master/docs/architecture-ideas/state-machine.md
@@ -136,55 +142,52 @@ Getting links from: http://localhost:8000/architecture-ideas/state-machine/
 ├───OK─── https://www.smashingmagazine.com/2018/01/rise-state-machines/
 ├───OK─── https://jonbellah.com/articles/intro-state-machines
 ├───OK─── https://statecharts.github.io/what-is-a-state-machine.html
-Finished! 96 links found. 84 excluded. 1 broken.
+Finished! 97 links found. 85 excluded. 1 broken.
 
-Getting links from: http://localhost:8000/installation/
-├───OK─── https://github.com/apprunjs/apprun-docs/edit/master/docs/installation.md
-├───OK─── https://lit-html.polymer-project.org/
+Getting links from: http://localhost:8000/getting-started/
+├─BROKEN─ https://github.com/apprunjs/apprun-docs/edit/master/docs/getting-started.md (HTTP_404)
 ├───OK─── https://github.com/WebReflection/uhtml
 ├───OK─── https://reactjs.org/docs/introducing-jsx.html
 ├───OK─── https://esbuild.github.io/
 ├─BROKEN─ https://localhost:8080/ (ERRNO_ECONNREFUSED)
-Finished! 89 links found. 83 excluded. 1 broken.
+Finished! 90 links found. 85 excluded. 2 broken.
 
 Getting links from: http://localhost:8000/tutorial/
 ├───OK─── https://github.com/apprunjs/apprun-docs/edit/master/docs/tutorial.md
-Finished! 63 links found. 62 excluded. 0 broken.
+Finished! 64 links found. 63 excluded. 0 broken.
 
 Getting links from: http://localhost:8000/spa/
 ├───OK─── https://github.com/apprunjs/apprun-docs/edit/master/docs/spa.md
 ├───OK─── http://localhost:8000/imgs/Figure_7-2.png
-Finished! 58 links found. 56 excluded. 0 broken.
+Finished! 59 links found. 57 excluded. 0 broken.
 
 Getting links from: http://localhost:8000/routing/
 ├───OK─── https://github.com/apprunjs/apprun-docs/edit/master/docs/routing.md
 ├───OK─── https://github.com/phBalance/apprun-router
-Finished! 67 links found. 65 excluded. 0 broken.
+Finished! 65 links found. 63 excluded. 0 broken.
 
 Getting links from: http://localhost:8000/view-patterns/
 ├───OK─── https://github.com/apprunjs/apprun-docs/edit/master/docs/view-patterns.md
-├─BROKEN─ http://localhost:8000/view-patterns/07-routing (HTTP_404)
-Finished! 87 links found. 85 excluded. 1 broken.
+Finished! 86 links found. 85 excluded. 0 broken.
 
 Getting links from: http://localhost:8000/directive/
 ├───OK─── https://github.com/apprunjs/apprun-docs/edit/master/docs/directive.md
 ├───OK─── https://daneden.github.io/animate.css
-Finished! 70 links found. 68 excluded. 0 broken.
+Finished! 68 links found. 66 excluded. 0 broken.
 
 Getting links from: http://localhost:8000/3rd-party-libs/
 ├───OK─── https://github.com/apprunjs/apprun-docs/edit/master/docs/3rd-party-libs.md
 ├───OK─── https://github.com/yysun/apprun-bootstrap/raw/master/screenshot.png
 ├───OK─── https://github.com/apprunjs/apprun-coreui
 ├───OK─── https://github.com/apprunjs/apprun-coreui/raw/master/screen.png
-Finished! 67 links found. 63 excluded. 0 broken.
+Finished! 68 links found. 64 excluded. 0 broken.
 
 Getting links from: http://localhost:8000/cli-in-console/
 ├───OK─── https://github.com/apprunjs/apprun-docs/edit/master/docs/cli-in-console.md
 ├───OK─── https://thepracticaldev.s3.amazonaws.com/i/khumq8np94i5uwo9bwn1.png
 ├───OK─── https://thepracticaldev.s3.amazonaws.com/i/fq37a5rjfoz4pqsi0f05.png
-├───OK─── https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#Tagged_templates
 ├───OK─── https://gothinkster.github.io/apprun-realworld-example-app
-Finished! 64 links found. 59 excluded. 0 broken.
+Finished! 65 links found. 61 excluded. 0 broken.
 
 Getting links from: http://localhost:8000/dev-server/
 ├───OK─── https://github.com/apprunjs/apprun-docs/edit/master/docs/dev-server.md
@@ -195,7 +198,7 @@ Getting links from: http://localhost:8000/dev-server/
 ├───OK─── https://github.com/yysun/apprun-dev-server
 ├───OK─── https://www.npmjs.com/package/live-server
 ├───OK─── https://github.com/yysun/apprun-dev-server/raw/master/public/apprun-hmr.gif
-Finished! 76 links found. 68 excluded. 0 broken.
+Finished! 77 links found. 69 excluded. 0 broken.
 
 Getting links from: http://localhost:8000/ssr/
 ├───OK─── https://github.com/apprunjs/apprun-docs/edit/master/docs/ssr.md
@@ -203,16 +206,28 @@ Getting links from: http://localhost:8000/ssr/
 ├─BROKEN─ https://apprun-ssr.glitch.me/ (HTTP_503)
 ├───OK─── https://medium.com/@yiyisun/making-asp-net-core-mvc-apps-into-single-page-apps-using-apprun-e1ae4dbc60da
 ├───OK─── https://cdn-images-1.medium.com/max/1600/1*1ZtgK-R4YDb8P4ahLq60Hg.png
-Finished! 61 links found. 56 excluded. 1 broken.
+Finished! 62 links found. 57 excluded. 1 broken.
 
 Getting links from: http://localhost:8000/strong-typing/
 ├───OK─── https://github.com/apprunjs/apprun-docs/edit/master/docs/strong-typing.md
+├───OK─── https://www.typescriptlang.org/docs/handbook/2/generics.html
+├───OK─── https://cdn-images-1.medium.com/max/1600/1*jT2qW1LgZVqSZWZgb_VZjQ.png
+├───OK─── https://cdn-images-1.medium.com/max/1600/1*2xYoeK0KwyQ2FYMXwMjnmA.png
+├───OK─── https://cdn-images-1.medium.com/max/1600/1*fK3RbeU4lWt9_kPDa7-jFg.png
+├───OK─── https://cdn-images-1.medium.com/max/1600/1*QsEmxowOL0oKWZ6dvlTw7Q.png
+├───OK─── https://cdn-images-1.medium.com/max/1600/1*VvHWpwTr0pXm08LHgXtTpQ.png
+├───OK─── https://cdn-images-1.medium.com/max/1600/1*veW7AQ1RTVcoRbd3IMp0og.png
+├───OK─── https://cdn-images-1.medium.com/max/1600/1*fTqni_vS4c5uD2_Q4Kw31A.png
+├───OK─── https://cdn-images-1.medium.com/max/1600/1*kkwPCiTcA9ny9IJ3uFTZsA.png
+├───OK─── https://cdn-images-1.medium.com/max/1600/1*fY-lIFIuFSpukxP3s82JYQ.png
+├───OK─── https://cdn-images-1.medium.com/max/1600/1*V3O5lHlg_ShD75Va0stOpA.png
 ├───OK─── https://cdn-images-1.medium.com/max/1600/1*RY-DEfVgOjj_clIEW4HeTA.png
-Finished! 53 links found. 51 excluded. 0 broken.
+├───OK─── https://cdn-images-1.medium.com/max/1600/1*AhiWkaV3WynuHElM6mPqjQ.png
+├───OK─── https://cdn-images-1.medium.com/max/1600/1*Rje-0LBmymjwBZbFW6zHKw.png
+Finished! 108 links found. 93 excluded. 0 broken.
 
 Getting links from: http://localhost:8000/unit-testing/
 ├───OK─── https://github.com/apprunjs/apprun-docs/edit/master/docs/unit-testing.md
-├─BROKEN─ http://localhost:8000/unit-testing/03-dev-tools (HTTP_404)
 ├───OK─── http://localhost:8000/imgs/Figure_12-9.png
 ├───OK─── http://localhost:8000/imgs/Figure_12-10.png
 ├───OK─── http://localhost:8000/imgs/Figure_12-11.png
@@ -222,7 +237,7 @@ Getting links from: http://localhost:8000/unit-testing/
 ├───OK─── https://github.com/gothinkster/apprun-realworld-example-app/blob/master/tests/mocks.ts
 ├───OK─── https://github.com/gothinkster/apprun-realworld-example-app/blob/master/tests/auto-events.spec.ts
 ├───OK─── https://github.com/gothinkster/apprun-realworld-example-app/blob/master/tests/snapshot.spec.ts
-Finished! 76 links found. 65 excluded. 1 broken.
+Finished! 77 links found. 67 excluded. 0 broken.
 
 Getting links from: http://localhost:8000/resources/
 ├───OK─── https://github.com/apprunjs/apprun-docs/edit/master/docs/resources.md
@@ -235,7 +250,7 @@ Getting links from: http://localhost:8000/resources/
 ├───OK─── https://medium.freecodecamp.org/a-real-world-comparison-of-front-end-frameworks-with-benchmarks-e1cb62fd526c
 ├───OK─── https://github.com/krausest/js-framework-benchmark
 ├───OK─── https://rawgit.com/krausest/js-framework-benchmark/master/webdriver-ts-results/table.html
-Finished! 74 links found. 64 excluded. 0 broken.
+Finished! 75 links found. 65 excluded. 0 broken.
 
-Finished! 1759 links found. 1592 excluded. 14 broken.
-Elapsed time: 2 minutes, 32 seconds
+Finished! 1906 links found. 1724 excluded. 5 broken.
+Elapsed time: 1 minute, 36 seconds

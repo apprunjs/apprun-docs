@@ -9,7 +9,7 @@ tags: ESM, JavaScript, TypeScript, Module
 
 We use the [JavaScript modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) (ESM) extensively while coding nowadays. But we still cannot deploy the module-based code yet. It is because the browsers don't know how to handle global modules.  E.g., When developing applications using [AppRun](https://github.com/yysun/apprun), we need a globe module of _apprun_.
 
-```javascript
+```js
 import app from 'apprun'
 ```
 
@@ -21,7 +21,7 @@ In the past, I was thinking of building a tool to convert the global modules to 
 
 > The [npm package CDN](https://unpkg.com), unpkg.com [supports delivering modules](https://github.com/mjackson/unpkg/issues/34) for along time. We can load _apprun_ as a module from _unpkg_.
 
-```javascript
+```js
 import app from 'https://unpkg.com/apprun?module'
 ```
 
@@ -39,7 +39,7 @@ This is a static web server for developing JavaScript/TypeScript using ES module
 
 ![](https://github.com/yysun/apprun-dev-server/raw/master/public/apprun-hmr.gif)
 
-The best part of the apprun-dev-server is that it does NOT require any code in our components to handle the hot module replacement. It retains the component state; replaces the module; and then puts the state back. All done automatically.
+The best part of the apprun-dev-server is that it does NOT require any code in our components to handle the hot module replacement. Instead, it retains the component state; replaces the module; and then puts the state back. All done automatically.
 
 If you want to refresh the state, you can reload the page in the browser by pressing F5 (on Windows) or Command+R (on Mac).
 
@@ -47,7 +47,7 @@ If you want to refresh the state, you can reload the page in the browser by pres
 
 You export Component as the default module export.
 
-```javascript
+```js
 import { app, Component } from 'apprun';
 
 export default class AboutComponent extends Component {
@@ -63,7 +63,7 @@ export default class AboutComponent extends Component {
 
 Then, you use the Component in the main file.
 
-```javascript
+```js
 import About from './About';
 
 new About().start('my-app');
@@ -104,7 +104,7 @@ npx degit yysun/apprun-esm-server my-app
 
 Create a apprun-dev-server.config.js in your project:
 
-```javascript
+```js
 module.exports = {
   port: 8181, // Set the server port. Defaults to 8080.
   host: "0.0.0.0", // Set the address to bind to. Defaults to 0.0.0.0 or process.env.IP.
@@ -119,7 +119,11 @@ module.exports = {
 ```
 ## Use with esbuild
 
+The apprun-dev-server is installed when using AppRun CLI to create AppRun projects.
 
+```sh
+npx apprun --init --spa --esbuild
+```
 
 Give it a try and send pull requests.
 

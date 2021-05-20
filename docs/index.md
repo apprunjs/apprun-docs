@@ -20,11 +20,11 @@ AppRun has the following benefits overall.
 
 ## Is AppRun for me?
 
-If you are a beginner developer, you will learn how to build web applications with really good architecture quickly. Also, what you learned in AppRun will help you to understand other frameworks and libraries.
+If you are a beginner developer, you will learn how to build web applications with outstanding architecture quickly. Also, what you learned in AppRun will help you to understand other frameworks and libraries.
 
 If you are an experienced developer, you will learn AppRun is a lightweight alternative to other frameworks and libraries. As a result, you will have one more good tool in your toolbox to meet your clients' needs.
 
 
 Ready to try it yourself?
 
-Head over to [Getting Started](01-start).
+Head over to [Getting Started](getting-started.md).

@@ -16,13 +16,13 @@ npm install apprun
 
 You can also load AppRun directly from the unpkg.com CDN:
 
-```javascript
+```js
 <script src="https://unpkg.com/apprun"></script>
 ```
 
 Or when you need HTML or lit-HTML:
 
-```javascript
+```js
 <script src="https://unpkg.com/apprun/dist/apprun-html.js"></script>
 ```
 
@@ -151,6 +151,13 @@ After the command finishes execution, you can start the application and then nav
 ```sh
 npm start
 ```
+
+AppRun projects use the following convention.
+
+* Use _npm start_ to start the dev server
+* Use _npm test_ to run unit tests
+* Use _npm run build_ to build for production
+
 
 ## Starter Template
 

@@ -64,7 +64,7 @@ The example is a ToDo application.
 
 As usual, in the AppRun applications, we convert the DOM events into AppRun events. E.g., When users click the _add_ button, we publish the //: event.
 
-```javascript
+```js
 // in JSX
 <button $onclick={[add]}>Add</button>
 
@@ -78,7 +78,7 @@ const add = () => {
 
 The //: event handler saves the event into FireStore.
 
-```javascript
+```js
 const db = firebase.firestore();
 app.on('//:', (event, data = {}) => {
   db.collection(`events`).add({ uid, event, data })
@@ -91,7 +91,7 @@ FireStore triggers our Function, which is monitoring the _events_ collection.
 
 ### Handle Events in Functions
 
-```javascript
+```js
 exports.updateTodo = functions.firestore.document('events/{Id}')
   .onWrite((change, context) => {
     const dat = change.after.data() as any;
@@ -116,7 +116,7 @@ FireStore then pushes the data change to the frontend.
 
 In the frontend, we subscribe to the _onSnapshot_ of FireStore and publish the AppRun event, '@show-all'.
 
-```javascript
+```js
 const db = firebase.firestore();
 db.collection(`users/${uid}/todos`).onSnapshot(snapshot => {
   app.run('@show-all',
@@ -126,7 +126,7 @@ db.collection(`users/${uid}/todos`).onSnapshot(snapshot => {
 
 Now, we are back to our AppRun application world, in which you can see the three familiar parts: _state_, _view_, and _update_.
 
-```javascript
+```js
 import app, { Component } from 'apprun';
 
 const state = {

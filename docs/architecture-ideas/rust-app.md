@@ -99,7 +99,7 @@ npm i @wasm-tool/wasm-pack-plugin -D
 
 And add the wasm-pack-plugin into the _webpack.config.js_.
 
-```javascript
+```js
 const WasmPackPlugin = require("@wasm-tool/wasm-pack-plugin");
 module.exports = {
   ...
@@ -151,7 +151,7 @@ pub fn add(a: i32, b: i32) -> i32 {
 
 This function adds two numbers. We can make a counter application from it. Here is the counter application in AppRun.
 
-```javascript
+```js
 import app from 'apprun';
 
 let wasm;
@@ -212,7 +212,7 @@ pub fn start() {
 
 Back to AppRun code, we will handle the '@hello' event.
 
-```javascript
+```js
 import app from 'apprun';
 
 let wasm;
