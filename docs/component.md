@@ -31,7 +31,7 @@ new Counter(100).mount(element);
 ```
 
 
-When the component is mounted, by default it won't display until the events come. It is useful in the single page application (SPA) scenario where you can mount all components at once. Each component is activated by the routing events.
+When the component is mounted, by default, it won't display until the events come. It is useful in the single page application (SPA) scenario where you can mount all components at once. Each component is activated by the routing events.
 
 If you need the component to display the initial state, you can use the _start_ function.
 

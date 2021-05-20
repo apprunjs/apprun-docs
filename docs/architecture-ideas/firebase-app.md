@@ -22,9 +22,9 @@ The example application uses the following technologies:
 * Firebase Hosting to host the frontend
 * Firebase Authentication
 
-> [Firebase](firebase.google.com) is Google's mobile platform that helps you quickly develop high-quality apps and grow your business.
+> [Firebase](https://firebase.google.com) is Google's mobile platform that helps you quickly develop high-quality apps and grow your business.
 
-I will focus on the architecture instead of step by step instructions. If you are not familiar with the Firebase suite of products, please visit [the docs](https://firebase.google.com/docs) and search for the tutorials.
+I will focus on the architecture instead of step-by-step instructions. If you are not familiar with the Firebase suite of products, please search google for the tutorials.
 
 The architecture can be summarized in the diagram below.
 
