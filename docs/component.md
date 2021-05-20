@@ -233,6 +233,7 @@ You can convert AppRun components into [web components/custom elements](https://
 </body>
 </html>
 ```
+<apprun-play></apprun-play>
 
 We have started to mention JSX. Next, you will learn about the [view patterns](06-view-patterns) of using JSX to create a rich user interface.
 

@@ -43,7 +43,7 @@ If you would prefer to use pretty links (i.e., non-hash links) and have HTML5 br
 
 ## Replacing Default Router
 
-Replacing AppRun's default router couldn't be easier. Just overwrite app.route, and you're off to the races. You'll also want to bind to the _popstate_ events and trigger the first URL event (via the DOMContentLoaded event handler in the code example below):
+Replacing AppRun's default router couldn't be easier. Just overwrite _app.route_, and you're off to the races. You'll also want to bind to the _popstate_ events and trigger the first URL event (via the DOMContentLoaded event handler in the code example below):
 
 ```javascript
 // A simplistic but not great router.

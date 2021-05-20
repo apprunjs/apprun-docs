@@ -14,7 +14,6 @@ markdown_extensions:
   - toc:
       permalink: true
   - admonition
-  - md_in_html
   - pymdownx.highlight
   - pymdownx.magiclink
   - pymdownx.superfences
@@ -42,31 +41,26 @@ nav:
       - State Management: state-management.md
       - Event Pubsub: event-pubsub.md
       - Component: component.md
+      - Reactivity: reactivity.md
     - Examples:
-      - Microservice wirh Dapr: dapr.md
-      - Firebase app: firebase-app.md
-      - Database and Websocket: db-websocket.md
-      - Webassembly app with Rust: rust-app.md
-      - State Machine: state-machine.md
+      - Microservice wirh Dapr: architecture-ideas/dapr.md
+      - Serverless App Using Firebase: architecture-ideas/firebase-app.md
+      - Database and Websocket: architecture-ideas/db-websocket.md
+      - Webassembly app with Rust: architecture-ideas/rust-app.md
+      - State Machine: architecture-ideas/state-machine.md
   - Getting started:
     - Installation: installation.md
-    - Tutorial: tutorial.md
-    - Play: play.md
-    - Dev Tools:
-      - CLI: cli.md
-      - CLI in Browser: cli-in-browser.md
-      - Dev Server: dev-server.md
+    - Quick Start: tutorial.md
   - Single Page Apps:
     - Creating Project: spa.md
-    - Layout: spa-layout.md
-    - Pages: spa-pages.md
     - Routing: routing.md
   - View Pattern:
     - JSX: view-patterns.md
     - Directive: directive.md
-    - HTML: html.md
     - 3rd Party Intergration: 3rd-party-libs.md
   - Advanced:
+    - CLI in Console: cli-in-console.md
+    - Dev Server: dev-server.md
     - Server Side Rendering: ssr.md
     - Strong Typing: strong-typing.md
     - Unit Testing: unit-testing.md

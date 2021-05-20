@@ -8,8 +8,23 @@ Application logic is broken down into three separated parts in the AppRun archit
 
 Use a _Counter_ as an example.
 
-![](imgs/apprun-demo.gif)
+```js
+const state = 0;
 
+const view = state => <div>
+  <h1>{state}</h1>
+  <button onclick={()=>app.run('-1')}>-1</button>
+  <button onclick={()=>app.run('+1')}>+1</button>
+</div>;
+
+const update = {
+  '+1': state => state + 1,
+  '-1': state => state - 1
+};
+
+app.start(document.body, state, view, update);
+```
+<apprun-play></apprun-play>
 
 ### State
 
@@ -20,7 +35,7 @@ const state = 0;
 ```
 
 !!! note
-    You define the initial state. AppRun manages the state. Therefore the initiale state is an immutable constatnt.
+    You define the initial state. AppRun manages the state. Therefore the initial state is an immutable constant.
 
 ### View
 
@@ -35,7 +50,7 @@ const view = state => <div>
 ```
 
 !!! note
-    AppRun allows you to choose your favorite virtual DOM technology in the _view_ function. The example above uses JSX. You can also use lit-html, uhtml and etc.
+    AppRun allows you to choose your favorite virtual DOM technology in the _view_ function. The example above uses JSX. You can also use lit-html, uhtml, and etc.
 
 ### Update
 
@@ -48,21 +63,13 @@ const update = {
 ```
 
 !!! note
-    There are a ew other ways to define event handlers.
-
+    There are a few other ways to define event handlers.
 
 When the three parts, the _state_, _view_, and _update_ are provided to AppRun to start an application, AppRun registers the event handlers defined in the _update_ and waits for AppRun events.
 
-## Try it Online
-
-You can run the _Counter_ example above locally or use the following online editors.
-
-* [AppRun Playground](https://apprun.js.org/#play)
-* [glitch](https://glitch.com/~apprun-counter).
-* [repl.it](https://repl.it/@yysun/apprun-counter)
-* [jsfiddle](https://jsfiddle.net/ap1kgyeb/4)
-
-
+```js
+app.start(document.body, state, view, update);
+```
 
 
 

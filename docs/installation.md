@@ -17,12 +17,18 @@ npm install apprun
 You can also load AppRun directly from the unpkg.com CDN:
 
 ```javascript
+<script src="https://unpkg.com/apprun"></script>
+```
+
+Or when you need HTML or lit-HTML:
+
+```javascript
 <script src="https://unpkg.com/apprun/dist/apprun-html.js"></script>
 ```
 
 ## Use in Browser
 
-### Use Global AppRun app
+### Use CDN
 
 ```html
 <html lang="en">
@@ -38,7 +44,7 @@ You can also load AppRun directly from the unpkg.com CDN:
 </body>
 </html>
 ```
-
+<apprun-play></apprun-play>
 
 ### Use ES Module
 
@@ -51,15 +57,16 @@ You can also load AppRun directly from the unpkg.com CDN:
 <script type="module">
   import { app } from 'https://unpkg.com/apprun/esm/apprun-html?module';
   const view = state => `<div>${state}</div>`;
-  app.start(document.body, 'hello world', view);
+  app.start(document.body, 'hello ESM', view);
 </script>
 </body>
 </html>
 ```
+<apprun-play></apprun-play>
 
 ### Use lit-html
 
-[lit-html](https://lit-html.polymer-project.org/) is an efficient, expressive, extensible HTML templating library for JavaScript from the Polumer project.
+[lit-html](https://lit-html.polymer-project.org/) is an efficient, expressive, extensible HTML templating library for JavaScript from the Polumer project. AppRun has included lit-html.
 ```html
 <html lang="en">
 <head>
@@ -67,17 +74,18 @@ You can also load AppRun directly from the unpkg.com CDN:
 </head>
 <body>
 <script type="module">
-  import app from 'https://unpkg.com/apprun?module';
+  import { app } from 'https://unpkg.com/apprun/esm/apprun-html?module'
   const view = state => html`<div>${state}</div>`;
-  app.start(document.body, 'hello world', view);
+  app.start(document.body, 'hello lit-html', view);
 </script>
 </body>
 </html>
 ```
+<apprun-play></apprun-play>
 
 ### Use µhtml
 
-[µhtml](https://github.com/WebReflection/uhtml) (micro html) is a ~2.5K lighterhtml subset to build declarative and reactive UI via template literals tags.
+[µhtml](https://github.com/WebReflection/uhtml) (micro html) is a ~2.5K _lighterhtml_ subset to build declarative and reactive UI via template literals tags. AppRun allows you to use different rendering technology like µhtml.
 
 ```html
 <html lang="en">
@@ -90,11 +98,12 @@ You can also load AppRun directly from the unpkg.com CDN:
   import { render, html } from 'https://unpkg.com/uhtml?module';
   app.render = render;
   const view = state => html`<div>${state}</div>`;
-  app.start(document.body, 'hello world', view);
+  app.start(document.body, 'hello uhtml', view);
 </script>
 </body>
 </html>
 ```
+<apprun-play></apprun-play>
 
 ### Use JSX
 
@@ -107,18 +116,21 @@ You can use JSX in the browser or compile JSX ahead of time. See AppRun CLI belo
 <head>
   <title>AppRun App</title>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <script src="https://unpkg.com/apprun/dist/apprun-html.js"></script>
+  <script src="https://unpkg.com/apprun"></script>
 </head>
 <body>
 <script type="text/babel" data-presets="es2017, react">
   const view = state => <div>{state}</div>;
-  app.start(document.body, 'hello world', view);
+  app.start(document.body, 'hello JSX', view);
 </script>
 </body>
 </html>
 ```
+<apprun-play></apprun-play>
 
-## TypeScript and webpack
+## Compile/Transpile and Bundle
+
+### TypeScript and webpack
 
 AppRun includes a command-line tool (CLI) for creating a TypeScript and webpack configured project.
 
@@ -126,7 +138,7 @@ AppRun includes a command-line tool (CLI) for creating a TypeScript and webpack 
 npx apprun --init
 ```
 
-## esbuild
+### esbuild
 
 You can initialize a project that uses [esbuild](https://esbuild.github.io/).
 
@@ -163,4 +175,4 @@ npx degit yysun/apprun-websockets my-app
 AppRun is so flexible that you can choose your favorite ways of using it.
 
 
-Next, you will see the [tutorial](02-tutorial) of creating AppRun apps.
+Next, you will see the quick-start tutorial on creating AppRun apps.
