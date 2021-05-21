@@ -28,6 +28,7 @@ extra_javascript:
   - assets/vendor/codemirror/mode/javascript/javascript.js
   - assets/vendor/codemirror/mode/xml/xml.js
   - assets/vendor/codemirror/mode/jsx/jsx.js
+  - https://unpkg.com/apprun/dist/apprun-html.js
   - assets/apprun-play.js
 
 google_analytics:

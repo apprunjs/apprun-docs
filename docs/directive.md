@@ -45,8 +45,7 @@ new Counter().start(document.body);
 
 ## $bind
 
-The $bind directive synchronizes the HTML input value to the _state_.
-You can see the $bind example below.
+The $bind directive synchronizes the HTML input value to the _state_. See the $bind example below.
 
 ```js
 const state = '';
@@ -54,6 +53,25 @@ const view = state => <div>
   <h1>Hello {state}</h1>
   <input autofocus $bind />
 </div>;
+app.start(document.body, state, view);
+```
+<apprun-play></apprun-play>
+
+Or, you can bind to the properties of the _state_.
+
+```js
+const state = {
+  a: 1,
+  b: 2,
+  get c() {
+    return this.a + this.b;
+  }
+};
+const view = ({a, b, c}) => <>
+  <input type="number" $bind="a" />
+  <input type="number" $bind="b" />
+  <p>{a} + {b} = { c }</p>
+</>;
 app.start(document.body, state, view);
 ```
 <apprun-play></apprun-play>
@@ -93,7 +111,8 @@ const start_animation = state => ({ animation: true })
 const stop_animation = state => ({ animation: false })
 
 const view = state => <>
-  <img $animation={state.animation && 'bounce infinite'} src='/assets/logo.png' />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css"></link>
+  <img $animation={state.animation && 'bounce infinite'} src='../assets/logo.png' />
   <div $animation='bounceInRight'>
     <button disabled={state.animation} $onclick={start_animation}>start</button>
     <button disabled={!state.animation} $onclick={stop_animation}>stop</button>
@@ -102,4 +121,4 @@ const view = state => <>
 
 app.start(document.body, state, view);
 ```
-<apprun-play></apprun-play>
+<apprun-play style="height:230px"></apprun-play>
