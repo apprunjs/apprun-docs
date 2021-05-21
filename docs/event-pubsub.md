@@ -25,7 +25,6 @@ When an AppRun event is published, the following steps take place:
 AppRun Event Life Cycle connects the _state_, _view_, and _update (event handlers)_ together. Take a look at the _Counter_ example again.
 
 ```js
-import app from 'apprun';
 const state = 0;
 const view = state => {
   return `<div>
@@ -38,7 +37,7 @@ const update = {
   '+1': state => state + 1,
   '-1': state => state - 1
 };
-app.start('my-app', state, view, update);
+app.start(document.body, state, view, update);
 ```
 <apprun-play></apprun-play>
 
@@ -105,7 +104,7 @@ You can see, because there are no events in this case, we don't need the _update
 Following the idea of using the JSX _event directive_ what can we do a similar thing with lit-html?
 
 
-The good news is that lit-html also has the directive concept to bring the _event directive_ to lit-html. The directive for lit-html is called _run_.
+The good news is that lit-html also has the directive concept to bring the _event directive_ to lit-html. So the directive for lit-html is called _run_.
 
 The example below shows how to use the _run_ directive to trigger AppRun events. Also, similar to the JSX event directives, the _run_ directive can call the event lifecycle directly.
 
@@ -153,7 +152,7 @@ const update = {
 };
 app.start(document.body, state, view, update);
 ```
-<apprun-play></apprun-play>
+<apprun-play style="height:300px"></apprun-play>
 
 ## Use Events for Everything
 

@@ -138,10 +138,12 @@ class Counter extends Component {
 app.webComponent('my-counter', Counter);
 document.body.insertAdjacentHTML('beforeend',
 `<my-counter></my-counter>
- <my-counter></my-counter>`);
+ <my-counter></my-counter>
+ <my-counter></my-counter>
+`);
 
 ```
-<apprun-play></apprun-play>
+<apprun-play style="height:350px"></apprun-play>
 
 
 

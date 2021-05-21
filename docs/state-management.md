@@ -29,8 +29,7 @@ const view = state => <>
 </>;
 app.start(document.body, state, view);
 ```
-<apprun-play></apprun-play>
-
+<apprun-play style="height:300px"></apprun-play>
 
 
 ## State History
@@ -88,6 +87,6 @@ const update = {
 
 app.start(document.body, state, view, update, {history: true});
 ```
-<apprun-play></apprun-play>
+<apprun-play style="height:380px"></apprun-play>
 
 Although it is effortless to enable the AppRun state history, the caveat must be immutable. Because in the AppRun state history it stores the references to the states, if we have modified the state directly, each state stored in the state history refers to the same state, which is always the value of the last change. Thus, the time-travel back and forward will not work. Therefore, the fundamental concept of using state history is to make the state immutable.
