@@ -1,12 +1,10 @@
 ---
 title: Use State Machine in AppRun Applications
 published: true
-description: This post describes how to create a state machine in AppRun applications to help event handling using a calculator as an example.
+description: This post describes creating a state machine in AppRun applications to help event handling using a calculator as an example.
 tags: #apprun #javascript #typescript #state_machine
 ---
 ## Introduction
-
-### State machine
 
 The state machine is the tool that developers must have in their toolbox.
 
@@ -16,9 +14,9 @@ How can a state machine help?
 
 Typically, when building applications, we follow what's known as the event-driven — where an event happens in the application, we update the application state and render the state to the screen.
 
-Events can happen anytime during user interactions and system interactions while the application can be in any state. Before we start to handle the events, we first have to determine what is the current state and then handle the event accordingly. Sometimes it can be challenging.
+Events can happen anytime during user interactions and system interactions, while the application can be in any state. Therefore, before we start to handle the events, we first have to determine the current state and then handle the event accordingly. Sometimes it can be challenging.
 
-The state machine provides a state-event-state mapping. Before we start to handle the events, we know the current state and the future state, so that we only need to focus on the limited state-event scope.
+The state machine provides a state-event-state mapping. Thus, before we start to handle the events, we know the current state and the future state, so that we only need to focus on the limited state-event scope.
 
 > The specific state machine we are going to use is the [Mealy machine](https://en.wikipedia.org/wiki/Mealy_machine). It has an initial state and then transitions to new states based on events and its current state.
 
@@ -32,16 +30,240 @@ We are going to build a calculator application as an example. You will learn fro
 
 ### State and Event
 
-The calculator application looks like:
+The calculator application looks like this:
 
-![Calculator Application](https://dev-to-uploads.s3.amazonaws.com/i/hfscu8m5zix5dy91b3hw.png)
+```js
+const find_transition = (state_machine, state, event) => {
+  const current_state = state_machine[state];
+  if (!current_state) throw new Error(`No state: ${current_state} found in state machine`);
+  const event_tuple = current_state.find(s => s[0] === event);
+  return event_tuple ? {
+    next_state: event_tuple[1],
+    transition: event_tuple[2]
+  } : {}
+};
 
-It has a grid of buttons that users can click at any time. It also displays:
+const state = {
+  _state: 'START',
+  display: '0',
+  arg1: 0,
+  arg2: 0,
+  op: '',
+  stack: []
+};
 
-* The numbers that the user types, or the calculation result.
-* The calculation formula, which includes the first argument, the operator and the second argument, and the calculation result.
+const view = ({ _state, op, arg1, arg2, display, stack }) => <>
+  <style> {`
+    .calculator { width: 200px; }
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 2px;
+    }
+    button { padding: 10px; width:100%; }
+    button:nth-of-type(1) {
+      grid-column: span 2;
+    }
+    button:nth-of-type(16) {
+      grid-column: span 2;
+    }
+  `}
+  </style>
+  <div class="calculator">
+    <h1>{display}</h1>
+    <div class="buttons" $onclick={button_click}>
+      <button>CE</button>
+      <button>+/-</button>
+      <button>/</button>
+      <button>7</button>
+      <button>8</button>
+      <button>9</button>
+      <button>*</button>
+      <button>4</button>
+      <button>5</button>
+      <button>6</button>
+      <button>-</button>
+      <button>1</button>
+      <button>2</button>
+      <button>3</button>
+      <button>+</button>
+      <button>0</button>
+      <button>.</button>
+      <button>=</button>
+    </div>
+    <small>
+      {stack.length > 0 && `${stack[0][0]} ${stack[0][1]} `}
+      {_state.startsWith("FIRST_") && `${display}`}
+      {_state === "OP" && `${arg1} ${op}`}
+      {_state.startsWith("SECOND_") && `${arg1} ${op} ${display}`}
+      {_state === "EQ" && `${arg1} ${op} ${arg2} = ${display}`}
+    </small>
+  </div>
+</>;
 
-The initial state of the calculator looks like:
+const button_click = (state, e) => {
+
+  const priority = {
+    '*': 2,
+    '/': 2,
+    '+': 1,
+    '-': 1
+  }
+
+  const getEvent = c => {
+    switch (c) {
+      case '+/-':
+        return '+/-';
+      case 'CE':
+        return 'CE';
+      case '.':
+        return 'DOT';
+      case '=':
+        return 'EQ';
+      default:
+        return /\d/.test(c) ? 'NUM' : 'OP';
+    }
+  };
+
+  const key = e.target?.textContent || e;
+  const event = getEvent(key);
+
+  let { _state, op, arg1, arg2, display, stack } = state;
+
+  const clear = () => {
+    display = '0';
+    arg1 = arg2 = 0;
+    op = '';
+    stack.length = 0;
+  }
+
+  const negative = () => {
+    display = display.startsWith('-') ? display.substring(1) : '-' + display;
+  };
+
+  const calc = () => {
+    display = eval(`${arg1}${op}${arg2}`).toString();
+  };
+
+  const op1 = () => {
+    op = key;
+    arg1 = parseFloat(display);
+  };
+
+  const op2 = () => {
+    if (priority[key] === priority[op]) {
+      arg2 = parseFloat(display);
+      calc();
+      op = key;
+      arg1 = parseFloat(display);
+    } else if (priority[key] < priority[op]) {
+      arg2 = parseFloat(display);
+      calc();
+      arg1 = parseFloat(display);
+      op = key;
+      if (stack.length) {
+        const f = stack.pop();
+        arg1 = eval(`${f[0]}${f[1]}${display}`);
+        display = arg1.toString();
+      }
+    } else {
+      stack.push([arg1, op]);
+      arg1 = parseFloat(display);
+      op = key;
+    }
+
+  };
+
+  const eq0 = () => {
+    arg1 = parseFloat(display);
+    calc();
+  };
+
+  const eq2 = () => {
+    arg2 = parseFloat(display);
+    calc();
+    if (stack.length) {
+      arg2 = parseFloat(display);
+      const f = stack.pop();
+      display = eval(`${f[0]}${f[1]}${display}`).toString();
+      arg1 = f[0];
+      op = f[1];
+    }
+  };
+
+  const state_machine = {
+    START: [
+      ['NUM', 'FIRST_ARG', () => display = key],
+      ['DOT', 'FIRST_ARG_FLOAT', () => display = '0.']
+    ],
+
+    FIRST_ARG: [
+      ['+/-', 'FIRST_ARG', negative],
+      ['NUM', 'FIRST_ARG', () => display += key],
+      ['DOT', 'FIRST_ARG_FLOAT', () => display += key],
+      ['OP', 'OP', op1],
+      ['CE', 'START', clear]
+    ],
+
+    FIRST_ARG_FLOAT: [
+      ['+/-', 'FIRST_ARG_FLOAT', negative],
+      ['NUM', 'FIRST_ARG_FLOAT', () => display += key],
+      ['OP', 'OP', op1],
+      ['CE', 'START', clear]
+    ],
+
+    OP: [
+      ['NUM', 'SECOND_ARG', () => display = key],
+      ['DOT', 'SECOND_ARG', () => display = '0.'],
+      ['OP', 'OP', () => op = key],
+      ['CE', 'START', clear]
+    ],
+
+    SECOND_ARG: [
+      ['+/-', 'SECOND_ARG', negative],
+      ['NUM', 'SECOND_ARG', () => display += key],
+      ['DOT', 'SECOND_ARG_FLOAT', () => display += key],
+      ['EQ', 'EQ', eq2],
+      ['OP', 'OP', op2],
+      ['CE', 'OP', () => display = '0']
+    ],
+
+    SECOND_ARG_FLOAT: [
+      ['+/-', 'SECOND_ARG_FLOAT', negative],
+      ['NUM', 'SECOND_ARG_FLOAT', () => display += key],
+      ['EQ', 'EQ', eq2],
+      ['OP', 'OP', op2],
+      ['CE', 'OP', () => display = '0']
+    ],
+
+    EQ: [
+      ['+/-', 'FIRST_ARG', negative],
+      ['NUM', 'FIRST_ARG', () => display = key],
+      ['DOT', 'FIRST_ARG_FLOAT', () => display = '0.'],
+      ['EQ', 'EQ', eq0],
+      ['OP', 'OP', op1],
+      ['CE', 'START', clear]
+    ]
+  };
+
+  const { next_state, transition } = find_transition(state_machine, _state, event);
+  _state = next_state || _state;
+  transition && transition();
+
+  return { _state, op, arg1, arg2, display, stack };
+}
+app.start(document.body, state, view)
+```
+<apprun-play style="height:350px" no_src="true"></apprun-play>
+
+Click the 'Try the Code' button; you will see the source code.
+
+The calculator has a grid of buttons that users can click at any time. It also displays:
+
+* The numbers that the user typed and the calculation result on top of the grid.
+* The calculation formula includes the first argument, the operator, and the second argument, and the calculation result below the gird.
+
+Let's model the initial state of the calculator.
 
 ```js
 const state = {
@@ -52,7 +274,7 @@ const state = {
 };
 ```
 
-We handle the buttons' click events in the event handler, _button___click_. Because of the HTML event bubbling, we just need one event handler for all buttons
+We handle the buttons' click events in the event handler, _button___click_. Because of the HTML event bubbling, we only need one event handler for all the buttons.
 
 ```typescript
 const view =
@@ -62,16 +284,17 @@ const view =
 
 const button_click = (state, e) => {
 }
+
+app.start(document.body, state, view);
 ```
 
 That's all we need to do to create an AppRun application, an _initial state_, a _view_, and _event handlers_.
 
-Next, we will add a state machine.
-
+Next, we will add the state machine implementation.
 
 ### State Machine
 
-We follow and extend the calculator state machine from [David's post](https://www.codinglawyer.io/posts/build-javascript-calculator). The post also provides a [diagram](https://www.codinglawyer.io/static/c24440761863d1b3b8bf38e336056726/fa498/sketch-fsm.png) helpful to understand the state machine.
+> We follow and extend the calculator state machine from [David's post](https://www.codinglawyer.io/posts/build-javascript-calculator). The post also provides a [diagram](https://www.codinglawyer.io/static/c24440761863d1b3b8bf38e336056726/fa498/sketch-fsm.png) helpful to understand the state machine.
 
 We first define the _states_ and _events_ of the state machine using TypeScript [Discriminated Unions](https://www.typescriptlang.org/docs/handbook/advanced-types.html#discriminated-unions).
 
@@ -150,20 +373,12 @@ const state_machine: StateMachine<States, Events> = {
   //EQ:[] // Error on missing EQ state, if we commented it out
 }
 ```
+You can see the state machine is just a simple data structure.
 
-Compare to many other different ways of implementing the state machine in JavaScript/TypeScript found online, the state machine in this post has the following advantages:
 
-* Declarative - it tells whats, not how;
-* Independent - technology stack agnostic;
-* KISS - no worry of preconditions, postconditions, etc...
+### Add State-Machine State
 
-You can see the state machine is just a simple data structure. We can easily add it to the AppRun applications. Explained step by step below.
-
-## Add State Machine to AppRun Application
-
-### Add State Machine State
-
-We add a new property for tracking the state-machine state, called _*_state*_ into the application state.
+We add a new property for tracking the state-machine state, called _*_state*_, into the initial state.
 
 ```js
 const state = {
@@ -212,7 +427,7 @@ Now that we know the current state-machine state from the _*_state*_ property of
 Finding _transitions_ from the _state___machine_ is straightforward.
 
 ```typescript
-export const find_transition = <S extends string, E>(
+const find_transition = <S extends string, E>(
   state_machine: StateMachine<S, E>,
   state: S,
   event: E
@@ -246,11 +461,251 @@ const button_click = (state, e) => {
 
 If no _transition_ found, nothing will happen.
 
-Finally, we return a new state from the event handler, AppRun will render the screen accordingly.
+Finally, we return a new state from the event handler; AppRun will render the screen accordingly.
 
-Now, the application is wired up with AppRun architecture. We have successfully created the calculator application.
+Now, we have successfully created the calculator application. You can see the calculator in TypeScript below.
 
-You can try the live app [here](https://apprun.js.org/#calculator) and find the source code [here](https://github.com/yysun/apprun/blob/master/demo/components/calculator.tsx).
+```typescript
+export type Transition<T = any> = (state?: T) => void;
+export type EventStateTransition<E, S> = [E, S, Transition];
+export type StateMachine<S extends string, E> = {
+  [key in S]: EventStateTransition<E, S>[];
+};
+type Events = 'NUM' | 'OP' | 'DOT' | 'CE' | 'EQ' | '+/-';
+type States = 'START' | 'FIRST_ARG' | 'FIRST_ARG_FLOAT' | 'OP' | 'SECOND_ARG' | 'SECOND_ARG_FLOAT' | 'EQ';
+
+const find_transition = <S extends string, E>(
+  state_machine: StateMachine<S, E>,
+  state: S,
+  event: E
+): { next_state?: S, transition?: Transition } => {
+  const current_state = state_machine[state];
+  if (!current_state) throw new Error(`No state: ${current_state} found in state machine`);
+  const event_tuple = current_state.find(s => s[0] === event);
+  return event_tuple ? {
+    next_state: event_tuple[1],
+    transition: event_tuple[2]
+  } : {}
+};
+
+type Events = 'NUM' | 'OP' | 'DOT' | 'CE' | 'EQ' | '+/-';
+
+type States = 'START' | 'FIRST_ARG' | 'FIRST_ARG_FLOAT' | 'OP' | 'SECOND_ARG' | 'SECOND_ARG_FLOAT' | 'EQ';
+
+const state = {
+  _state: 'START' as States,
+  display: '0',
+  arg1: 0,
+  arg2: 0,
+  op: '',
+  stack: []
+};
+
+type State = typeof state;
+
+const view = ({ _state, op, arg1, arg2, display, stack }: State) => <>
+  <style> {`
+    .calculator { width: 200px; }
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 2px;
+    }
+    button { padding: 10px; width:100%; }
+    button:nth-of-type(1) {
+      grid-column: span 2;
+    }
+    button:nth-of-type(16) {
+      grid-column: span 2;
+    }
+  `}
+  </style>
+  <div class="calculator">
+    <h1>{display}</h1>
+    <div class="buttons" $onclick={button_click}>
+      <button>CE</button>
+      <button>+/-</button>
+      <button>/</button>
+      <button>7</button>
+      <button>8</button>
+      <button>9</button>
+      <button>*</button>
+      <button>4</button>
+      <button>5</button>
+      <button>6</button>
+      <button>-</button>
+      <button>1</button>
+      <button>2</button>
+      <button>3</button>
+      <button>+</button>
+      <button>0</button>
+      <button>.</button>
+      <button>=</button>
+    </div>
+    <small>
+      {stack.length > 0 && `${stack[0][0]} ${stack[0][1]} `}
+      {_state.startsWith("FIRST_") && `${display}`}
+      {_state === "OP" && `${arg1} ${op}`}
+      {_state.startsWith("SECOND_") && `${arg1} ${op} ${display}`}
+      {_state === "EQ" && `${arg1} ${op} ${arg2} = ${display}`}
+    </small>
+  </div>
+</>;
+
+const button_click = (state: State, e: any) => {
+
+  const priority = {
+    '*': 2,
+    '/': 2,
+    '+': 1,
+    '-': 1
+  }
+
+  const getEvent = (c: string): Events => {
+    switch (c) {
+      case '+/-':
+        return '+/-';
+      case 'CE':
+        return 'CE';
+      case '.':
+        return 'DOT';
+      case '=':
+        return 'EQ';
+      default:
+        return /\d/.test(c) ? 'NUM' : 'OP';
+    }
+  };
+
+  const key = e.target?.textContent || e;
+  const event = getEvent(key);
+
+  let { _state, op, arg1, arg2, display, stack } = state;
+
+  const clear = () => {
+    display = '0';
+    arg1 = arg2 = 0;
+    op = '';
+    stack.length = 0;
+  }
+
+  const negative = () => {
+    display = display.startsWith('-') ? display.substring(1) : '-' + display;
+  };
+
+  const calc = () => {
+    display = eval(`${arg1}${op}${arg2}`).toString();
+  };
+
+  const op1 = () => {
+    op = key;
+    arg1 = parseFloat(display);
+  };
+
+  const op2 = () => {
+    if (priority[key] === priority[op]) {
+      arg2 = parseFloat(display);
+      calc();
+      op = key;
+      arg1 = parseFloat(display);
+    } else if (priority[key] < priority[op]) {
+      arg2 = parseFloat(display);
+      calc();
+      arg1 = parseFloat(display);
+      op = key;
+      if (stack.length) {
+        const f = stack.pop();
+        arg1 = eval(`${f[0]}${f[1]}${display}`);
+        display = arg1.toString();
+      }
+    } else {
+      stack.push([arg1, op]);
+      arg1 = parseFloat(display);
+      op = key;
+    }
+
+  };
+
+  const eq0 = () => {
+    arg1 = parseFloat(display);
+    calc();
+  };
+
+  const eq2 = () => {
+    arg2 = parseFloat(display);
+    calc();
+    if (stack.length) {
+      arg2 = parseFloat(display);
+      const f = stack.pop();
+      display = eval(`${f[0]}${f[1]}${display}`).toString();
+      arg1 = f[0];
+      op = f[1];
+    }
+  };
+
+  const state_machine: StateMachine<States, Events> = {
+    START: [
+      ['NUM', 'FIRST_ARG', () => display = key],
+      ['DOT', 'FIRST_ARG_FLOAT', () => display = '0.']
+    ],
+
+    FIRST_ARG: [
+      ['+/-', 'FIRST_ARG', negative],
+      ['NUM', 'FIRST_ARG', () => display += key],
+      ['DOT', 'FIRST_ARG_FLOAT', () => display += key],
+      ['OP', 'OP', op1],
+      ['CE', 'START', clear]
+    ],
+
+    FIRST_ARG_FLOAT: [
+      ['+/-', 'FIRST_ARG_FLOAT', negative],
+      ['NUM', 'FIRST_ARG_FLOAT', () => display += key],
+      ['OP', 'OP', op1],
+      ['CE', 'START', clear]
+    ],
+
+    OP: [
+      ['NUM', 'SECOND_ARG', () => display = key],
+      ['DOT', 'SECOND_ARG', () => display = '0.'],
+      ['OP', 'OP', () => op = key],
+      ['CE', 'START', clear]
+    ],
+
+    SECOND_ARG: [
+      ['+/-', 'SECOND_ARG', negative],
+      ['NUM', 'SECOND_ARG', () => display += key],
+      ['DOT', 'SECOND_ARG_FLOAT', () => display += key],
+      ['EQ', 'EQ', eq2],
+      ['OP', 'OP', op2],
+      ['CE', 'OP', () => display = '0']
+    ],
+
+    SECOND_ARG_FLOAT: [
+      ['+/-', 'SECOND_ARG_FLOAT', negative],
+      ['NUM', 'SECOND_ARG_FLOAT', () => display += key],
+      ['EQ', 'EQ', eq2],
+      ['OP', 'OP', op2],
+      ['CE', 'OP', () => display = '0']
+    ],
+
+    EQ: [
+      ['+/-', 'FIRST_ARG', negative],
+      ['NUM', 'FIRST_ARG', () => display = key],
+      ['DOT', 'FIRST_ARG_FLOAT', () => display = '0.'],
+      ['EQ', 'EQ', eq0],
+      ['OP', 'OP', op1],
+      ['CE', 'START', clear]
+    ]
+  };
+
+  const { next_state, transition } = find_transition(state_machine, _state, event);
+  _state = next_state || _state;
+  transition && transition();
+
+  return { _state, op, arg1, arg2, display, stack };
+};
+app.start(document.body, state, view)
+```
+
 
 ## Conclusion
 
@@ -260,7 +715,7 @@ AppRun is event-driven. Often I feel it is challenging to make events right. Som
 
 ## References
 
-There are many references online about the state machine. I got most of my inspiration from the following posts. I recommend you read the concept explanation of the posts and pay less attention to the implementations, because using AppRun, you can do better.
+There are many references online about the state machine. I got most of my inspiration from the following posts. I recommend you read the concept explanation of the posts and pay less attention to the implementations because using AppRun; you can do better.
 
 * [1] Krasimir Tsonev explains [Mealy](https://en.wikipedia.org/wiki/Mealy_machine) and [Moore](https://en.wikipedia.org/wiki/Moore_machine) in the post: [The Rise Of The State Machines](https://www.smashingmagazine.com/2018/01/rise-state-machines/)
 
