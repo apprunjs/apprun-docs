@@ -1,4 +1,97 @@
 //import { app, Component, html, run } from 'https://unpkg.com/apprun/dist/apprun-html.esm'; // no need in JS
+
+const popup_div = `<div id="play-popup" class="overlay">
+<style id="apprun-play-style">
+.apprun-play .col {
+  display: inline-block;
+  width: calc(50% - 3px);
+  height: 100%;
+}
+.apprun-preview {
+  width: 100%
+}
+.apprun-play .editor, .apprun-play .preview {
+  display: inline-block;
+  width: calc(100% - 20px);
+  height: 100%;
+}
+
+a.button {
+  font-size: .8em;
+  padding: 10px;
+  cursor: pointer;
+  color: var(--md-primary-bg-color);
+  background: var(--md-primary-fg-color)
+}
+a.button:hover {
+  color: var(--md-primary-fg-color);
+  background: var(--md-primary-bg-color)
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  visibility: hidden;
+  opacity: 0;
+  z-index: 999;
+}
+.overlay.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin: 80px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 3px;
+  position: relative;
+  width: 90%;
+  height: calc(100% - 150px);
+}
+
+.popup .close {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color: #06D85F;
+}
+.popup .content {
+  height: 100%;
+  overflow: hidden;
+}
+
+.cm-s-default {
+  height: 100%;
+  font-size: small;
+  line-height: 1.5em;
+}
+</style>
+
+
+	<div class="popup apprun-play">
+		<a class="close" href="javascript:app.run('@close-popup')">&times;</a>
+		<div class="content">
+			<div class="col">
+        <textarea class="editor"></textarea>
+      </div>
+      <div class="col">
+      <iframe class="preview"/>
+      </div>
+    </div>
+	</div>
+</div>`;
+
 const code_html = code => `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,35 +140,19 @@ const preview_code = code => {
 
 let editor;
 class Play extends Component {
-  view = _ => {
-    if (!document.getElementById('play-popup')) document.body.insertAdjacentHTML('beforeend',
-`<div id="play-popup" class="overlay">
-	<div class="popup apprun-play">
-		<a class="close" href="javascript:app.run('@close-popup')">&times;</a>
-		<div class="content">
-			<div class="col">
-        <textarea class="editor"></textarea>
-      </div>
-      <div class="col">
-      <iframe class="preview"/>
-      </div>
-    </div>
-	</div>
-</div>`);
-    return html`
-<div class="box">
-	<a class="button" @click=${run('show-popup')}>Try the Code</a>
-</div>`;
-  }
+  view = _ => html`<div class="box">
+    <a class="button" @click=${run('show-popup')}>Try the Code</a>
+  </div>`;
 
-  rendered = ({ style, no_src }) => {
+  rendered = ({ style, hide_src }) => {
     const code = this.element.previousElementSibling.innerText;
-    if (no_src) this.element.previousElementSibling.style.display = 'none';
+    if (hide_src) this.element.previousElementSibling.style.display = 'none';
     const iframe = document.createElement('iframe');
     iframe.classList.add('apprun-preview');
     iframe.style.cssText = style;
     this.element.before(iframe);
     write_code(iframe, code);
+    if (!document.getElementById('play-popup')) document.body.insertAdjacentHTML('beforeend', popup_div);
   }
 
   update = {
@@ -99,4 +176,3 @@ class Play extends Component {
 }
 
 app.webComponent('apprun-play', Play);
-window.addEventListener('popstate', () => app.route(location.hash));

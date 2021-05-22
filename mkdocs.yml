@@ -10,6 +10,8 @@ theme:
   features:
     - navigation.sections
 
+copyright: Copyright &copy; 2016 - 2021 Yiyi Sun
+
 markdown_extensions:
   - toc:
       permalink: true
@@ -17,12 +19,15 @@ markdown_extensions:
   - pymdownx.highlight
   - pymdownx.magiclink
   - pymdownx.superfences
-  - pymdownx.snippets
+  - pymdownx.tabbed
+  - pymdownx.snippets:
+      base_path:
+        docs/_src
+      check_paths: true
 
 extra_css:
   - assets/vendor/codemirror/codemirror.css
-  - assets/style.css
-  -
+
 extra_javascript:
   - assets/vendor/codemirror/codemirror.js
   - assets/vendor/codemirror/mode/javascript/javascript.js
