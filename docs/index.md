@@ -24,7 +24,9 @@ If you are a beginner developer, you will learn how to build web applications wi
 
 If you are an experienced developer, you will learn AppRun is a lightweight alternative to other frameworks and libraries. As a result, you will have one more good tool in your toolbox to meet your clients' needs.
 
+!!! note
+    Most of the code snippets in this guide are interactive that you can edit and see the results.
 
 Ready to try it yourself?
 
-Head over to [Getting Started](getting-started.md).
+Head over to [Getting Started](getting-started.md) or explore the [AppRun Architecture](architecture.md).

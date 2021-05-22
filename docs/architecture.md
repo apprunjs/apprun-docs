@@ -8,9 +8,9 @@ Application logic is broken down into three separated parts in the AppRun archit
 * View — a function to display the state
 * Update — a collection of event handlers to update the state
 
-Use a _Counter_ as an example.
+Use a _Counter_ as an example (you can edit the code and see the result).
 
-```js
+<textarea>
 const state = 0;
 
 const view = state => <div>
@@ -25,8 +25,8 @@ const update = {
 };
 
 app.start(document.body, state, view, update);
-```
-<apprun-play></apprun-play>
+</textarea>
+<apprun-play hide_button="true"></apprun-play>
 
 ### State
 
@@ -84,8 +84,10 @@ AppRun solves two challenging problems, which I call them:
 
 Using a _counter_ example that has two buttons, also, I made the Counter a bitter complicated to show how many times each button clicked.
 
-![Counter](https://dev-to-uploads.s3.amazonaws.com/i/hdjy2w33ipeqdv9wxbea.png)
-
+<textarea>
+--8<-- "counter.js"
+</textarea>
+<apprun-play hide_src="true" hide_button="true"></apprun-play>
 
 The code below uses jQuery. jQuery is a library that provides the convenience to access and manipulation the DOM. It does not provide any architectural guidance. jQuery code is similar to the vanilla JavaScript code that can go wild.
 
@@ -169,34 +171,9 @@ The _view_ function always returns the same result as long as the _state_ is the
 
 Using AppRun, we have a _counter_ application made from the _state, _view_, and _update_ as shown below.
 
-```js
-// initial state object
-const state = {
-  count: 0,
-  count_plus: 0,
-  count_minus: 0
-}
-
-// one view function to render the state, its' a pure function
-const view = ({ count, count_plus, count_minus }) => html`
-  <h1>${count}</h1>
-  <button onclick="app.run('minus')">- (${count_minus})</button>
-  <button onclick="app.run('plus')">+ (${count_plus})</button>
-`
-
-// collection of state updates, state is immutable
-const minus = (state) => ({ ...state,
-  count: state.count - 1,
-  count_minus: state.count_minus + 1
-});
-
-const plus = (state) => ({ ...state,
-  count: state.count + 1,
-  count_plus: state.count_plus + 1
-});
-
-app.start(document.body, state, view, {plus, minus});
-```
+<textarea>
+--8<-- "counter.js"
+</textarea>
 <apprun-play></apprun-play>
 
 With the AppRun state management and DOM differential rendering in place, we no longer have the problem mixing **state update** with **DOM rendering**.
@@ -213,11 +190,23 @@ There was the 'Ceremony vs. Essence' discussion happened about ten years ago. At
 
 Let's take a look at some of today's frontend technologies from the Ceremony vs. Essence point of view. We will use a simple button click counting application as an example.
 
-![Svelte](https://dev-to-uploads.s3.amazonaws.com/i/7mo21xx84dlho7j9tybp.png)
+<textarea>
+const add = count => count + 1;
+
+const view = count => <button $onclick={add}>
+  Clicks: {count}
+</button>;
+
+const rendered = count => console.log(count);
+
+app.start(document.body, 0, view, null, { rendered });
+console.log('mounted!');
+</textarea>
+<apprun-play hide_src="true"></apprun-play>
 
 ### The Essence
 
-The essence of the application is to display a button which adds the count by one and shows the count. Also, it will log some messages in the console to mimic effects after the rendering cycle.
+The essence of the application is to display a button that adds the count by one and shows the count. Also, it will log some messages in the console to mimic effects after the rendering cycle.
 
 The concept is as simple as below.
 
@@ -234,7 +223,7 @@ We will use the 95-character essence code above with a few frontend frameworks, 
 
 > A framework defines a skeleton where the application defines its features to fill out the skeleton. -- you can find this quote from googling.
 
-When using the frontend frameworks, we need to write some code to plugin the essence code into the frameworks. The code required to plugin into the framework is the ceremony. We don't want them. Less of them is better.
+We need to write some code to plugin the essence code into the frameworks when using the front-end frameworks. The code required to plugin into the framework is the ceremony. We don't want them. Less of them is better.
 
 ### The Ceremony
 
@@ -254,7 +243,6 @@ const rendered = count => console.log(count);
 app.start(document.body, 0, view, null, { rendered });
 console.log('mounted!');
 ```
-<apprun-play></apprun-play>
 
 In the example above, the application state is a number that has a default value to be 0; the _add_ function is the event handler to update the state. The _view_ function displays the state. The _rendered_ function runs after the DOM is rendered. The _app.start_ function ties them all together to the _document.body_ element.
 
@@ -264,7 +252,7 @@ Now, we identify and cross out the ceremonies.
 
 AppRun code ceremony is mainly required by the JavaScript syntax, like the module import and the arrow functions. The only thing needed from AppRun is the _app.start_ function.
 
-Overall, it has 226 characters, which means 58% of code are ceremonies.
+Overall, it has 226 characters, which means 58% of the code are ceremonies.
 
 #### Svelte
 
@@ -292,9 +280,9 @@ Behind the scene, the svelte compiler creates the component class boilerplate. T
 
 ![Svelte](https://dev-to-uploads.s3.amazonaws.com/i/o5j864n6r89tvqzqbcev.png)
 
-Svelte code ceremony is also mainly the JavaScript syntax requirements. Only the _script_ tags are required by the Svelte compiler, which is worth of trading with what the compiler saves.
+Svelte code ceremony is also mainly the JavaScript syntax requirements. Only the _script_ tags are required by the Svelte compiler, which is worth trading with what the compiler saves.
 
-It has 217 characters, which means 56% of code is ceremony.
+It has 217 characters, which means 56% of the code is ceremony.
 
 #### React Hooks
 
@@ -324,7 +312,7 @@ The React code has more ceremonies than the AppRun code and Svelte code above. I
 
 ![React](https://dev-to-uploads.s3.amazonaws.com/i/qtmjinxl7zqpoyz0og41.png)
 
-The _setCount, _useState_, and _useEffect_ functions are the code the deal with the React framework itself. They don't help us to express the essence of the application. They are framework ceremonies.
+The _setCount, _useState_, and _useEffect_ functions are the code deals with the React framework itself. They don't help us to express the essence of the application. They are framework ceremonies.
 
 #### Vue Composition API
 
@@ -387,15 +375,15 @@ const count = ref(0);
 const add = () => count.value++;
 ```
 
-You can also see AppRun uses a _pure function_. AppRun and Svelte are easy to understand. React Hooks and Vue Composition API are more difficult.
+You can also see AppRun uses a _pure function_. AppRun and Svelte are easy to understand. React Hooks, and Vue Composition API are more difficult.
 
 ### Conclusion
 
 Both the AppRun code and the Svelte code express the essence well and have less ceremony.
 
-React Hooks and Vue Composition API are cool. However, they both add a lot more ceremonies to our codebase. Remember, the ceremony has no business values but making it challenging to understand and, therefore, more costly to maintain.
+React Hooks, and Vue Composition API are cool. However, they both add a lot more ceremonies to our codebase. Remember, the ceremony has no business values but is challenging to understand and, therefore, more costly to maintain.
 
-In addition, AppRun can run in browsers directly without acompiler. Please click the 'Try the Code' buttons to run the AppRun code above if you haven't.
+In addition, AppRun can run in browsers directly without a compiler. Please click the 'Try the Code' buttons to run the AppRun code above if you haven't.
 
 AppRun app codebase also can easily be [strong typed](strong-typing.md) if you wish.
 

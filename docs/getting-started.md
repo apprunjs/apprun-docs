@@ -1,6 +1,6 @@
 # Getting Started
 
-This guide describes how to get up and running with AppRun in minutes
+This guide describes how to get up and running with AppRun in minutes.
 
 > **AppRun Concepts**
 >

@@ -56,7 +56,7 @@ nav:
       - State Machine: architecture-ideas/state-machine.md
   - Getting started:
     - Installation: getting-started.md
-    - Quick Start: tutorial.md
+    - Tutorial: tutorial.md
   - Single Page Apps:
     - Creating Project: spa.md
     - Routing: routing.md
