@@ -57,6 +57,7 @@ nav:
   - Getting started:
     - Installation: getting-started.md
     - Tutorial: tutorial.md
+    - Showcase: showcase.md
   - Single Page Apps:
     - Creating Project: spa.md
     - Routing: routing.md
@@ -71,3 +72,4 @@ nav:
     - Strong Typing: strong-typing.md
     - Unit Testing: unit-testing.md
   - Resources: resources.md
+  - About: about.md
