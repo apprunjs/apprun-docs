@@ -8,9 +8,9 @@ Application logic is broken down into three separated parts in the AppRun archit
 * View — a function to display the state
 * Update — a collection of event handlers to update the state
 
-Use a _Counter_ as an example (you can edit the code and see the result).
+Use a _Counter_ as an example.
 
-<textarea>
+```js
 const state = 0;
 
 const view = state => <div>
@@ -25,8 +25,8 @@ const update = {
 };
 
 app.start(document.body, state, view, update);
-</textarea>
-<apprun-play hide_button="true"></apprun-play>
+```
+<apprun-play></apprun-play>
 
 ### State
 
@@ -56,7 +56,7 @@ const view = state => <div>
 
 ### Update
 
-The _update_ is a collection of named event handlers, or a dictionary of event handlers. Each event handler creates a new state from the current state.
+The _update_ is a collection of named event handlers or a dictionary of event handlers. Each event handler creates a new state from the current state.
 ```js
 const update = {
   '+1': state => state + 1,
@@ -73,23 +73,23 @@ When the three parts, the _state_, _view_, and _update_ are provided to AppRun t
 app.start(document.body, state, view, update);
 ```
 
+Next, let's review some of the benefits of AppRun Architecture.
+
+
 ## Avoid Spaghetti Code
 
-AppRun solves two challenging problems, which I call them:
+AppRun solves two challenging problems commonly found in application development:
 
-* Direct State Update
-* Rendering Fragments
+Let's make the _Counter_ a bitter complicated to show how many times each button clicked.
 
-### Problem Code
-
-Using a _counter_ example that has two buttons, also, I made the Counter a bitter complicated to show how many times each button clicked.
-
-<textarea>
+```js
 --8<-- "counter.js"
-</textarea>
+```
 <apprun-play hide_src="true" hide_button="true"></apprun-play>
 
-The code below uses jQuery. jQuery is a library that provides the convenience to access and manipulation the DOM. It does not provide any architectural guidance. jQuery code is similar to the vanilla JavaScript code that can go wild.
+The code below uses jQuery. jQuery is a library that provides the convenience to access and manipulation the DOM. It does not give any architectural guidance. jQuery code is similar to the vanilla JavaScript code that can go wild.
+
+### An jQuery Example
 
 ```js
 $(function () {
@@ -125,23 +125,31 @@ $(function () {
   })
 ```
 
-You can see from the above code that event handlers _plus_ and _minus_ have the problem patterns. They update the state directly. They also render the DOM in different pieces.
+You can see from the above code that
 
-But the real problem is that there isn't a way to break them further. The state has to be shared globally. And the rendering has to be different in each click event.
+* The state is shared globally. The two event handlers _plus_ and _minus_ both update the state directly.
+* The two event handlers also both render the DOM in different pieces.
+
+Therefore, the jQuery code has two problems:
+
+* Direct State Update
+* Rendering Fragments
 
 In much more complicated real applications, the logic could be long and tangled even more.
 
+How can we solve the problems using AppRun?
+
 ### AppRun Code
 
-AppRun is a _state_ management system. It is also an event-driven system that has an event lifecycle. During an AppRun event lifecycle:
+AppRun includes the _state_ management, event system, and Virtual-DOM rendering. Following the Hollywood Principle (Don't call us. We call you), we provide code pieces to AppRun and wait for AppRun to call them.
+
+During an AppRun event lifecycle:
 
 * AppRun let you update the _state_ when needed
 * AppRun let you create a virtual DOM out of the _state_ when needed
 * AppRun renders the virtual DOM when needed.
 
-Following the Hollywood Principle (Don't call us. We call you.) here, we provide code pieces to AppRun and wait for AppRun to call them.
-
-We write functions to update the _state_. First, AppRun gives the _current state_. We create a new _state_ based on the _current state_.
+When using AppRun to update _state_, AppRun gives the _current state_. Then, we create a new _state_ based on the _current state_.
 
 ```js
 const minus = (state) => ({ ...state,
@@ -155,10 +163,9 @@ const plus = (state) => ({ ...state,
 });
 ```
 
-We will be able to concentrate on the parts that are needed to update. We can spread out the rest of the _state_ using the spread operator. Also, because there is no reference to a shared global object, it is very easy to unit test the _state_ update logic.
+Because there is no reference to a shared global object, it is very easy to unit test the logic. Also, we can focus on the parts of _state_ that are needed to update and ignore the rest of the _state_ using the spread operator.
 
-
-We also write a _view_ function that AppRun will call with the _state_ as the input parameter. We usually use JSX in the _view_ function to create a virtual DOM, which is just a data structure. The _view_ function does not render the DOM. AppRun renders the DOM using a diffing algorithm. It only renders the DOM that is needed to change. Therefore, we only need one _view_ function for all events. AppRun takes care of the differential rendering accordingly.
+We only write a _view_ function that creates a virtual DOM. AppRun renders the DOM using the diffing algorithm. It only updates the DOM that is needed to change. Therefore, although we have only one _view_ function for all events, AppRun takes care of the differential rendering accordingly.
 
 ```js
 const view = ({ count, count_plus, count_minus }) => html`
@@ -167,30 +174,30 @@ const view = ({ count, count_plus, count_minus }) => html`
   <button onclick="app.run('plus')">+ (${count_plus})</button>`
 ```
 
-The _view_ function always returns the same result as long as the _state_ is the same. It also does not change the _state_ or anything outside the function, which means it has no side effects. Therefore, we can make the _view_ function a _pure function_. There are many benefits of using _pure function_, including but not limited to unit testing. It makes the UI code easy to unit test.
+The _view_ function always returns the same result as long as the _state_ is the same. It also does not change the _state_ or anything outside the function, which means it has no side effects. Therefore, the _view_ function is a _pure function_. There are many benefits of using _pure function_, including but not limited to unit testing.
 
-Using AppRun, we have a _counter_ application made from the _state, _view_, and _update_ as shown below.
+Finally, We have a _ counter _ application shown below by putting the _state, _view_, and _update_ together.
 
-<textarea>
+```js
 --8<-- "counter.js"
-</textarea>
+```
 <apprun-play></apprun-play>
 
-With the AppRun state management and DOM differential rendering in place, we no longer have the problem mixing **state update** with **DOM rendering**.
+You can see that with the help of AppRun state management and DOM differential rendering, we no longer have the **Direct State Update** with **Rendering Fragments** problems.
 
 ### AppRun Benefits
 
-No matter how complex the application is, we will always have three parts, the _state_, _view_, and _update_. We no longer mix the state update with DOM rendering. Because the three parts are totally decoupled, our codebase is so much easier to understand, test, and maintain.
+No matter how complex the application is, we will always have three parts, the _state_, _view_, and _update_. We don't mix the state update with DOM rendering. Because the three parts are decoupled, our codebase is so much easier to understand, test, and maintain.
 
 ## Ceremony vs. Essence
 
-There was the 'Ceremony vs. Essence' discussion happened about ten years ago. At that time, Ruby was on the rise. People compared [Ruby with C#](https://davesquared.net/2010/07/essence-and-ceremony-ruby-and-c.html).
+There was the 'Ceremony vs. Essence' discussion happened about ten years ago. At that time, Ruby was on the rise. So people compared [Ruby with C#](https://davesquared.net/2010/07/essence-and-ceremony-ruby-and-c.html).
 
 > The fundamental idea of the Ceremony vs. Essence idea appears to be that, all other things being equal, programming languages should attempt to allow programmers to clearly express the essence of their programs without being caught up in excessive ceremony provided by the programming language. -- From this [post](http://bryanpendleton.blogspot.com/2010/02/ceremony-vs-essence.html).
 
 Let's take a look at some of today's frontend technologies from the Ceremony vs. Essence point of view. We will use a simple button click counting application as an example.
 
-<textarea>
+```js
 const add = count => count + 1;
 
 const view = count => <button $onclick={add}>
@@ -201,8 +208,8 @@ const rendered = count => console.log(count);
 
 app.start(document.body, 0, view, null, { rendered });
 console.log('mounted!');
-</textarea>
-<apprun-play hide_src="true"></apprun-play>
+```
+<apprun-play hide_src="true" hide_button="true"></apprun-play>
 
 ### The Essence
 
@@ -219,11 +226,11 @@ console.log(count); // upon very click
 console.log('mounted!'); // upon mounted
 ```
 
-We will use the 95-character essence code above with a few frontend frameworks, such as AppRun, Svelte, React Hooks, and the Vue Composition API.
+We will compare the 95-character essence code above with a few frontend frameworks, such as AppRun, Svelte, React Hooks, and the Vue Composition API.
 
 > A framework defines a skeleton where the application defines its features to fill out the skeleton. -- you can find this quote from googling.
 
-We need to write some code to plugin the essence code into the frameworks when using the front-end frameworks. The code required to plugin into the framework is the ceremony. We don't want them. Less of them is better.
+We need to write code to plugin the essence code into the frontend frameworks, which is the ceremony. We don't want them. Less of them is better.
 
 ### The Ceremony
 
@@ -243,16 +250,21 @@ const rendered = count => console.log(count);
 app.start(document.body, 0, view, null, { rendered });
 console.log('mounted!');
 ```
+<apprun-play></apprun-play>
 
-In the example above, the application state is a number that has a default value to be 0; the _add_ function is the event handler to update the state. The _view_ function displays the state. The _rendered_ function runs after the DOM is rendered. The _app.start_ function ties them all together to the _document.body_ element.
+In the example above,
+
+1. The application's state is a number that has a default value of 0.
+2. The _add_ function is the event handler to update the state.
+3. The _view_ function displays the state.
+4. The _rendered_ function runs after the DOM is rendered.
+5. The _app.start_ function ties them all together to the _document.body_ element.
 
 Now, we identify and cross out the ceremonies.
 
 ![AppRun](https://dev-to-uploads.s3.amazonaws.com/i/7eypk2z64h5azepxnlbc.png)
 
-AppRun code ceremony is mainly required by the JavaScript syntax, like the module import and the arrow functions. The only thing needed from AppRun is the _app.start_ function.
-
-Overall, it has 226 characters, which means 58% of the code are ceremonies.
+With AppRun, the ceremony is mainly required by the JavaScript syntax, like the module import and the arrow functions. Overall, it has 226 characters, which means 58% of the code are ceremonies.
 
 #### Svelte
 
@@ -276,7 +288,7 @@ Svelte uses a single file for a component. The file consists of a script section
 
 ```
 
-Behind the scene, the svelte compiler creates the component class boilerplate. Then, the compiler extracts the _script_ block, wires up the [reactivity](https://svelte.dev/tutorial/reactive-assignments) ($:), and adds the rendering template into the boilerplate. The boilerplate does not exist in our codebase. Therefore, the svelte application has very little ceremonies.
+Behind the scene, the svelte compiler creates the component class boilerplate. Then, the compiler extracts the _script_ block, wires up the [reactivity](https://svelte.dev/tutorial/reactive-assignments) ($:), and adds the rendering template into the boilerplate. The boilerplate does not exist in our codebase. Therefore, the svelte application has very few ceremonies.
 
 ![Svelte](https://dev-to-uploads.s3.amazonaws.com/i/o5j864n6r89tvqzqbcev.png)
 
@@ -312,7 +324,7 @@ The React code has more ceremonies than the AppRun code and Svelte code above. I
 
 ![React](https://dev-to-uploads.s3.amazonaws.com/i/qtmjinxl7zqpoyz0og41.png)
 
-The _setCount, _useState_, and _useEffect_ functions are the code deals with the React framework itself. They don't help us to express the essence of the application. They are framework ceremonies.
+The _setCount, _useState_, and _useEffect_ functions are the code that deals with the React framework itself. They don't help us to express the essence of the application. They are framework ceremonies.
 
 #### Vue Composition API
 
@@ -354,9 +366,7 @@ The _ref_, _watchEffect_, _onMounted_, _setup, _count.value_, and returning an o
 
 ### Expression Comparison
 
-We are not stopping at only comparing the character counts. What is more important is how do you express the business logic. How many extra boilerplates are forced to you by the frameworks?
-
-Let's see how do we _increase the counter_ as an example again.
+We are not stopping at only comparing the character counts or how many extra boilerplates are forced on you by the frameworks. We also compare how do you express the business logic. For example, let's see how we express _**Increase the Counter**_ as an example again.
 
 ```js
 // AppRun
@@ -375,19 +385,15 @@ const count = ref(0);
 const add = () => count.value++;
 ```
 
-You can also see AppRun uses a _pure function_. AppRun and Svelte are easy to understand. React Hooks, and Vue Composition API are more difficult.
+Both the AppRun code and the Svelte code express the essence well and have less ceremony. So AppRun and Svelte are easy to understand. React Hooks and Vue Composition API are cool. However, they both add a lot more ceremonies to our codebase.
 
-### Conclusion
+Remember, the ceremony has no business values but just challenges to understand and maintain.
 
-Both the AppRun code and the Svelte code express the essence well and have less ceremony.
+In addition, AppRun has a few other benefits
 
-React Hooks, and Vue Composition API are cool. However, they both add a lot more ceremonies to our codebase. Remember, the ceremony has no business values but is challenging to understand and, therefore, more costly to maintain.
+* AppRun is lightweight that can run in browsers directly without a compiler.
+* AppRun uses _pure functions_ when it is possible.
+* AppRun app codebase can easily be [strong typed](strong-typing.md) if you wish.
 
-In addition, AppRun can run in browsers directly without a compiler. Please click the 'Try the Code' buttons to run the AppRun code above if you haven't.
-
-AppRun app codebase also can easily be [strong typed](strong-typing.md) if you wish.
-
-
-
-
+I hope you enjoy it. If you haven't clicked the 'Try the Code' buttons to run the AppRun code above, please give it a try.
 
