@@ -2,7 +2,7 @@
 
 The recently updated [AppRun Docs Site](https://apprun.js.org/docs) has made the code snippets in the documents runnable and editable, making the technical documentation interactive and much more fun to use.
 
-The site is built with [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/), a beautiful and powerful tool for building technical documentation site. We extended it by adding a web component built with [AppRun](https://apprun.js.org) to deliver the interactive experiences.
+The site is built with [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/), a beautiful and powerful tool for building technical documentation site. We have extended it by adding a web component built with [AppRun](https://apprun.js.org) to deliver interactive experiences.
 
 In this post, I Will explain how it's made. Let's start with reviewing the user experience.
 
@@ -34,7 +34,7 @@ Not only is it much more attractive to the readers, but also the authors will fe
 
 ### Present the Live Code
 
-Traditionally, authors copy and paste the code snippets from their testing projects into the markdown documents as code blocks. The limitation is that they can only present the code but not the running code. This is because it would be simpler to show the running code than to describe the code behaviour. For example, describing a calculator could need an extended text, but it could be easier to present the calculator for users to click.
+Traditionally, authors copy and paste the code snippets from their testing projects into the markdown documents as code blocks. The limitation is that they can only present the code but not the running code. This is because it would be simpler to show the running code than to describe the code behavior. For example, describing a calculator could need an extended text, but it could be easier to present the calculator for users to click.
 
 You can visit the [AppRun Docs Page](https://apprun.js.org/docs/architecture-ideas/state-machine/#model-a-calculator) to see a running calculator.
 
