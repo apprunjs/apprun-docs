@@ -64,6 +64,7 @@ nav:
   - View Pattern:
     - JSX: view-patterns.md
     - Directive: directive.md
+    - SVG: svg.md
     - 3rd Party Intergration: 3rd-party-libs.md
   - Advanced:
     - CLI in Console: cli-in-console.md
