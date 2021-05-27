@@ -19,6 +19,8 @@ AppRun book published by Apress.
 
 ## Posts
 
+* [All the Ways to Make a Web Component - May 2021 Update](https://webcomponents.dev/blog/all-the-ways-to-make-a-web-component/)
+
 * [A Real-World Comparison of Front-End Frameworks with Benchmarks 2019 Update](https://medium.freecodecamp.org/a-realworld-comparison-of-front-end-frameworks-with-benchmarks-2019-update-4be0d3c78075) (2019)
 
 * [A Real-World Comparison of Front-End Frameworks with Benchmarks 2018 Update](https://medium.freecodecamp.org/a-real-world-comparison-of-front-end-frameworks-with-benchmarks-2018-update-e5760fb4a962) (2018)
