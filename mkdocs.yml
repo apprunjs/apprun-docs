@@ -58,6 +58,7 @@ nav:
     - Installation: getting-started.md
     - Tutorial: tutorial.md
     - Showcase: showcase.md
+    - Notebooks: notebooks.md
   - Single Page Apps:
     - Creating Project: spa.md
     - Routing: routing.md

@@ -78,7 +78,7 @@ app.start(document.body, state, view);
 
 ## Custom directive
 
-When AppRun is processing the JSX code, it publishes the $ event when it finds the custom attributes like $X. Thus, you can subscribe to the $ event to provide your directives. E.g., if you create the $animation directive to attach the animation classes from the animation library, [animation.css](https://daneden.github.io/animate.css).
+When AppRun is processing the JSX code, it publishes the $ event when it finds the custom attributes like $X. Thus, you can subscribe to the $ event to provide your directives.
 
 ```js
 app.on('$', ({key, props}) => {
@@ -90,7 +90,10 @@ app.on('$', ({key, props}) => {
   }
 });
 ```
-You can see the $animation example below.
+
+### Animation directive
+
+We can create the $animation directive to attach the animation classes from the animation library, [animation.css](https://daneden.github.io/animate.css). See the $animation example below.
 
 ```js
 // Animation Directive Using animate.css
@@ -120,5 +123,62 @@ const view = state => <>
 </>
 
 app.start(document.body, state, view);
+```
+<apprun-play style="height:230px"></apprun-play>
+
+
+### Form Validation
+
+HTML5 [Constraint Validation API](https://developer.mozilla.org/en-US/docs/Web/API/Constraint_validation) simplifies the client-side validation. We can use basic validation by choosing the type attribute of input elements, such as email and URL. Or we can use the _pattern_ attribute for validation using regular expression. Also, we can use the _required_, _maxlength_, _min_, and _max_ attributes.
+
+We can create the $validation directive to display the validation results by setting and removing the class.
+
+```js
+const validate = (e) => {
+  const element = e.target;
+  element.checkValidity();
+  console.log(element.validity.valid);
+  if (element.validity.valid) {
+    element.classList.remove('is-invalid');
+  } else {
+    element.classList.add('is-invalid');
+  }
+}
+
+app.on('$', ({ key, props }) => {
+  if (key === '$validate') {
+    const event = props[key];
+    props['oninput'] = validate;
+  }
+});
+
+
+const signIn = (state, e) => {
+  e.preventDefault();
+  alert('form submitted')
+}
+
+const view = ({name}) => <>
+  <style>{`.is-invalid { border: 2px solid red; color: red }`}</style>
+  <form autocomplete="off" $onsubmit="signIn">
+    <p>
+    <label for="name" autocomplete="off">Enter an name (letters only): </label>
+    <input $validate type="text" name="name" required pattern="[A-Za-z]+"/>
+    </p>
+    <p>
+    <label for="email" autocomplete="off">Enter a email: </label>
+    <input $validate type="email" name="email" required />
+    </p>
+    <p>
+    <label for="url" autocomplete="off">Enter an URL: </label>
+    <input $validate type="url" name="url" required />
+    </p>
+    <button type="submit">Submit</button>
+  </form>
+  <div>{name}</div>
+</>;
+
+app.start(document.body, {}, view, {signIn});
+
 ```
 <apprun-play style="height:230px"></apprun-play>

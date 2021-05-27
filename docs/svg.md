@@ -22,11 +22,12 @@ const triangles = [
 class SvgComponent extends Component {
   state = 0;
 
-  view = state => {
+ view = state => {
+    const transform = "rotate(" + state + "deg)";
     return <div className="view">
     <style>{style}</style>
       <svg width="380" height="380" viewBox="-190,-190,380,380">
-        <g id="carousel" transform={`rotate(${state})`}>
+        <g id="carousel" style={{transform}}>
           {triangles.map(t =>
             <polygon id={t.id}
               points="-50,-88 0,-175 50,-88"

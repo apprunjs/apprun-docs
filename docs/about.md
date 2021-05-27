@@ -2,15 +2,15 @@
 
 The recently updated [AppRun Docs Site](https://apprun.js.org/docs) has made the code snippets in the documents runnable and editable, making the technical documentation interactive and much more fun to use.
 
-The site is built with [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/), a beautiful and powerful tool for building technical documentation site. We have extended it by adding a web component built with [AppRun](https://apprun.js.org) to deliver interactive experiences.
+The site is built with [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/), a beautiful and powerful tool for building technical documentation site. We extended it by adding a web component built with [AppRun](https://apprun.js.org) to deliver interactive experiences.
 
 In this post, I Will explain how it's made. Let's start with reviewing the user experience.
 
 ## User Experience
 
-Technical documents usually have code snippets. Often the code has syntax highlighted for easy reading. However, users usually can see screenshots but not live results of the code. Screenshots have limitations. For example, when describing how to make animation, a static screenshot is not helpful. We need a way to display the live code execution results.
+Technical documents usually have code snippets. Often the code has syntax highlighted for easy reading. However, users usually can only see screenshots but not live results of the code. Screenshots have limitations. For example, when describing how to make animation, a static screenshot is not helpful. We need a way to display the live code execution results.
 
-### See the Result
+### See the Results
 
 You can visit the [AppRun Docs Page](https://apprun.js.org/docs/directive/#custom-directive) to see a live animation.
 
@@ -18,7 +18,7 @@ You can visit the [AppRun Docs Page](https://apprun.js.org/docs/directive/#custo
 
 ### Try the Code
 
-Furthermore, users might have been inspired by the code examples and want to try different ideas. Traditionally, they could copy and code to run it in their code editors. It would be nice for users to edit the code right on the doc site and see the results.
+Furthermore, users might have been inspired by the code examples and want to try different ideas. Traditionally, they could copy and paste the code to run it in their code editors. It would be nice for users to edit the code right on the doc site and see the results.
 
 You can click the "Try the Code" button of the [AppRun Docs Page](https://apprun.js.org/docs/directive/#custom-directive). It opens the AppRun Playground with an editor and preview pane to play the code.
 
@@ -34,7 +34,7 @@ Not only is it much more attractive to the readers, but also the authors will fe
 
 ### Present the Live Code
 
-Traditionally, authors copy and paste the code snippets from their testing projects into the markdown documents as code blocks. The limitation is that they can only present the code but not the running code. This is because it would be simpler to show the running code than to describe the code behavior. For example, describing a calculator could need an extended text, but it could be easier to present the calculator for users to click.
+Traditionally, authors copy and paste the code snippets from their testing projects into the markdown documents as code blocks. The limitation is that they can only present the code but not the running code. Sometimes, it would be hard to describe the code behavior. For example, describing a calculator could need a long text, but it could be easier to present the calculator for users to click.
 
 You can visit the [AppRun Docs Page](https://apprun.js.org/docs/architecture-ideas/state-machine/#model-a-calculator) to see a running calculator.
 
@@ -80,7 +80,7 @@ We can use the [embedding external files](https://squidfunk.github.io/mkdocs-mat
 
 ### Automatic Test the Code
 
-When it displays the code result automatically is automatic testing of the code, which tells the author if the code works as expected.
+When it displays the code result automatically means automatic testing of the code, which tells the author if the code works as expected.
 
 Also, while writing, the authors can come up with new ideas. With _apprun-play_ web component, they can edit the code and see the live results. Once it's done, they can copy and paste the code back into the document.
 
