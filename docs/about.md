@@ -42,23 +42,25 @@ You can visit the [AppRun Docs Page](https://apprun.js.org/docs/architecture-ide
 
 All we need to do is to add a web component, called _apprun-play_ under the code blocks.
 
+
+```` markdown
+```js
+// code snippets
 ```
-  ``js
-  // code snippets
-  ``
-  <apprun-play></apprun-play>
+<apprun-play></apprun-play>
 ```
+````
 
 ### Control the Presentation
 
 You probably have noticed that the page shows only the results but not the source code. It is because we can control whether to show the source code. We can also decide whether to see the "Try the Code" button.
 
+```` markdown
+```js
+// code snippets
 ```
-  ``js
-  // code snippets
-  ``
-  <apprun-play hide_src="true" hide_button="true"></apprun-play>
-```
+<apprun-play hide_src="true" hide_button="true"></apprun-play>
+````
 
 You can visit the [AppRun Docs Page](https://apprun.js.org/docs/architecture/#ceremony-vs-essence) to see an example of only displaying the running results.
 
@@ -71,12 +73,12 @@ We can present the code snippets, but we can also embed whole applications becau
 
 We can use the [embedding external files](https://squidfunk.github.io/mkdocs-material/reference/code-blocks/#embedding-external-files) feature of [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/). This way, the markdown document does not include the source code and can remain simple and clean.
 
+```` markdown
 ```
-  <textarea>
-  --8<-- "real-world.html"
-  </textarea>
-  <apprun-play style="height:350px" hide_src="true" hide_button="true"></apprun-play>
+--8<--​ "real-world.html"
 ```
+<apprun-play style="height:350px" hide_src="true" hide_button="true"></apprun-play>
+````
 
 ### Automatic Test the Code
 
