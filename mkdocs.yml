@@ -59,6 +59,7 @@ nav:
     - Tutorial: tutorial.md
     - Showcase: showcase.md
     - Notebooks: notebooks.md
+    - React: react.md
   - Single Page Apps:
     - Creating Project: spa.md
     - Routing: routing.md
