@@ -46,7 +46,7 @@ Or when you need HTML or lit-HTML:
 ```
 <apprun-play></apprun-play>
 
-### Use ES Module
+### Use ES Module in Browser
 
 ```html
 <html lang="en">
@@ -55,7 +55,7 @@ Or when you need HTML or lit-HTML:
 </head>
 <body>
 <script type="module">
-  import { app } from 'https://unpkg.com/apprun/esm/apprun-html?module';
+  import { app } from 'https://unpkg.com/apprun/dist/apprun-html.esm.js';
   const view = state => `<div>${state}</div>`;
   app.start(document.body, 'hello ESM', view);
 </script>
@@ -74,7 +74,7 @@ Or when you need HTML or lit-HTML:
 </head>
 <body>
 <script type="module">
-  import { app } from 'https://unpkg.com/apprun/esm/apprun-html?module'
+  import { app, html } from 'https://unpkg.com/apprun/dist/apprun-html.esm.js';
   const view = state => html`<div>${state}</div>`;
   app.start(document.body, 'hello lit-html', view);
 </script>

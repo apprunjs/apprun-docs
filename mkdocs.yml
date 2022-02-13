@@ -35,9 +35,10 @@ extra_javascript:
   - assets/vendor/codemirror/mode/jsx/jsx.js
   - assets/apprun-play.js
 
-google_analytics:
-  - UA-123786786-1
-  - auto
+extra:
+  analytics:
+    provider: google
+    property: UA-123786786-1
 
 nav:
   - Home: index.md
