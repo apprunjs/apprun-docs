@@ -125,6 +125,13 @@ The apprun-dev-server is installed when using AppRun CLI to create AppRun projec
 npx apprun --init --spa --esbuild
 ```
 
+Or, you can initialize a project using the `npm init apprun-app` command and select the `esbuild` option.
+
+```sh
+npm init apprun-app [my-app]
+```
+
+
 Give it a try and send pull requests.
 
 https://github.com/yysun/apprun-dev-server

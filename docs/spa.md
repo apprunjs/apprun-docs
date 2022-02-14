@@ -8,16 +8,10 @@ You can initialize a SPA project that uses TypeScript and WebPack.
 npx apprun --init --spa
 ```
 
-To initialize a project that targets ES5, use the AppRun CLI with the --es5 flag:
+Or, you can initialize a project using the `npm init apprun-app` command and select the `Single Page App` option.
 
 ```sh
-npx apprun --init --spa --es5
-```
-
-You can initialize a SPA project that uses esbuild.
-
-```
-npx apprun --init --spa --esbuild
+npm init apprun-app [my-app]
 ```
 
 ## SPA Architecture
