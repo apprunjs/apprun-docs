@@ -2,13 +2,7 @@
 
 ## Create Project
 
-You can initialize a SPA project that uses TypeScript and WebPack.
-
-```sh
-npx apprun --init --spa
-```
-
-Or, you can initialize a project using the `npm init apprun-app` command and select the `Single Page App` option.
+You can initialize a project using the `npm init apprun-app` command and select the `Single Page App` option.
 
 ```sh
 npm init apprun-app [my-app]

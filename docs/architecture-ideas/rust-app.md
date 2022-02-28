@@ -112,7 +112,7 @@ module.exports = {
 }
 ```
 
-Also, because of the wasm-pack-plugin generates the _dynamic import_ module, you need to modify _tsconfig.json_ file to set the module to be _esnext_.
+Also, because the wasm-pack-plugin generates the _dynamic import_ module, you need to modify _tsconfig.json_ file to set the module to be _esnext_.
 
 ```json
 {
@@ -236,7 +236,7 @@ Now, when the application starts, it displays the messages sent from the WebAsse
 ![Message from WASM](https://dev-to-uploads.s3.amazonaws.com/i/atljaqot7q08qcu9rk9m.png)
 <figcaption>Message from wasm</figcaption>
 
-We have successfully made the two-way interactions between the WebAssembly and the AppRun application.
+We have successfully made two-way interactions between the WebAssembly and the AppRun application.
 
 ## Souce Code
 
@@ -256,4 +256,4 @@ npx degit yysun/apprun-rust my-app
 
 This post should give you a quick start to use Rust/WebAssembly in the AppRun applications. The demo project shows the two technologies interact with each other very well. You can use the demo project as a template.
 
-We have now opened the door to a new world. There are much more potentials to explorer.
+We have now opened the door to a new world. There is much more potential to explore.

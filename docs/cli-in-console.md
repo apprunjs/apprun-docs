@@ -16,7 +16,7 @@ Just like many other CLI, the *help* command lists all available commands. For e
 
 ## Why do we need a CLI in the console?
 
-CLI in the console is convenient for watching runtime data. For example, during application development, we often need to debug and exam the application's internal data. Using the *console.log* function is the easiest yet compelling way to display the data because the console lets us drill down into the nested array and object structure.
+CLI in the console is convenient for watching runtime data. For example, during application development, we often need to debug and check the application's internal data. Using the *console.log* function is the easiest yet most compelling way to display the data because the console lets us drill down into the nested array and object structure.
 
 ![Drilldown](https://thepracticaldev.s3.amazonaws.com/i/fq37a5rjfoz4pqsi0f05.png)
 
@@ -24,7 +24,7 @@ With a CLI in the console, The app codebase stays clear of *console.log*. The CL
 
 #How is it made?
 
-It is relatively easy to create a CLI in the console than to create a dev-tool as the browser extension. It is based on the JavaScript [tagged templates](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#Tagged_templates).
+The CLI uses JavaScript [tagged templates](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#Tagged_templates).
 
 We create the *_apprun* function in the *window* object.
 
@@ -42,7 +42,7 @@ window['_apprun'] = (strings) => {
   else window['_apprun-help'][1]();
 }
 ```
-It has an extensive architecture. We create the AppRun commands in the *window* object. The AppRun command is a tuple that includes the description of the command and the implementation function of the command. E.g. the help command look like this:
+It has extensive architecture. We create the AppRun commands in the *window* object. The AppRun command is a tuple that includes the description of the command and the implementation function of the command. E.g., the help command looks like this:
 
 ```js
 window['_apprun-help'] = ['', () => {
@@ -62,7 +62,7 @@ That's all the infrastructure code we need to create CLI commands in the console
 
 # Live Demo
 
-The AppRun CLI in the console is one of the developer tools includes in the AppRun library. You can visit the AppRun RealWorld Example App https://gothinkster.github.io/apprun-realworld-example-app to see the CLI in actions.
+The AppRun CLI in the console is one of the developer tools included in the AppRun library. You can visit the AppRun RealWorld Example App https://gothinkster.github.io/apprun-realworld-example-app to see the CLI in action.
 
 * The *components* command logs the DOM elements that have AppRun components
 * The *events* command logs the event subscription of the app

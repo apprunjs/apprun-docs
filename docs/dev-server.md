@@ -119,13 +119,7 @@ module.exports = {
 ```
 ## Use with esbuild
 
-The apprun-dev-server is installed when using AppRun CLI to create AppRun projects.
-
-```sh
-npx apprun --init --spa --esbuild
-```
-
-Or, you can initialize a project using the `npm init apprun-app` command and select the `esbuild` option.
+The apprun-dev-server is installed when creating a project by using the `npm init apprun-app` command and select the `esbuild` option.
 
 ```sh
 npm init apprun-app [my-app]
