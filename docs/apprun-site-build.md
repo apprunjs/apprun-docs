@@ -15,7 +15,7 @@ The _build_ command scans your pages in the `pages` directory and compiles them 
   /index.js         <- compiled from `pages/index.md`
   /main.js          <- compiled from `pages/main.tsx` and some bootstrap code
   /about
-    index.js        <- compiled from `pages/about/index.tsx`
+    index.js        <- compiled from `pages/about/index.md`
   /contact
     index.js        <- compiled from `pages/contact/index.tsx`
 
