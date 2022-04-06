@@ -33,15 +33,7 @@ The application will be served at http://localhost:8080.
 
 ## Add Pages
 
-You can add tsx/jsx files (AppRun components, including functional components and class components), markdown, or html files to the `pages` directory.
-
-### Example of a AppRun functional component page:
-```javascript
-import app from 'apprun';
-export default (args) => <>
-  <p>This is a functional Component</p>
-</>
-```
+You can add tsx/jsx files (AppRun components), markdown, or html files to the `pages` directory.
 
 ### Example of a AppRun class component page:
 ```javascript
