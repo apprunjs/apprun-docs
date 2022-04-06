@@ -13,7 +13,6 @@ npm init apprun-app [my-app]
 And select the `AppRun Site` template. An AppRun-Site project has the following structure:
 
 ```
-/public             <- static website
 /pages              <- pages of the website
   /index.html       <- index page
   /index.md         <- home page
@@ -22,6 +21,7 @@ And select the `AppRun Site` template. An AppRun-Site project has the following 
     index.md        <- about page, markdown
   /contact
     contact.tsx     <- contact page, AppRun component
+/public             <- static website
 ```
 
 Then, you can use:
