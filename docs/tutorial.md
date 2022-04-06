@@ -185,4 +185,4 @@ app.render(document.body, <App />);
 !!! note
     We have just created a simple SPA using components. In a real-world scenario, usually, we create pages as modules and bundle them together or load them dynamically.
 
-Please continue to read the next section of this guide to learn more about SPA.
+Please continue to read the next section of this guide to learn more about [SPA, SSR, and static site](apprun-site.md).

@@ -1,8 +1,8 @@
-# AppRun CLI in Console
+# AppRun Dev Tools
 
 We have been using the command-line interface (CLI) in the terminal window and the command prompt. Have you thought of a CLI in the console of the browser's developer tool?
 
-![CLI in the console](https://thepracticaldev.s3.amazonaws.com/i/khumq8np94i5uwo9bwn1.png)
+![AppRun Dev Tools](https://thepracticaldev.s3.amazonaws.com/i/khumq8np94i5uwo9bwn1.png)
 
 ## How does it work?
 
@@ -62,7 +62,7 @@ That's all the infrastructure code we need to create CLI commands in the console
 
 # Live Demo
 
-The AppRun CLI in the console is one of the developer tools included in the AppRun library. You can visit the AppRun RealWorld Example App https://gothinkster.github.io/apprun-realworld-example-app to see the CLI in action.
+The AppRun Dev Tools is one of the developer tools included in the AppRun library. You can visit the AppRun RealWorld Example App https://gothinkster.github.io/apprun-realworld-example-app to see the CLI in action.
 
 * The *components* command logs the DOM elements that have AppRun components
 * The *events* command logs the event subscription of the app
@@ -72,9 +72,5 @@ The AppRun CLI in the console is one of the developer tools included in the AppR
 
 # Conclusion
 
-Developers like CLI. CLI in the console helps get runtime events and messages hard for the traditional CLI in the terminal. The AppRun CLI in the console even extended the CLI beyond watching the data to generate tests. Thus, it increases the development productivity for debugging and testing.
-
-
-
-
+Developers like CLI. Dev Tools helps get runtime events and messages hard for the traditional CLI in the terminal. The AppRun Dev Tools can watch the components and events, and can generate tests. Thus, it increases the development productivity for debugging and testing.
 

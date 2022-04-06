@@ -55,25 +55,27 @@ nav:
       - Database and Websocket: architecture-ideas/db-websocket.md
       - Webassembly app with Rust: architecture-ideas/rust-app.md
       - State Machine: architecture-ideas/state-machine.md
+      - Showcase: showcase.md
   - Getting started:
     - Installation: getting-started.md
     - Tutorial: tutorial.md
-    - Showcase: showcase.md
-    - Notebooks: notebooks.md
-    - React: react.md
-  - Single Page Apps:
-    - Creating Project: spa.md
-    - Routing: routing.md
+  - AppRun Site:
+    - New Project: apprun-site.md
+    - Build: apprun-site-build.md
+    - Client-Side Rendering: apprun-site-csr.md
+    - Server-Side Rendering: apprun-site-ssr.md
+    - Static Web Site: apprun-site-static.md
+    - Configurations: apprun-site-config.md
   - View Pattern:
     - JSX: view-patterns.md
     - Directive: directive.md
     - SVG: svg.md
     - 3rd Party Intergration: 3rd-party-libs.md
   - Advanced:
-    - CLI in Console: cli-in-console.md
-    - Dev Server: dev-server.md
-    - Server Side Rendering: ssr.md
+    - Dev Tools: cli-in-console.md
     - Strong Typing: strong-typing.md
     - Unit Testing: unit-testing.md
+    - Notebooks: notebooks.md
+    - Use with React: react.md
   - Resources: resources.md
   - About: about.md

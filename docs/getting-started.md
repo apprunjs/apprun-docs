@@ -2,30 +2,24 @@
 
 This guide describes how to get up and running with AppRun in minutes.
 
-> **AppRun Concepts**
->
-> If you are looking for an introductory overview of AppRun technology, it is recommended to visit the concepts section.
-
-
-## Installation
-
 AppRun is distributed on npm.
 ```sh
 npm install apprun
 ```
 
-You can also load AppRun directly from the unpkg.com CDN:
+You can use AppRun directly from the unpkg.com CDN:
 
 ```js
 <script src="https://unpkg.com/apprun/dist/apprun-html.js"></script>
 ```
 
-## Create AppRun Apps
 
-You can create an AppRun app by using the `npm init` command.
+To get started with AppRun, choose one of the following two options:
 
-```sh
-npm init apprun-app [my-app]
-```
+1. Use the [tutorial](tutorial.md) without any installation
+2. Create a new [AppRun Site](https://github.com/yysun/apprun-site)
 
-Next, you will see the quick-start [tutorial](tutorial.md) of creating AppRun apps
+
+
+
+

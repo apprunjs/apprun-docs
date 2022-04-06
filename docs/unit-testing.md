@@ -21,7 +21,7 @@ There are two types of unit tests in the AppRun application.
 
 ## Create Tests using CLI
 
-Creating unit tests could be tedious, but you can use the [AppRun CLI in Console](cli-in-console.md) to generate the tests.
+Creating unit tests could be tedious, but you can use the [AppRun Dev Tools](cli-in-console.md) to generate the tests.
 
 First, include the CLI scripts in your HTML.
 
