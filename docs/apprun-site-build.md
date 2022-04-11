@@ -29,9 +29,7 @@ The _build_ command scans your pages in the `pages` directory and compiles them 
     contact.tsx     <- contact page, AppRun component
 ```
 
-When running the _npm start_ command, the `public`  directory will be served at http://localhost:8080.
+The compiled js files are ES modules. They are compatible on the client-side and server-side.
 
-The compiled js files are ES modules and will be imported dynamically.
-
-Next, you will learn how are the [compiled javascript file being used](apprun-site-csr.md).
+Next, you will learn about [client-side rendering](apprun-site-csr.md).
 

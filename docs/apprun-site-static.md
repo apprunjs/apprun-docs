@@ -31,7 +31,7 @@ The _build_ command first scans and compiles your pages in the `pages` directory
     contact.tsx     <- contact page, AppRun component`
 ```
 
-With all the HTML pages are created, you can deploy the static website.
+With all the HTML pages created, you can deploy the static website.
 
 
 In the next section, you will learn a few ways to [customize AppRun-Site commands and dev server](apprun-site-config.md).

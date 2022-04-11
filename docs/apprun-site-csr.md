@@ -1,7 +1,29 @@
 
 # AppRun-Site Client-Side Rendering
 
-The AppRun-Site _build_ command creates a Single-Page Application (SPA), including client-side rendering and routing. During the _build_ process, it injects the client-side code into the _main.js_ file.
+The AppRun-Site _build_ command creates pages as ES modules that can be loaded dynamically. The AppRun-Site _build_ command injects the client-side code into the _main.js_ file for routing and loading the pages. To conclude, AppRun Sites are Single Page Applications (SPA).
+
+## App Startup
+
+If you have startup code, you can add it to the _main.tsx_ file. The AppRun-Site _build_ command injects calls to the default exported function of the _main.tsx_ file.
+
+```
+/pages              <- pages of the website
+  /main.tsx         <- startup code
+```
+
+### Example of a markdown page:
+```javascript
+import app from 'apprun';
+import Layout from '../components/layout'
+import Comic from '../components/comic';
+
+export default () => {
+  app.webComponent('ws-comic', Comic);        // register web component
+  app.render(document.body, <Layout />);      // render site layout
+}
+
+```
 
 ## No-Code Routing
 
@@ -13,8 +35,7 @@ The event handler for the _/contact_ event is also injected. Therefore, there is
 
 ## Routing Parameters
 
-However, if you want to pass parameters to the component through the URL, you can create your event handler.
-
+However, if you want to pass parameters to the component through the URL, you can create your event handler. For example:
 ```javascript
 import { app, Component } from 'apprun';
 export default class extends Component {
@@ -36,4 +57,4 @@ AppRun-Site injects code by default to support pretty links (a.k.a. non-hash lin
 
 > The AppRun-Site dev server provides such capability of serving _index.html_ when the routes don't exist.
 
-To conclude, AppRun-Site builds Single Page Application (SPA). Next, you will see how to use the dev server and how does it render your pages on the [server side](apprun-site-ssr.md).
+Next, you will see how to use the dev server and how it renders your pages on the [server side](apprun-site-ssr.md).

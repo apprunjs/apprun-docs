@@ -4,7 +4,7 @@ There are several options and configurations for AppRun-Site.
 
 ## Build Command Options
 
-You can use the following command line options for the _build_ command.
+You can use the following command-line options for the _build_ command.
 
 ```sh
 Usage: apprun-site build [options] [source]
@@ -20,15 +20,30 @@ Options:
   -h, --help             display help for command
 ```
 
+## Dev Command Optins
+
+```sh
+Usage: apprun-site dev [options] [source]
+
+launch development server
+
+Options:
+  -o, --output [output]  output directory (default: "public")
+  -p, --pages [pages]    pages directory (default: "pages")
+  -h, --help             display help for command
+```
+
+
 ## Dev Server Options
 
-You can customize dev server in the `apprun-site.yml` config file.
+In addition, you can also customize the AppRun-Site in the `apprun-site.yml` config file.
 
 ```yml
 site_name: AppRun Site
 site_url: /
 
-no-startup: true   # don't inject start up code for dynamic routing
+no-startup: true   # don't inject startup code for dynamic routing
+no-sss: true       # don't use server-side-rendering
 
 dev-server:
   port: 8080

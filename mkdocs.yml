@@ -60,7 +60,7 @@ nav:
     - Installation: getting-started.md
     - Tutorial: tutorial.md
   - AppRun Site:
-    - New Project: apprun-site.md
+    - Create: apprun-site.md
     - Build: apprun-site-build.md
     - Client-Side Rendering: apprun-site-csr.md
     - Server-Side Rendering: apprun-site-ssr.md

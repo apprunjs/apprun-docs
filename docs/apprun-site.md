@@ -21,19 +21,18 @@ And select the `AppRun Site` template. An AppRun-Site project has the following 
     index.md        <- about page, markdown
   /contact
     contact.tsx     <- contact page, AppRun component
-/public             <- static website
 ```
 
 Then, you can use:
 
-* _npm start_ to start the dev server and watch your code changes.
+* _npm start_ or _npm run dev_ to start the dev server and watch your code changes.
 
-The application will be served at http://localhost:8080.
+The application will run at http://localhost:8080.
 
 
 ## Add Pages
 
-You can add tsx/jsx files (AppRun components), markdown, or html files to the `pages` directory.
+You can add AppRun components, class or functional (tsx/jsx files), markdown, or html files to the `pages` directory.
 
 ### Example of a AppRun class component page:
 ```javascript
@@ -47,12 +46,26 @@ export default class ContactComponent extends Component {
 }
 ```
 
-### Example of a markdown page:
+### Example of a AppRun funtional component page:
+```javascript
+import app from 'apprun';
+export default () => <>
+  <h2>...</h2>
+  <p>This is a functional Component</p>
+</>
+```
 
+### Example of a markdown page:
 ```markdown
 # Hello Web Component
-This is a demo page to display a comic from XKCD using a web component.
+This is a markdown page with a web component to display a comic from XKCD
 <ws-comic></ws-comic>
+```
+
+### Example of a html page:
+```html
+<h2>Page</h2>
+<div>This is an HTML page</div>
 ```
 
 All the pages will be compiled to the ES modules into the `public` directory when you build the site.
