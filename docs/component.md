@@ -6,7 +6,7 @@ An AppRun component is a mini-application with elm architecture, which means ins
 
 ### Render the Component
 
-To use the components, you can render them to an element.
+To use the components, you can render them into an element.
 
 ```js
 const element = document.getElementById('my-app');
@@ -115,7 +115,7 @@ class Counter extends Component {
 
 ### Event Directive
 
-We can also use the [directive](directive.md) to simplify the event handling.
+We can also use the [directive](directive.md) to simplify event handling.
 
 ```js
 import {app, Component} from 'apprun';
@@ -132,7 +132,7 @@ class Counter extends Component {
 
 ## Life Cycle Functions
 
-Life Cycle Functions are call back functions that AppRun calls during the component life cycle. They are _mounted_, _rendered_, and _unload_.
+Life Cycle Functions are callback functions that AppRun calls during the component life cycle. They are _mounted_, _rendered_, and _unload_.
 
 ```js
 import { app, Component } from 'apprun';
@@ -153,7 +153,7 @@ app.render(document.body, <MyApp />);
 
 ### mounted
 
-The _mounted_ function is called after the component instance is mounted to a DOM element. The _mounted_ function can be used to set the initialize the state.
+The _mounted_ function is called after the component instance is mounted to a DOM element. The _mounted_ function can be used to set the initialize _state_.
 ```js
 mounted: (props: any, children: any[], state: T) => T | void;
 
@@ -188,7 +188,7 @@ rendered: (state: T, props?: any[]) => void;
 
 ### unload
 
-The _unload function is called when the DOM element that component is mounted to is removed or reused by other components. For example, the _unload function can be used to clean by the resources created by the 3rd party libraries.
+The _unload function is called when the DOM element that the component is mounted to is removed or reused by other components. For example, the _unload function can be used to clean the resources created by the 3rd party libraries.
 
 ```js
 unload: (state: T) => void;
@@ -235,7 +235,7 @@ You can convert AppRun components into [web components/custom elements](https://
 
 ## HTML Child Components
 
-Unlike JSX, you can embed component class into JSX; when using HTML string components, you will need to make a web component/custom element. Then you can embed the components.
+Unlike JSX, you can embed component classes into JSX; when using HTML string components, you will need to make a web component/custom element. Then you can embed the components.
 
 ```js
 import app from 'apprun';

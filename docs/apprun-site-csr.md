@@ -5,7 +5,7 @@ The AppRun-Site _build_ command creates pages as ES modules that can be loaded d
 
 ## App Startup
 
-If you have startup code, you can add it to the _main.tsx_ file. The AppRun-Site _build_ command injects calls to the default exported function of the _main.tsx_ file.
+If you have a startup code, you can add it to the _main.tsx_ file. The AppRun-Site _build_ command injects calls to the default exported function of the _main.tsx_ file.
 
 ```
 /pages              <- pages of the website

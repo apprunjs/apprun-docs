@@ -1,26 +1,26 @@
 # Strong Typing
 
-From the AppRun architecture and AppRun event life cycle, we can see two places that require strong-typing: state and event names.
+From the AppRun architecture and AppRun event life cycle, we can see two places that require strong typing: state and event names.
 
 * The initial state and the state passed between the view function and event handlers
-* The event names for publishing and subscribing Apprun events
+* The event names for publishing and subscribing to Apprun events
 
 ![](imgs/Figure_1-1.png)
 
 ## Strong Typing of State
 
-The state are used in the _view_ function and in the _update_(event handlers). We can make the state strong typed in the _view_ function and in the _update_.
+The state is used in the _view_ function and in the _update_(event handlers). We can make the state strong typed in the _view_ function and in the _update_.
 
 ### Typed View
 
-First, we can make the state use in the _view_ strongly typed by importing the View type from AppRun and apply it to the view function.
+First, we can make the state used in the _view_ strongly typed by importing the View type from AppRun and applying it to the view function.
 
 ```js
 import { app, View } from 'apprun';
 const view: View<number> => state => <div>...</div>
 ```
 
-The View type imported from AppRun is a [generic type](https://www.typescriptlang.org/docs/handbook/2/generics.html). It makes the view function into a generic function, which let us define the type of its parameters. E.g., we define the view function to be View<number>, TypeScript recognizes the state parameter of the view function is number.
+The View type imported from AppRun is a [generic type](https://www.typescriptlang.org/docs/handbook/2/generics.html). It makes the view function into a generic function, which let us define the type of its parameters. E.g., we define the view function to be View<number>, TypeScript recognizes the state parameter of the view function is a number.
 ![typed view ](https://cdn-images-1.medium.com/max/1600/1*jT2qW1LgZVqSZWZgb_VZjQ.png)
 
 ### Typed Update
@@ -32,13 +32,13 @@ import { app, View, Update } from 'apprun';
 const update: Update<number> = { ... }
 ```
 
-The Update type imported from AppRun is also generic. It makes the event handlers in the update object into generic functions. TypeScript recognizes the state parameter of the event handler functions are number.
+The Update type imported from AppRun is also generic. It makes the event handlers in the update object into generic functions. TypeScript recognizes the state parameter of the event handler functions as are number.
 
 ![Typed Update](https://cdn-images-1.medium.com/max/1600/1*2xYoeK0KwyQ2FYMXwMjnmA.png)
 
 ### Typed Application
 
-Finally, let's make the application strongly type. The _app.start_ is a generic function already. If we give the _app.start_ function a type, E.g., number, it means the state of the application is number, the view of the application is View<number> and the update of the application is Update<number>.
+Finally, let's make the application strongly typed. The _app.start_ is a generic function already. If we give the _app.start_ function a type, E.g., number, it means the state of the application is number, the view of the application is View<number> and the update of the application is Update<number>.
 
 ```js
 app.start<number>( ... )
@@ -64,7 +64,7 @@ So far, e have made the strongly typed state to the view function, the event han
 
 ## Strong Typing of Events
 
-AppRun update object is a named collection or dictionary of the event handlers. The event names are strings, such as +1 and -1. They are not typed, not checked by the compiler, and not IDE friendly. Instead, we can use TypeScript enum to define the event names.
+AppRun update object is a named collection or dictionary of the event handlers. The event names are strings, such as +1 and -1. They are not typed, not checked by the compiler, and not IDE friendly. Instead, we can use the TypeScript enum to define the event names.
 
 ### Enum of Event Names
 
@@ -86,7 +86,7 @@ The _update_ can be an array of tuples for defining AppRun event handlers.
 
 The event handler tuple has two fields: the event name and the event handler function.
 
-We can use two advanced TypeScript types with the tuple: union type and string literal type, to create so call discriminated union. For more information about union type, string literal type, and discriminated union, please refer to the TypeScript handbook.
+We can use two advanced TypeScript types the tuple: union type and string literal type, to create so call discriminated union. For more information about union type, string literal type, and discriminated union, please refer to the TypeScript handbook.
 
 ### Discriminated Union Typed Event Names
 
@@ -107,22 +107,22 @@ The event names are strongly typed. TypeScript can even provide code auto-comple
 ![Typed Update Tuple](https://cdn-images-1.medium.com/max/1600/1*Z1y_-n7_Y1bzDUJuw0ORVw.png)
 
 
-If the event name is not one of the strings defined in Events type, TypeScript catch the error.
+If the event name is not one of the strings defined in the Events type, TypeScript catches the error.
 
 ![Catch Event Name Error in Update Tuple](https://cdn-images-1.medium.com/max/1600/1*kkwPCiTcA9ny9IJ3uFTZsA.png)
 
 
 ### Typed Events in View
 
-To make the event names in the view function strongly type, we need to make the event names of the application strongly type first. We can add the Events type to the _app.start_ generic function.
+To make the event names in the view function strongly type, we need to make the event names of the application strongly type first. We can add the Events type to the _app_.start_ the generic function.
 
 ```js
 app.start<number, Events>(...)
 ```
 
-It makes the application can only trigger the events that are defined in the Events type. Because we have made the event names strongly typed TypeScript provides intelliSense to the event names the application.
+It makes the application only can trigger the events that are defined in the Events type. Because we have made the event names strongly typed TypeScript provides intelliSense to the event names of the application.
 
-![Typed Event Names in Application](https://cdn-images-1.medium.com/max/1600/1*fY-lIFIuFSpukxP3s82JYQ.png)
+![Typed Event Names in the Application](https://cdn-images-1.medium.com/max/1600/1*fY-lIFIuFSpukxP3s82JYQ.png)
 
 TypeScript also catches the event name errors in the view function.
 
@@ -135,7 +135,7 @@ So far, we have accomplished strong typing for the AppRun global application. Ne
 
 AppRun Component is like a scoped AppRun application. It also has three parts: _state_, _view_, and _update_.
 
-AppRun Component is a generic class. We create our components by extending the AppRun Component class. We can add the state type and events type to the Component class, as well as to the view function and update tuple to make the component strongly typed so that TypeScript can provide IntelliSense and type validation while we are coding.
+AppRun Component is a generic class. We create our components by extending the AppRun Component class. We can add the state type and events type to the Component class, as well as to the view function, and update the tuple to make the component strongly typed so that TypeScript can provide IntelliSense and type validation while we are coding.
 
 ![Typed State and Type Event Names in Component](https://cdn-images-1.medium.com/max/1600/1*RY-DEfVgOjj_clIEW4HeTA.png)
 

@@ -1,7 +1,7 @@
 # AppRun-Site - Static Site
 
 
-The AppRun-Site _build_ command has an option to render your pages into HTML files and create a static website.
+The AppRun-Site _build_ command has the option to render your pages into HTML files and create a static website.
 
 ```sh
 npx apprun-site build --render
@@ -34,4 +34,4 @@ The _build_ command first scans and compiles your pages in the `pages` directory
 With all the HTML pages created, you can deploy the static website.
 
 
-In the next section, you will learn a few ways to [customize AppRun-Site commands and dev server](apprun-site-config.md).
+In the next section, you will learn the [AppRun-Site command line](apprun-site-cli.md).

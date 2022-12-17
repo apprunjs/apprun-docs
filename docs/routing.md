@@ -4,9 +4,9 @@ Routing in AppRun is event-driven. Therefore, handling routing using events is s
 
 ## Routing Event
 
-AppRun router detects the _hash_ changes in URL (by listening to the window's _onpopstate_ event) and publishes the AppRun events using the _hash_ as the event name. Components subscribe to the routing events.
+AppRun router detects the _hash_ changes in the URL (by listening to the window's _onpopstate_ event) and publishes the AppRun events using the _hash_ as the event name. Components subscribe to the routing events.
 
-E.g., when URL in the browser address bar becomes http://..../#counter, it triggers the _#counter_ event. The _Counter_ component reacts to the _#counter_ and renders itself to the screen.
+E.g., when the URL in the browser address bar becomes http://..../#counter, it triggers the _#counter_ event. The _Counter_ component reacts to the _#counter_ and renders itself to the screen.
 
 That's it. There is no other code for routing.
 

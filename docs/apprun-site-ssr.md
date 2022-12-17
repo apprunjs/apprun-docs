@@ -10,7 +10,7 @@ The AppRun-Site dev server serves _index.html_ when the routes don't exist to su
 
 ## ES Module
 
-Because the pages are compiled to ES Modules, they can be loaded dynamically. Also, thanks to the [AppRun architecture](architecture.md), the dev server can render all the pages on the server the same way in the browser.
+Because the pages are compiled into ES Modules, they can be loaded dynamically. Also, thanks to the [AppRun architecture](architecture.md), the dev server can render all the pages on the server the same way in the browser.
 
 E.g., when users visit http://.../contact, the dev server finds an ES module from `/contact/index.js`. The dev server loads the module dynamically and renders it to [jsdom](https://github.com/jsdom/jsdom). Then, it sends the HTML from _jsdom_ back to the browser.
 

@@ -17,7 +17,7 @@ Jest watches file changes and runs the test files only related to changed files.
 There are two types of unit tests in the AppRun application.
 
 1. Test the _events-states_ - publishing the events and asserting the states.
-2. Test the _state-vdom_ - set the states and asset the VDOM output of the _view_ function.
+2. Test the _state-vdom_ - set the states and assert the VDOM output of the _view_ function.
 
 ## Create Tests using CLI
 

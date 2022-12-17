@@ -1,8 +1,8 @@
 # 3rd Party Libraries
 
-Using jQuery and jQuery plugins is not an anti-pattern. On the contrary, it is welcomed and encouraged. AppRun embraces 3rd libraries and recommends you to use them in your AppRun application development.
+Using jQuery and jQuery plugins is not an anti-pattern. On the contrary, it is welcomed and encouraged. AppRun embraces 3rd libraries and recommends you use them in your AppRun application development.
 
-AppRun was designed to support 3rd party libraries in mind. The AppRun VDOM is resilient to allow other libraries to change to DOM. 
+AppRun was designed to support 3rd party libraries in mind. The AppRun VDOM is resilient to allow other libraries to change to DOM.
 
 You can embed a DOM element into JSX or use the JSX _ref_ attribute.
 
@@ -38,7 +38,7 @@ export default class extends Component {
 
 ## Ref Attribute
 
-The JSX _ref_ attribute is a call back function called when the specific DOM element is rendered. The DOM element can be any element in JSX. e.g., the d3 example below. The d3 example also demonstrates using the _mounted_ function to initialize the state as a _Promise_.
+The JSX _ref_ attribute is a callback function called when the specific DOM element is rendered. The DOM element can be any element in JSX. e.g., the d3 example below. The d3 example also demonstrates using the _mounted_ function to initialize the state as a _Promise_.
 
 ```js
 const map = (element, features) => { /*...*/}
@@ -61,11 +61,11 @@ export default class extends Component {
 }
 ```
 
-Combing component life cycle events and embed DOM and the _ref_ attribute provides a convenient way to use 3rd party libraries in the AppRun application. You can find out more from the following examples.
+Combing component life cycle events and embedding DOM and the _ref_ attribute provides a convenient way to use 3rd party libraries in the AppRun application. You can find out more from the following examples.
 
 ## Bootstrap Admin Dashboard
 
-The [bootstrap admin dashboard]() uses Bootstrap layout. It also uses jQuery plugin DataTables and FullCalendar and chart.js and D3.
+The [bootstrap admin dashboard]() uses the Bootstrap layout. It also uses jQuery DataTables and FullCalendar and chart.js and D3.
 
 ![admin dashboard](https://github.com/yysun/apprun-bootstrap/raw/master/screenshot.png)
 

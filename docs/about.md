@@ -2,7 +2,7 @@
 
 The recently updated [AppRun Docs Site](https://apprun.js.org/docs) has made the code snippets in the documents runnable and editable, making the technical documentation interactive and much more fun to use.
 
-The site is built with [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/), a beautiful and powerful tool for building technical documentation site. We extended it by adding a web component built with [AppRun](https://apprun.js.org) to deliver interactive experiences.
+The site is built with [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/), a beautiful and powerful tool for building technical documentation sites. We extended it by adding a web component built with [AppRun](https://apprun.js.org) to deliver interactive experiences.
 
 In this post, I Will explain how it's made. Let's start with reviewing the user experience.
 
@@ -25,12 +25,12 @@ You can click the "Try the Code" button of the [AppRun Docs Page](https://apprun
 
 ![edit code](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/y0dc7t2lw0txqab2vus7.png)
 
-The user experiences have much improved with the capabilities of seeing the code results and trying the code in technical documents.
+The user experiences have improved with the capabilities of seeing the code results and trying the code in technical documents.
 
 
 ## Author Experience
 
-Not only is it much more attractive to the readers, but also the authors will feel it much more enjoyable when writing the documents.
+Not only is it much more attractive to the readers, but also the authors will feel it is much more enjoyable when writing the documents.
 
 ### Present the Live Code
 
@@ -72,15 +72,7 @@ We can present the code snippets, but we can also embed whole applications becau
 ![Embed Apps](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/nfwlatbkx39bpijwihhl.png)
 
 We can use the [embedding external files](https://squidfunk.github.io/mkdocs-material/reference/code-blocks/#embedding-external-files) feature of [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/). This way, the markdown document does not include the source code and can remain simple and clean.
-
-```` markdown
-```
---8<--​ "real-world.html"
-```
-<apprun-play style="height:350px" hide_src="true" hide_button="true"></apprun-play>
-````
-
-### Automatic Test the Code
+Automatic Test of the Code
 
 When it displays the code result automatically means automatic testing of the code, which tells the author if the code works as expected.
 

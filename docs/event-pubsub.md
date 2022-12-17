@@ -4,7 +4,7 @@ Event publication and subscription, also known as event emitter, is a commonly u
 
 * Publishing an event means raising an event for some other code to handle. Publishing an event is also referred to as firing an event or
 triggering an event.
-* Subscribing an event means registering an event handler function to the event. The event handler function executes when the correspondent event.
+* Subscribing an event means registering an event handler function to the event. The event handler function executes when the correspondent event
 
 At the core, AppRun is an event pub-sub system.
 
@@ -41,7 +41,7 @@ app.start(document.body, state, view, update);
 ```
 <apprun-play></apprun-play>
 
-When one of the buttons is clicked, it publishes AppRun event +1 or -1. The event handlers increase or decreases the state and return a new state. The view function creates the virtual DOM using the new state. Finally, AppRun renders the virtual DOM.
+When one of the buttons is clicked, it publishes AppRun event +1 or -1. The event handlers increase or decrease the state and return a new state. The view function creates the virtual DOM using the new state. Finally, AppRun renders the virtual DOM.
 
 ## Event Scope
 
@@ -57,12 +57,12 @@ In AppRun [components](component.md), events are limited within the component's 
 
 In addition to using _app.run_ and _this.run_ for publishing events
 
-[AppRun Directives](directive.md) provides syntax sugar to simplify the event publishing.
+[AppRun Directives](directive.md) provides syntax sugar to simplify event publishing.
 
 
 ### JSX Directives
 
-The directives are special HTML attributes with names starting with $, such as _$onclick_. They are the extensions to the JSX syntax to simplify the JSX or add extra features.
+The directives are special HTML attributes with names starting with $, such as _$onclick_. They are extensions to the JSX syntax to simplify the JSX or add extra features.
 
 We can use _$onclick_ to simplify the syntax of publishing AppRun events from
 
@@ -71,12 +71,7 @@ We can use _$onclick_ to simplify the syntax of publishing AppRun events from
 ```
 
 to
-
-```js
-<button $onclick='+1'>+1</button>
-```
-
-We use tuple for passing event parameters.
+We use tuples for passing event parameters.
 
 ```js
 <button $onclick={['add', +1]}>+1</button>
@@ -101,7 +96,7 @@ You can see, because there are no events in this case, we don't need the _update
 [lit-html](https://lit-html.polymer-project.org) is the DOM rendering technology that lets us write HTML templates using [string literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals).
 
 
-Following the idea of using the JSX _event directive_ what can we do a similar thing with lit-html?
+Following the idea of using the JSX _event directive_ what can we do similar thing with lit-html?
 
 
 The good news is that lit-html also has the directive concept to bring the _event directive_ to lit-html. So the directive for lit-html is called _run_.
@@ -130,7 +125,7 @@ The _run_ directive will:
 
 ## Asynchronous Events
 
-In the service API-oriented applications, the state is created by changed by the asynchronous operations. e.g., getting remote data from the server.
+In the service API-oriented applications, the state is created asynchronous operations. e.g., getting remote data from the server.
 
 It is easy to handle asynchronous operations in the AppRun event handlers. We only need to add the _async_ keyword in front of the event handler and call the functions that return a _Promise_ object with the _await_ keyword.
 
@@ -164,8 +159,8 @@ DOM events => AppRun Events => (current state) => Update => (new state) => View 
 
 Events are not only for handling user interactions. They are used for everything in AppRun.
 
-* [Routing](routing.md) is through event.
-* [Directive](directive.md) is through event.
+* [Routing](routing.md) is through events.
+* [Directives](directive.md) are through events.
 
 ## Event Typing
 

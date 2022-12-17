@@ -129,7 +129,7 @@ app.start(document.body, state, view);
 
 ### Form Validation
 
-HTML5 [Constraint Validation API](https://developer.mozilla.org/en-US/docs/Web/API/Constraint_validation) simplifies the client-side validation. We can use basic validation by choosing the type attribute of input elements, such as email and URL. Or we can use the _pattern_ attribute for validation using regular expression. Also, we can use the _required_, _maxlength_, _min_, and _max_ attributes.
+HTML5 [Constraint Validation API](https://developer.mozilla.org/en-US/docs/Web/API/Constraint_validation) simplifies client-side validation. We can use basic validation by choosing the type attribute of input elements, such as email and URL. Or we can use the _pattern_ attribute for validation using regular expression. Also, we can use the _required_, _maxlength_, _min_, and _max_ attributes.
 
 We can create the $validation directive to display the validation results by setting and removing the class.
 

@@ -1,10 +1,10 @@
 # State Management
 
-The _State_, one of three main parts of the AppRun architecture, plays an essential role in the AppRun event lifecycle. It is the equivalent of the _Model_ of the Elm architecture. Elm defines the Model as the application state. Modal and State are two names of the same thing. Therefore, they are interchangeable in the AppRun architecture. Most of the time, we use the term State in AppRun.
+The _State_, one of three main parts of the AppRun architecture, plays an essential role in the AppRun event lifecycle. It is the equivalent of the _Model_ of Elm architecture. Elm defines the Model as the application state. Modal and State are two names of the same thing. Therefore, they are interchangeable in the AppRun architecture. Most of the time, we use the term State in AppRun.
 
-The State is the application state at any given time of your applications. The State is the data flow between Update and View. It acts as the data transfer object (DTO) in traditional multilayered application architecture, where the DTO is an object that carries data between logical and physical layers.
+The State is the application state at any given time of your application. The State is the data flow between Update and View. It acts as the data transfer object (DTO) in traditional multilayered application architecture, where the DTO is an object that carries data between logical and physical layers.
 
-The benefits of using events and DTO like the state is that there are no dependencies between the _view_ and _update (event handlers)_. Thus, it makes the AppRun applications easier to develop, test, and maintain. You can get more information about [unit testing](unit-testing.md) later.
+The benefit of using events and DTO like the state is that there are no dependencies between the _view_ and _update (event handlers)_. Thus, it makes the AppRun applications easier to develop, test, and maintain. You can get more information about [unit testing](unit-testing.md) later.
 
 ## Initial State
 
@@ -89,4 +89,4 @@ app.start(document.body, state, view, update, {history: true});
 ```
 <apprun-play style="height:380px"></apprun-play>
 
-Although it is effortless to enable the AppRun state history, the caveat must be immutable. Because in the AppRun state history it stores the references to the states, if we have modified the state directly, each state stored in the state history refers to the same state, which is always the value of the last change. Thus, the time-travel back and forward will not work. Therefore, the fundamental concept of using state history is to make the state immutable.
+Although it is effortless to enable the AppRun state history, the caveat must be immutable. Because the AppRun state history stores the references to the states, if we have modified the state directly, each state stored in the state history refers to the same state, which is always the value of the last change. Thus, the time travel back and forward will not work. Therefore, the fundamental concept of using state history is to make the state immutable.

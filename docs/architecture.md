@@ -2,7 +2,7 @@
 
 ## Architecture Overview
 
-Application logic is broken down into three separated parts in the AppRun architecture.
+Application logic is broken down into three separate parts in the AppRun architecture.
 
 * State (a.k.a. Model) — the state of your application
 * View — a function to display the state
@@ -87,9 +87,8 @@ Let's make the _Counter_ a bitter complicated to show how many times each button
 ```
 <apprun-play hide_src="true" hide_button="true"></apprun-play>
 
-The code below uses jQuery. jQuery is a library that provides the convenience to access and manipulation the DOM. It does not give any architectural guidance. jQuery code is similar to the vanilla JavaScript code that can go wild.
-
-### An jQuery Example
+The code below uses jQuery. jQuery is a library that provides the convenience to access and manipulate the DOM. It does not give any architectural guidance. jQuery code is similar to the vanilla JavaScript code that can go wild.
+A jQuery Example
 
 ```js
 $(function () {
@@ -128,7 +127,7 @@ $(function () {
 You can see from the above code that
 
 * The state is shared globally. The two event handlers _plus_ and _minus_ both update the state directly.
-* The two event handlers also both render the DOM in different pieces.
+* The two event handlers also render the DOM in different pieces.
 
 Therefore, the jQuery code has two problems:
 
@@ -141,7 +140,7 @@ How can we solve the problems using AppRun?
 
 ### AppRun Code
 
-AppRun includes the _state_ management, event system, and Virtual-DOM rendering. Following the Hollywood Principle (Don't call us. We call you), we provide code pieces to AppRun and wait for AppRun to call them.
+AppRun includes _state_ management, an event system, and Virtual-DOM rendering. Following the Hollywood Principle (Don't call us. We call you), we provide code pieces to AppRun and wait for AppRun to call them.
 
 During an AppRun event lifecycle:
 
@@ -149,7 +148,7 @@ During an AppRun event lifecycle:
 * AppRun let you create a virtual DOM out of the _state_ when needed
 * AppRun renders the virtual DOM when needed.
 
-When using AppRun to update _state_, AppRun gives the _current state_. Then, we create a new _state_ based on the _current state_.
+When using AppRun to update the _state_, AppRun gives the _current state_. Then, we create a new _state_ based on the _current state_.
 
 ```js
 const minus = (state) => ({ ...state,
@@ -163,7 +162,7 @@ const plus = (state) => ({ ...state,
 });
 ```
 
-Because there is no reference to a shared global object, it is very easy to unit test the logic. Also, we can focus on the parts of _state_ that are needed to update and ignore the rest of the _state_ using the spread operator.
+Because there is no reference to a shared global object, it is very easy to unit-test the logic. Also, we can focus on the parts of the _state_ that are needed to update and ignore the rest of the _state_ using the spread operator.
 
 We only write a _view_ function that creates a virtual DOM. AppRun renders the DOM using the diffing algorithm. It only updates the DOM that is needed to change. Therefore, although we have only one _view_ function for all events, AppRun takes care of the differential rendering accordingly.
 
@@ -174,7 +173,7 @@ const view = ({ count, count_plus, count_minus }) => html`
   <button onclick="app.run('plus')">+ (${count_plus})</button>`
 ```
 
-The _view_ function always returns the same result as long as the _state_ is the same. It also does not change the _state_ or anything outside the function, which means it has no side effects. Therefore, the _view_ function is a _pure function_. There are many benefits of using _pure function_, including but not limited to unit testing.
+The _view_ function always returns the same result as long as the _state_ is the same. It also does not change the _state_ or anything outside the function, which means it has no side effects. Therefore, the _view_ function is a _pure function_. There are many benefits of using the _pure__ function_, including but not limited to unit testing.
 
 Finally, We have a _ counter _ application shown below by putting the _state, _view_, and _update_ together.
 
@@ -191,11 +190,11 @@ No matter how complex the application is, we will always have three parts, the _
 
 ## Ceremony vs. Essence
 
-There was the 'Ceremony vs. Essence' discussion happened about ten years ago. At that time, Ruby was on the rise. So people compared [Ruby with C#](https://davesquared.net/2010/07/essence-and-ceremony-ruby-and-c.html).
+There was the 'Ceremony vs. Essence' discussion that happened about ten years ago. At that time, Ruby was on the rise. So people compared [Ruby with C#](https://davesquared.net/2010/07/essence-and-ceremony-ruby-and-c.html).
 
 > The fundamental idea of the Ceremony vs. Essence idea appears to be that, all other things being equal, programming languages should attempt to allow programmers to clearly express the essence of their programs without being caught up in excessive ceremony provided by the programming language. -- From this [post](http://bryanpendleton.blogspot.com/2010/02/ceremony-vs-essence.html).
 
-Let's take a look at some of today's frontend technologies from the Ceremony vs. Essence point of view. We will use a simple button click counting application as an example.
+Let's take a look at some of today's frontend technologies from the Ceremony vs. Essence point of view. We will use a simple button-click counting application as an example.
 
 ```js
 const add = count => count + 1;
@@ -226,7 +225,7 @@ console.log(count); // upon very click
 console.log('mounted!'); // upon mounted
 ```
 
-We will compare the 95-character essence code above with a few frontend frameworks, such as AppRun, Svelte, React Hooks, and the Vue Composition API.
+We will compare the 95-character essence code above with a few front-end frameworks, such as AppRun, Svelte, React Hooks, and the Vue Composition API.
 
 > A framework defines a skeleton where the application defines its features to fill out the skeleton. -- you can find this quote from googling.
 
@@ -268,7 +267,7 @@ With AppRun, the ceremony is mainly required by the JavaScript syntax, like the 
 
 #### Svelte
 
-Svelte uses a single file for a component. The file consists of a script section for code and the UI template. It requires a compiler to turn it into the runnable JavaScript code.
+Svelte uses a single file for a component. The file consists of a script section for the code and the UI template. It requires a compiler to turn it into runnable JavaScript code.
 
 ```js
 <script>
@@ -298,7 +297,7 @@ It has 217 characters, which means 56% of the code is ceremony.
 
 #### React Hooks
 
-The React code is a slightly modified version from the [React Hooks Docs](https://reactjs.org/docs/hooks-overview.html).
+The React code is a slightly modified version of the [React](https://reactjs.org/docs/hooks-overview.html) Hooks Docs](https://reactjs.org/docs/hooks-overview.html).
 
 ```js
 import React, { useState, useEffect } from 'react';
@@ -366,7 +365,7 @@ The _ref_, _watchEffect_, _onMounted_, _setup, _count.value_, and returning an o
 
 ### Expression Comparison
 
-We are not stopping at only comparing the character counts or how many extra boilerplates are forced on you by the frameworks. We also compare how do you express the business logic. For example, let's see how we express _**Increase the Counter**_ as an example again.
+We are not stopping at only comparing the character counts or how many extra boilerplates are forced on you by the frameworks. We also compare how you express the business logic. For example, let's see how we express _**Increase the Counter**_ as an example again.
 
 ```js
 // AppRun
@@ -393,7 +392,7 @@ In addition, AppRun has a few other benefits
 
 * AppRun is lightweight that can run in browsers directly without a compiler.
 * AppRun uses _pure functions_ when it is possible.
-* AppRun app codebase can easily be [strong typed](strong-typing.md) if you wish.
+* AppRun app codebase can easily be [strongly typed](strong-typing.md) if you wish.
 
 I hope you enjoy it. If you haven't clicked the 'Try the Code' buttons to run the AppRun code above, please give it a try.
 

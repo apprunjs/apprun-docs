@@ -10,7 +10,7 @@ theme:
   features:
     - navigation.sections
 
-copyright: Copyright &copy; 2016 - 2021 Yiyi Sun
+copyright: Copyright &copy; 2016 - 2022 Yiyi Sun
 
 markdown_extensions:
   - toc:
@@ -59,19 +59,20 @@ nav:
   - Getting started:
     - Installation: getting-started.md
     - Tutorial: tutorial.md
+    - Create AppRun App: create-apprun-app.md
+    - Single Page App: spa.md
   - AppRun Site:
     - Create: apprun-site.md
     - Build: apprun-site-build.md
     - Client-Side Rendering: apprun-site-csr.md
     - Server-Side Rendering: apprun-site-ssr.md
     - Static Web Site: apprun-site-static.md
-    - Configurations: apprun-site-config.md
-  - View Pattern:
+    - AppRun-Site CLI: apprun-site-cli.md
+  - Advanced:
     - JSX: view-patterns.md
     - Directive: directive.md
     - SVG: svg.md
     - 3rd Party Intergration: 3rd-party-libs.md
-  - Advanced:
     - Dev Tools: cli-in-console.md
     - Strong Typing: strong-typing.md
     - Unit Testing: unit-testing.md

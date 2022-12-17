@@ -1,6 +1,20 @@
-# AppRun-Site Configurations
+# AppRun-Site Command Line
 
-There are several options and configurations for AppRun-Site.
+The AppRun-site command line has the following commands:
+
+```
+Usage: apprun-site [options] [command]
+
+Options:
+  -h, --help                  display help for command
+
+Commands:
+  init [options] [targetDir]  initialize a new app
+  build [options] [source]    build site
+  serv [options] [source]     launch development server, watch and no live reload
+  dev [options] [source]      launch development server, watch and live reload
+  help [command]              display help for command
+```
 
 ## Build Command Options
 
@@ -20,21 +34,36 @@ Options:
   -h, --help             display help for command
 ```
 
-## Dev Command Optins
+## Dev Command Options
 
 ```sh
 Usage: apprun-site dev [options] [source]
 
-launch development server
+launch development server, watch and live reload
 
 Options:
   -o, --output [output]  output directory (default: "public")
   -p, --pages [pages]    pages directory (default: "pages")
+  -n, --no_ssr           disable server side rendering (default: false)
+  -h, --help             display help for command
+➜  apprun git:(master) ✗ npx apprun-site@latest serve -h
+```
+
+## Serv Command Options
+
+```
+Usage: apprun-site serv [options] [source]
+
+launch development server, watch and no live reload
+
+Options:
+  -o, --output [output]  output directory (default: "public")
+  -p, --pages [pages]    pages directory (default: "pages")
+  -n, --no_ssr           disable server side rendering (default: false)
   -h, --help             display help for command
 ```
 
-
-## Dev Server Options
+## AppRun-Site Config File
 
 In addition, you can also customize the AppRun-Site in the `apprun-site.yml` config file.
 

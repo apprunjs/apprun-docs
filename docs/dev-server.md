@@ -7,7 +7,7 @@ tags: ESM, JavaScript, TypeScript, Module
 
 ## Introduction
 
-We use the [JavaScript modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) (ESM) extensively while coding nowadays. But we still cannot deploy the module-based code yet. It is because the browsers don't know how to handle global modules.  E.g., When developing applications using [AppRun](https://github.com/yysun/apprun), we need a globe module of _apprun_.
+We use [JavaScript modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) (ESM) extensively while coding nowadays. But we still cannot deploy the module-based code yet. It is because the browsers don't know how to handle global modules.  E.g., When developing applications using [AppRun](https://github.com/yysun/apprun), we need a globe module of _apprun_.
 
 ```js
 import app from 'apprun'
@@ -119,7 +119,7 @@ module.exports = {
 ```
 ## Use with esbuild
 
-The apprun-dev-server is installed when creating a project by using the `npm init apprun-app` command and select the `esbuild` option.
+The apprun-dev-server is installed when creating a project by using the `npm init apprun-app` command and selecting the `esbuild`` option.
 
 ```sh
 npm init apprun-app [my-app]
