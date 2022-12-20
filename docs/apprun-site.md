@@ -1,6 +1,6 @@
 # AppRun Site
 
-AppRun-Site let you focus on creating web pages are created using HTML, markdown, AppRun components, and web components. AppRun-Site will take care of the rest:
+AppRun-Site let you focus on creating web pages using HTML, markdown, AppRun components, and web components. AppRun-Site will take care of the rest:
 
 * It compiles your pages to ES Modules
 * It runs your pages run as Single Page Applications (SPA)

@@ -9,7 +9,6 @@ Options:
   -h, --help                  display help for command
 
 Commands:
-  init [options] [targetDir]  initialize a new app
   build [options] [source]    build site
   serv [options] [source]     launch development server, watch and no live reload
   dev [options] [source]      launch development server, watch and live reload
@@ -49,17 +48,18 @@ Options:
 ➜  apprun git:(master) ✗ npx apprun-site@latest serve -h
 ```
 
-## Serv Command Options
+## Serve Command Options
 
 ```
-Usage: apprun-site serv [options] [source]
+Usage: apprun-site serve [options] [source]
 
-launch development server, watch and no live reload
+launch development server, live reload is optional
 
 Options:
   -o, --output [output]  output directory (default: "public")
   -p, --pages [pages]    pages directory (default: "pages")
   -n, --no_ssr           disable server side rendering (default: false)
+  -l, --live_reload      enable live reload (default: false)
   -h, --help             display help for command
 ```
 

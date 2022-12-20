@@ -8,7 +8,8 @@ AppRun is a JavaScript library for building applications. But, you may ask, ther
 AppRun provides [elm-inspired](https://guide.elm-lang.org/architecture) architecture and embraces the **event-driven** programming pattern, making AppRun different from other frameworks and libraries.
 
 AppRun has the following benefits overall.
-Clean architecture that needs less code
+
+* Clean architecture that needs less code
 * State management and routing included
 * No proprietary syntax to learn (no hooks)
 * Use directly in the browser or with a compiler/bundler
