@@ -10,7 +10,7 @@ theme:
   features:
     - navigation.sections
 
-copyright: Copyright &copy; 2016 - 2022 Yiyi Sun
+copyright: Copyright &copy; 2016 - 2023 Yiyi Sun
 
 markdown_extensions:
   - toc:
