@@ -26,7 +26,7 @@ const update = {
 
 app.start(document.body, state, view, update);
 ```
-<apprun-play></apprun-play>
+<apprun-code hide-src></apprun-code>
 
 ### State
 
@@ -85,7 +85,7 @@ Let's make the _Counter_ a bitter complicated to show how many times each button
 ```js
 --8<-- "counter.js"
 ```
-<apprun-play hide_src="true" hide_button="true"></apprun-play>
+<apprun-code hide-code="true" style="border: dotted gray 1px"></apprun-code>
 
 The code below uses jQuery. jQuery is a library that provides the convenience to access and manipulate the DOM. It does not give any architectural guidance. jQuery code is similar to the vanilla JavaScript code that can go wild.
 A jQuery Example
@@ -180,7 +180,7 @@ Finally, We have a _ counter _ application shown below by putting the _state, _v
 ```js
 --8<-- "counter.js"
 ```
-<apprun-play></apprun-play>
+<apprun-code></apprun-code>
 
 You can see that with the help of AppRun state management and DOM differential rendering, we no longer have the **Direct State Update** with **Rendering Fragments** problems.
 
@@ -208,7 +208,7 @@ const rendered = count => console.log(count);
 app.start(document.body, 0, view, null, { rendered });
 console.log('mounted!');
 ```
-<apprun-play hide_src="true" hide_button="true"></apprun-play>
+<apprun-code hide_src="true" hide_button="true"></apprun-code>
 
 ### The Essence
 
@@ -249,7 +249,7 @@ const rendered = count => console.log(count);
 app.start(document.body, 0, view, null, { rendered });
 console.log('mounted!');
 ```
-<apprun-play></apprun-play>
+<apprun-code></apprun-code>
 
 In the example above,
 
@@ -394,5 +394,4 @@ In addition, AppRun has a few other benefits
 * AppRun uses _pure functions_ when it is possible.
 * AppRun app codebase can easily be [strongly typed](strong-typing.md) if you wish.
 
-I hope you enjoy it. If you haven't clicked the 'Try the Code' buttons to run the AppRun code above, please give it a try.
-
+I hope you enjoy it. If you haven't tried, try to edit and run the AppRun code above.

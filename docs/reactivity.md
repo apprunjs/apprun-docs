@@ -46,7 +46,7 @@ const view = state => <div>
 
 app.start(document.body, 0, view)
 ```
-<apprun-play></apprun-play>
+<apprun-code></apprun-code>
 
 ## Two-Way Binding
 
@@ -59,7 +59,7 @@ const view = state => <>
 </>
 app.start(document.body, {}, view)
 ```
-<apprun-play></apprun-play>
+<apprun-code code-width="50%"></apprun-code>
 
 ## Reactive State
 
@@ -98,7 +98,7 @@ const view = ({a, b, c}) => <>
 </>;
 app.start(document.body, state, view);
 ```
-<apprun-play></apprun-play>
+<apprun-code code-width="50%"></apprun-code>
 
 ### ES2015 Proxy
 
@@ -149,13 +149,13 @@ const state = new Proxy(
   handler
 );
 const view = state => <div>
-  <textarea rows="10" cols="50" $bind="text"></textarea>
+  <textarea rows="10" cols="30" $bind="text"></textarea>
   <div>chars: {state.characters} words: {state.words} lines: {state.lines}</div>
   <pre>{state.text}</pre>
 </div>;
 app.start(document.body, state, view);
 ```
-<apprun-play style="height:300px"></apprun-play>
+<apprun-code style="height:300px" code-width="50%"></apprun-code>
 
 I like Proxy because it takes the property value calculation logic out of the _state_ objects. As a result, the _proxy handler_ is much easier to test and maintain. On the other hand, the _state_ objects stay lean. I want the [_state_ to act like the _data transfer object_ (DTO)](https://apprun.js.org/docs/#/04-architecture) in traditional multi-layered application architecture, where the DTO is an object that carries data between logical and physical layers.
 

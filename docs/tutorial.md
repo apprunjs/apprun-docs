@@ -12,12 +12,9 @@ Let's use the _Counter_ app as an example and code it directly in the HTML file.
 
 ```html
 <html>
-<head>
-  <meta charset="utf-8">
-  <title>Counter</title>
-</head>
 <body>
-  <script src="https://unpkg.com/apprun/dist/apprun-html.js"></script>
+  <script src="https://unpkg.com/apprun/dist/apprun-html.js">
+  </script>
   <script>
     const state = 0;
     const view = state => {
@@ -36,69 +33,21 @@ Let's use the _Counter_ app as an example and code it directly in the HTML file.
 </body>
 </html>
 ```
-<apprun-play></apprun-play>
+<apprun-code></apprun-code>
 
-It is easy to have simple code in the HTML file. However, most of the time, we use external script files for complex app logic.
+!!! note
+    Browsers dont support JSX, so we use the _html_ function (Template literals) in the _view_ function to create HTML elements.
 
-```html
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>Counter</title>
-</head>
-<body>
-  <script src="https://unpkg.com/apprun/dist/apprun-html.js"></script>
-  <script src="app.js"></script>
-</body>
-</html>
-```
-
-Next, we will create an AppRun component in the _app.js_ file.
 
 ## Create Your First Component
 
 AppRun components are mini-applications with the _state_, _view_, and _update_ architecture.
 
-It is straightforward to re-create the _Counter_ app as a component.
+Let's re-create the _Counter_ app as a component.
 
-
-```js
-//app.js
-class Counter extends Component {
-  state = 0;
-  view = state => {
-    return html`<div>
-      <h1>${state}</h1>
-      <button @click=${()=>this.run("-1")}>-1</button>
-      <button @click=${()=>this.run("+1")}>+1</button>
-    </div>`;
-  };
-  update = {
-    '+1': state => state + 1,
-    '-1': state => state - 1
-  };
-}
-new Counter().start(document.body);
-
-```
-<apprun-play></apprun-play>
-
-!!! note
-    Components have local event events. We use _this.run_ instead of _app.run_ to publish local events.
-
-
-## Create a Web Component
-
-AppRun components can be defined as web components/custom elements and used in HTML. All we need to do is to give the AppRun component a custom-element name using the _app.webComponent_ function.
-
-```js
+```html
 <html>
-<head>
-  <meta charset="utf-8">
-  <title>Counter</title>
-</head>
 <body>
-  <my-counter></my-counter>
   <script src="https://unpkg.com/apprun/dist/apprun-html.js"></script>
   <script>
     class Counter extends Component {
@@ -115,16 +64,18 @@ AppRun components can be defined as web components/custom elements and used in H
         '-1': state => state - 1
       };
     }
-    app.webComponent('my-counter', Counter);
+    new Counter().start(document.body);
   </script>
 </body>
 </html>
-
 ```
-<apprun-play style="height:350px"></apprun-play>
+<apprun-code></apprun-code>
+
+!!! note
+    Components have local event events. We use _this.run_ instead of _app.run_ to publish local events.
 
 
-## Create a Single-Page App
+## Use Components for SPA
 
 We can easily make a single-page page (SPA) using AppRun components. Each page is a component that can be activated by anchor links like #Home, #contact, and #about.
 
@@ -153,17 +104,82 @@ const App = () => <>
 </>
 
 app.render(document.body, <App />);
-[About, Contact, Home].map(C => new C().start('pages'));
+[About, Contact, Home]
+  .map(C => new C().start('pages'));
 ```
-<apprun-play></apprun-play>
+<apprun-code code-width="50%"></apprun-code>
+
+!!! note
+    We have just created a simple SPA using components. In a real-world scenario, usually, create pages as modules and bundle them together or load them dynamically. See the [Single Page App](spa.md) for more details.
+
+
+## Create a Web Component
+
+AppRun components can be defined as web components/custom elements and used in HTML. All we need to do is to give the AppRun component a custom-element name using the _app.webComponent_ function.
+
+```js
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Counter</title>
+</head>
+<body>
+  <my-counter></my-counter>
+  <my-counter></my-counter>
+  <my-counter></my-counter>
+  <script src="https://unpkg.com/apprun/dist/apprun-html.js">
+  </script>
+  <script>
+    class Counter extends Component {
+      state = 0;
+      view = state => {
+        return html`<div>
+          <h1>${state}</h1>
+          <button @click=${()=>this.run("-1")}>-1</button>
+          <button @click=${()=>this.run("+1")}>+1</button>
+        </div>`;
+      };
+      update = {
+        '+1': state => state + 1,
+        '-1': state => state - 1
+      };
+    }
+    app.webComponent('my-counter', Counter);
+  </script>
+</body>
+</html>
+
+```
+<apprun-code></apprun-code>
+
+!!! note
+    We have create a web component / custom element and used it three times.
 
 <br />
 
-!!! note
-    We have just created a simple SPA using components. In a real-world scenario, usually, create pages as modules and bundle them together or load them dynamically.
+Now, you are ready to move forward to more advanced topics:
 
-Next, you will learn how to
 
-* [Use the _npm create apprun-app_](create-apprun-app.md) to create a new AppRun project
-* [Create an AppRun Site](apprun-site.md) for SSR and static site generation
+
+<div class="grid cards" markdown>
+
+-   :material-clock-fast:{ .lg .middle } __Use AppRun as ESM in browser__
+
+    ---
+
+    Reference AppRun from CDN as ESM to build your apps
+
+    [Use AppRun Module in the browser](esm.md)
+
+-   :fontawesome-solid-terminal:{ .lg .middle } __Create an SPA project__
+
+    ---
+
+    Create a new SPA project using the AppRun CLI
+
+    [:octicons-arrow-right-24: Create AppRun App](create-apprun-app.md)
+
+</div>
+
+
 

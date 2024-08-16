@@ -10,9 +10,14 @@ theme:
   features:
     - navigation.sections
 
-copyright: Copyright &copy; 2016 - 2023 Yiyi Sun
+copyright: Copyright &copy; 2016 - 2024 Yiyi Sun
 
 markdown_extensions:
+  - md_in_html
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - toc:
       permalink: true
   - admonition
@@ -34,6 +39,7 @@ extra_javascript:
   - assets/vendor/codemirror/mode/xml/xml.js
   - assets/vendor/codemirror/mode/jsx/jsx.js
   - assets/apprun-play.js
+  - assets/apprun-code.js
 
 extra:
   analytics:
@@ -57,10 +63,20 @@ nav:
       - State Machine: architecture-ideas/state-machine.md
       - Showcase: showcase.md
   - Getting started:
-    - Installation: getting-started.md
+    - Installation: installation.md
     - Tutorial: tutorial.md
     - Create AppRun App: create-apprun-app.md
     - Single Page App: spa.md
+  - Advanced:
+    - JSX: view-patterns.md
+    - Directive: directive.md
+    - SVG: svg.md
+    - Use with React: react.md
+    - 3rd Party Intergration: 3rd-party-libs.md
+    - Dev Tools: cli-in-console.md
+    - Strong Typing: strong-typing.md
+    - Unit Testing: unit-testing.md
+    - Notebooks: notebooks.md
   - AppRun Site:
     - Create: apprun-site.md
     - Build: apprun-site-build.md
@@ -68,15 +84,5 @@ nav:
     - Server-Side Rendering: apprun-site-ssr.md
     - Static Web Site: apprun-site-static.md
     - AppRun-Site CLI: apprun-site-cli.md
-  - Advanced:
-    - JSX: view-patterns.md
-    - Directive: directive.md
-    - SVG: svg.md
-    - 3rd Party Intergration: 3rd-party-libs.md
-    - Dev Tools: cli-in-console.md
-    - Strong Typing: strong-typing.md
-    - Unit Testing: unit-testing.md
-    - Notebooks: notebooks.md
-    - Use with React: react.md
   - Resources: resources.md
   - About: about.md

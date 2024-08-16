@@ -1,122 +1,113 @@
 # Use AppRun with React
 
-[React](https://reactjs.org/) is a popular JavaScript library for building user interfaces. Using AppRun and React in conjunction is one of the best ways to build a web app.
+[React](https://reactjs.org/) is a popular JavaScript library for building user interfaces. Using AppRun and React in conjunction is one of the best ways to build a web app. Here's why you should consider using AppRun with React:
 
-You can use AppRun with React in one of the two ways.
+* __Simplified State Management__: React often requires additional libraries like Hooks or Redux for state management. AppRun's state management system is easier use. It can reduce complexity and make your application easier to build and maintain​.
 
-* Use AppRun components in React apps
-* Use React Virtual DOM in AppRun apps
+* __Event-Driven Routing__: AppRun's routing system is event-based, treating route changes as events just like any other user interaction. This makes routing in single-page applications (SPA) straightforward and consistent with other app logic. It is a pertect replacement of the React Router or similar tools​​.
 
-## Use AppRun Components
 
-It only takes one line of code to use AppRun components in React.
+* __Seamless JSX Integration__: AppRun supports JSX, the same syntax used by React, which means you can use React as the rendering engine for AppRun components. This allows you to leverage React's powerful rendering capabilities and its vast ecosystem​​.
 
-Let's use the code from the [React Hooks Doc](https://reactjs.org/docs/hooks-overview.html) as an example.
+You can either create an React app and add AppRun to it or create an AppRun app and add React. Here is how you can do it:
 
-```js
-import React, { useState } from 'react';
+## Step 1, Installation
 
-function Example() {
-  // Declare a new state variable, which we'll call "count"
-  const [count, setCount] = useState(0);
 
-  return (
-    <div>
-      <p>You clicked {count} times</p>
-      <button onClick={() => setCount(count + 1)}>
-        Click me
-      </button>
-    </div>
-  );
-}
+```bash
+npm create vite@latest my-app -- --template react
+cd my app
+npm i apprun
 ```
 
-The same app using the AppRun looks like below.
+or
 
-```js
-class MyComponent extends Component {
-  state = 0;
-  view = count => <div>
-    <p>You clicked {count} times</p>
-    <button onclick={()=>this.run('add')}>
-      Click me
-    </button>
-  </div>;
-  update  = {
-    add: state => state + 1
-  };
-}
-new MyComponent().start(document.body);
-
-```
-<apprun-play></apprun-play>
-
-To use the AppRun component in React is very easy. All you need to do is converting the AppRun component to a React component by calling the _toReact_ function.
-
-```js
-import { Component } from 'apprun/esm/component';
-import toReact from 'apprun/react';
-
-class MyComponent extends Component {
-  state = 0;
-  view = count => <div>
-    <p>You clicked {count} times</p>
-    <button onClick={()=>this.run('add')}>
-      Click me
-    </button>
-  </div>;
-  update  = {
-    add: state => state + 1
-  };
-}
-
-const App = toReact(MyComponent);
-export default App;
-```
-!!! note
-    The React VDOM uses JSX. AppRun VDOM also uses JSX. They are similar. However, React VDOM does not have directives. So you cannot use the AppRun _$onclick_ directive. Instead, you need to use the React _onClick_ attribute.
-
-Now, with just one line conversion to React component, we successfully used AppRun in React apps. Thus, we have the [elm-inspired AppRun architecture](https://apprun.js.org/docs/architecture/) in the React apps.
-
-You can visit https://github.com/yysun-apprun to see an example React project created by the [Create React App Cli](https://reactjs.org/docs/create-a-new-react-app.html) that uses AppRun components.
-
-## Use React VDOM
-
-On the other hand, since we can use any Virtual DOM (VDOM) technology in AppRun apps, including the one from React, lets' use the React VDOM in AppRun apps.
-
-It also just needs one line of code to replace the _app.render_ function with the _ReactDOM.render_ function.
-
-```js
-app.render = (el, vdom) => ReactDOM.render(vdom, el);
+```bash
+npm create apprun-app my-app
+cd my-app
+npm i react react-dom
 ```
 
-Below is the AppRun app that uses React VDOM.
+
+## Step 2, Setup AppRun
+
+To use React, call AppRun's `app.use_react` function by passing in _React_ and _ReactDOM_.
+
+### For React
 
 ```js
-import app from 'apprun';
 import React from 'react';
-import ReactDOM from 'react-dom';
-
-app.render = (el, vdom) => ReactDOM.render(vdom, el);
-
-class MyComponent extends Component {
-  state = 0;
-  view = count => <div>
-    <p>You clicked {count} times</p>
-    <button onClick={()=>this.run('add')}>
-      Click me
-    </button>
-  </div>;
-  update  = {
-    add: state => state + 1
-  };
-}
-new MyComponent().start(document.body);
+import ReactDOM from 'react-dom/client'
+app.use_react(React, ReactDOM);
 ```
 
-Again, you must remember to use the React _onClick_ attribute instead of the AppRun _$onclick_ directive.
+### For Preact
+
+```js
+import React from 'preact/compat';
+import ReactDOM from 'preact/compat';
+app.use_react(React, ReactDOM);
+```
+
+Since Preact is less restrictive than React. You can just use Preact's _render_ function.
+
+```js
+import { render } from 'preact'
+import app from 'apprun';
+app.use_render(render);
+```
+
+This way allows us to take advantage of AppRun's unique custom directives ($on, $bind) for handling events and data binding​​.
+
+!!! note
+    You need to remember React / Preact uses _onClick_ instead of _onclick_.
+
+
+## Step 3, Use React JSX and Components
+
+Build your AppRun components using React's JSX in the _view_ function.
+
+```jsx
+import { Component } from 'apprun';
+import { Button } from 'antd';
+
+export default class ContactComponent extends Component {
+  state = 0;
+
+  view = state => (
+    <>
+      <h1>{state}</h1>
+      <Button onClick={() => this.run('add', -1)}>-1</Button>
+      <Button onClick={() => this.run('add', +1)}>+1</Button>
+      <div><p/>(component)</div>
+    </>
+  );
+
+  update = {
+    add: (state, num) => state + num,
+    '#Contact': state => state,
+  };
+}
+```
+
+!!! note
+    Since AppRun directives are not supported in React, you need to call _this.run_ to publish events.
+
+
+## Example
+
+By using React and AppRun together, you can build a powerful web application with AppRun's clean architecture and beautiful React components from [Ant Design](https://ant.design).
+
+
+Here is an example: https://yysun.github.io/apprun-antd-demo-js
+
+Source: https://github.com/yysun/apprun-antd-demo-js
+
+
+This project has the [AppRun architecture](architecture.md). As well as the [React components from the Ant Design](https://ant.design/components/overview).
+
 
 ## Conclusion
 
-If you prefer to use React as the main framework, you can use AppRun to get the elm-inspired architecture. If you choose to use AppRun, you can also use the React Virtual DOM for rendering. You get the best of both worlds.
+Whether you add AppRun to your React app or add React to your AppRun app, you can get the best of both worlds.
 

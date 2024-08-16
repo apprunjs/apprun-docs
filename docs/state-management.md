@@ -20,16 +20,16 @@ We can define the initial state as a function. And even an asynchronous function
 ```js
 // Init State as an Async Function
 const state = async () => {
-  const response = await fetch('https://xkcd-imgs.herokuapp.com/');
+  const response = await fetch('https://my-xkcd-api.glitch.me');
   const comic = await response.json();
   return { comic };
 };
 const view = state => <>
-  { state.comic && <img src={ state.comic.url } />}
+  { state.comic && <img src={ state.comic.img } />}
 </>;
 app.start(document.body, state, view);
 ```
-<apprun-play style="height:300px"></apprun-play>
+<apprun-code style="height:300px" code-width="50%"></apprun-code>
 
 
 ## State History
@@ -42,9 +42,9 @@ const state = [];
 const Counter = ({num, idx}) => (
   <div>
     <h1>{num}</h1>
-    <button onclick={() => app.run("-1", idx)}>-1</button>
-    <button onclick={() => app.run("+1", idx)}>+1</button>
-    <button onclick={() => app.run("remove-counter", idx)}>x</button>
+    <button $onclick={["-1", idx]}>-1</button>
+    <button $onclick={["+1", idx]}>+1</button>
+    <button $onclick={["remove-counter", idx]}>x</button>
   </div>
 );
 
@@ -56,10 +56,10 @@ const view = (state) => {
   return (
   <div>
     <div>
-      <button onclick={() => app.run("history-prev")}> &lt;&lt; </button>
-      <button onclick={() => app.run("history-next")}> &gt;&gt; </button>
-      <button onclick={() => app.run("add-counter")}>add counter</button>
-      <button onclick={() => app.run("remove-counter", state.length-1)}
+      <button $onclick="history-prev"> &lt;&lt; </button>
+      <button $onclick="history-next"> &gt;&gt; </button>
+      <button $onclick="add-counter">add counter</button>
+      <button $onclick={["remove-counter", state.length-1]}
         disabled={state.length <= 0}>remove counter</button>
     </div>
     <br/>
@@ -87,6 +87,6 @@ const update = {
 
 app.start(document.body, state, view, update, {history: true});
 ```
-<apprun-play style="height:380px"></apprun-play>
+<apprun-code style="height:380px" code-width="50%"></apprun-code>
 
 Although it is effortless to enable the AppRun state history, the caveat must be immutable. Because the AppRun state history stores the references to the states, if we have modified the state directly, each state stored in the state history refers to the same state, which is always the value of the last change. Thus, the time travel back and forward will not work. Therefore, the fundamental concept of using state history is to make the state immutable.

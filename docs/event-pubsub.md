@@ -39,7 +39,7 @@ const update = {
 };
 app.start(document.body, state, view, update);
 ```
-<apprun-play></apprun-play>
+<apprun-code></apprun-code>
 
 When one of the buttons is clicked, it publishes AppRun event +1 or -1. The event handlers increase or decrease the state and return a new state. The view function creates the virtual DOM using the new state. Finally, AppRun renders the virtual DOM.
 
@@ -87,7 +87,7 @@ const view = count => <button $onclick={add}>
 app.start(document.body, 0, view);
 
 ```
-<apprun-play></apprun-play>
+<apprun-code></apprun-code>
 
 You can see, because there are no events in this case, we don't need the _update_ object anymore.
 
@@ -114,7 +114,7 @@ const view = state => {
 };
 app.start(document.body, 0, view, {add});
 ```
-<apprun-play></apprun-play>
+<apprun-code></apprun-code>
 
 The _run_ directive will:
 
@@ -134,20 +134,20 @@ const state = {};
 const view = state => <>
   <div><button $onclick="fetchComic">fetch ...</button></div>
   {state.loading && <div>loading ... </div>}
-  {state.comic && <img src={state.comic.url}/>}
+  {state.comic && <img src={state.comic.img}/>}
 </>;
 const update = {
   'loading': (state, loading) => ({...state, loading }),
   'fetchComic': async _ => {
     app.run('loading', true);
-    const response = await fetch('https://xkcd-imgs.herokuapp.com/');
+    const response = await fetch('https://my-xkcd-api.glitch.me');
     const comic = await response.json();
     return {comic};
   }
 };
 app.start(document.body, state, view, update);
 ```
-<apprun-play style="height:300px"></apprun-play>
+<apprun-code style="height:300px"></apprun-code>
 
 ## Use Events for Everything
 

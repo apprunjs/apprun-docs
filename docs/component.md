@@ -195,43 +195,6 @@ unload: (state: T) => void;
 ```
 
 You can see, the component life cycle functions are useful for integrating [3rd party libraries](3rd-party-libs.md).
-## Web Components
-
-You can convert AppRun components into [web components/custom elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components). AppRun components become the custom elements that also can handle AppRun events.
-
-```html
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>Counter as web component</title>
-</head>
-<body>
-  <my-app id='counter'></my-app>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/custom-elements/1.1.2/custom-elements.min.js"></script>
-  <script src="https://unpkg.com/apprun/dist/apprun-html.js"></script>
-  <script>
-    class Counter extends Component {
-      constructor() {
-        super();
-        this.state = 0;
-        this.view = state => `<div>
-          <h1>${state}</h1>
-          <button onclick='counter.run("-1")'>-1</button>
-          <button onclick='counter.run("+1")'>+1</button>
-          </div>`;
-        this.update = {
-          '+1': state => state + 1,
-          '-1': state => state - 1
-        };
-      }
-    }
-    app.webComponent('my-app', Counter);
-  </script>
-</body>
-</html>
-```
-<apprun-play></apprun-play>
-
 
 ## HTML Child Components
 

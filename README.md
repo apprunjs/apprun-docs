@@ -4,7 +4,8 @@ Welcome to the AppRun user guide! This guide shows you how to get started creati
 
 ## What is AppRun
 
-AppRun is a JavaScript library for building applications using the [elm](https://guide.elm-lang.org/architecture) inspired architecture, events, and components.
+AppRun is a lightweight alternative to other frameworks and libraries. It has a unique architecture inspired by the Elm architecture that can help you manage states, routing, and other essential aspects of your web application.
+
 > AppRun is an MIT-licensed open source project. Please consider [supporting the project on Patreon](https://www.patreon.com/apprun). 👍❤️🙏
 
 ## Overview
