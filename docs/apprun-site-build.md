@@ -29,7 +29,7 @@ The _build_ command scans your pages in the `pages` directory and compiles them 
     contact.tsx     <- contact page, AppRun component
 ```
 
-The compiled js files are ES modules. They are compatible on the client-side and server-side.
+The compiled js files are ES modules. They are compatible to run on the client-side and server-side and can be loaded on demand.
 
 Next, you will learn about [client-side rendering](apprun-site-csr.md).
 

@@ -1,5 +1,7 @@
 # AppRun Architecture
 
+AppRun is designed to simplify web application development by implementing the architecture, which ont only enhances code readability but also improves maintainability and scalability, making your development process more efficient.
+
 ## Architecture Overview
 
 Application logic is broken down into three separate parts in the AppRun architecture.

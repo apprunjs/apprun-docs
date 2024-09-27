@@ -57,4 +57,27 @@ AppRun-Site injects code by default to support pretty links (a.k.a. non-hash lin
 
 > The AppRun-Site dev server provides such capability of serving _index.html_ when the routes don't exist.
 
+
+## File-based Routing
+
+AppRun-site also injects code to load the pages on demand as dynamic modules using thw following steps:
+
+* load the index.html
+* load the main.js (for the dynamic layout and the start up code)
+* load the modules by path to render the pages:
+
+```
+/public
+  /                 <- /index.js
+  /about            <- /about/index.js
+  /contact          <- /contact/index.js
+```
+
+> Note:
+> * The main.js should create a layout and a div with the id `main-app` to render the pages.
+> * The page modules should create a div with the id `[page]-app` for sub pages. E.g., /docs/index.js should create a div with the id `docs-app` for its sub pages if any.
+
+
+The some file-based routing logic runs on the server side for the server-side rendering.
+
 Next, you will see how to use the dev server and how it renders your pages on the [server side](apprun-site-ssr.md).

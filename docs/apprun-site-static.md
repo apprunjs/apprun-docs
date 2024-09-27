@@ -11,14 +11,15 @@ The _build_ command first scans and compiles your pages in the `pages` directory
 
 ```
 /public             <- compiled site
-  /index.html       <- copied
+  /_.html           <- copied from `pages/index.html` for SPA
+  /index.html       <- *** server-side rendered `home` page ***
   /index.js         <- compiled
   /main.js          <- compiled
   /about
-    /index.html     <- *** server-side rendered page ***
+    /index.html     <- *** server-side rendered `about` page ***
     index.js        <- compiled
   /contact
-    /index.html     <- *** server-side rendered page ***
+    /index.html     <- *** server-side rendered `contact` page ***
     index.js        <- compiled
 
 /pages              <- sorrce pages
