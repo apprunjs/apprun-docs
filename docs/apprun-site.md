@@ -4,11 +4,11 @@ AppRun-Site let you focus on creating web pages using AppRun components, web com
 
 * You can create web pages using AppRun components and markdown
 * [Build](apprun-site-build.md) your pages to dynamic modules and load them on demand
-* Render your pages to create a [static website](#static-website)
-* [Serve](#serve) Single Page Applications (SPA) and Server-Side Rendering (SSR)
-* [File-based routing](#file-based-routing)
-* [API endpoints](#api-endpoints)
-* [Server-side actions](#server-side-actions)
+* Render your pages to create a [static website](apprun-site-static.md)
+* [Serve](apprun-site-ssr.md) Single Page Applications (SPA) and Server-Side Rendering (SSR)
+* [File-based routing](apprun-site-csr.md#file-based-routing)
+* [API endpoints](apprun-site-ssr.md#api-endpoints)
+* [Server-side actions](apprun-site-ssr.md#server-side-actions)
 
 
 ## Create AppRun Site

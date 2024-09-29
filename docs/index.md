@@ -84,4 +84,4 @@ You can choose one of the following options to get started:
 
 Ready to try it yourself?
 
-Head over to [Getting Started](getting-started.md) or explore the [AppRun Architecture](architecture.md).
+Head over to [Getting Started](tutorial.md) or explore the [AppRun Architecture](architecture.md).
