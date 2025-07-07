@@ -55,7 +55,7 @@ You can use AppRun directly from the unpkg.com CDN:
 </body>
 </html>
 ```
-<apprun-code style="font-size:.5rem" demo-width="30%"></apprun-code>
+<apprun-play style="font-size:.5rem" demo-width="30%"></apprun-play>
 
 
 ### htm
@@ -84,7 +84,7 @@ You can use AppRun directly from the unpkg.com CDN:
 </body>
 </html>
 ```
-<apprun-code style="font-size:.5rem" demo-width="30%"></apprun-code>
+<apprun-play style="font-size:.5rem" demo-width="30%"></apprun-play>
 
 
 ## Installation

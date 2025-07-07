@@ -28,7 +28,7 @@ const update = {
 // start the app
 app.start(document.body, state, view, update);
 ```
-<apprun-code></apprun-code>
+<apprun-play></apprun-play>
 
 !!! note
     Most of the code snippets in this guide are interactive. Try edit and see the results.

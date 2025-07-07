@@ -28,7 +28,7 @@ const update = {
 
 app.start(document.body, state, view, update);
 ```
-<apprun-code hide-src></apprun-code>
+<apprun-play hide-src></apprun-play>
 
 ### State
 
@@ -87,7 +87,7 @@ Let's make the _Counter_ a bitter complicated to show how many times each button
 ```js
 --8<-- "counter.js"
 ```
-<apprun-code hide-code="true" style="border: dotted gray 1px"></apprun-code>
+<apprun-play hide-code="true" style="border: dotted gray 1px"></apprun-play>
 
 The code below uses jQuery. jQuery is a library that provides the convenience to access and manipulate the DOM. It does not give any architectural guidance. jQuery code is similar to the vanilla JavaScript code that can go wild.
 A jQuery Example
@@ -182,7 +182,7 @@ Finally, We have a _ counter _ application shown below by putting the _state, _v
 ```js
 --8<-- "counter.js"
 ```
-<apprun-code></apprun-code>
+<apprun-play></apprun-play>
 
 You can see that with the help of AppRun state management and DOM differential rendering, we no longer have the **Direct State Update** with **Rendering Fragments** problems.
 
@@ -210,7 +210,7 @@ const rendered = count => console.log(count);
 app.start(document.body, 0, view, null, { rendered });
 console.log('mounted!');
 ```
-<apprun-code hide_src="true" hide_button="true"></apprun-code>
+<apprun-play hide_src="true" hide_button="true"></apprun-play>
 
 ### The Essence
 
@@ -251,7 +251,7 @@ const rendered = count => console.log(count);
 app.start(document.body, 0, view, null, { rendered });
 console.log('mounted!');
 ```
-<apprun-code></apprun-code>
+<apprun-play></apprun-play>
 
 In the example above,
 

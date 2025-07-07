@@ -33,7 +33,7 @@ Let's use the _Counter_ app as an example and code it directly in the HTML file.
 </body>
 </html>
 ```
-<apprun-code></apprun-code>
+<apprun-play></apprun-play>
 
 !!! note
     Browsers dont support JSX, so we use the _html_ function (Template literals) in the _view_ function to create HTML elements.
@@ -69,7 +69,7 @@ Let's re-create the _Counter_ app as a component.
 </body>
 </html>
 ```
-<apprun-code></apprun-code>
+<apprun-play></apprun-play>
 
 !!! note
     Components have local event events. We use _this.run_ instead of _app.run_ to publish local events.
@@ -107,7 +107,7 @@ app.render(document.body, <App />);
 [About, Contact, Home]
   .map(C => new C().start('pages'));
 ```
-<apprun-code code-width="50%"></apprun-code>
+<apprun-play code-width="50%"></apprun-play>
 
 !!! note
     We have just created a simple SPA using components. In a real-world scenario, usually, create pages as modules and bundle them together or load them dynamically. See the [Single Page App](spa.md) for more details.
@@ -150,7 +150,7 @@ AppRun components can be defined as web components/custom elements and used in H
 </html>
 
 ```
-<apprun-code></apprun-code>
+<apprun-play></apprun-play>
 
 !!! note
     We have create a web component / custom element and used it three times.

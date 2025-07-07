@@ -39,7 +39,7 @@ const update = {
 };
 app.start(document.body, state, view, update);
 ```
-<apprun-code></apprun-code>
+<apprun-play></apprun-play>
 
 When one of the buttons is clicked, it publishes AppRun event +1 or -1. The event handlers increase or decrease the state and return a new state. The view function creates the virtual DOM using the new state. Finally, AppRun renders the virtual DOM.
 
@@ -87,7 +87,7 @@ const view = count => <button $onclick={add}>
 app.start(document.body, 0, view);
 
 ```
-<apprun-code></apprun-code>
+<apprun-play></apprun-play>
 
 You can see, because there are no events in this case, we don't need the _update_ object anymore.
 
@@ -114,7 +114,7 @@ const view = state => {
 };
 app.start(document.body, 0, view, {add});
 ```
-<apprun-code></apprun-code>
+<apprun-play></apprun-play>
 
 The _run_ directive will:
 
@@ -147,7 +147,7 @@ const update = {
 };
 app.start(document.body, state, view, update);
 ```
-<apprun-code style="height:300px"></apprun-code>
+<apprun-play style="height:300px"></apprun-play>
 
 ## Use Events for Everything
 
