@@ -54,6 +54,7 @@ nav:
       - Event Pubsub: event-pubsub.md
       - State Management: state-management.md
       - Component: component.md
+      - Architecture Practices: architecture-practices.md
       - Reactivity: reactivity.md
     - Examples:
       - Microservice wirh Dapr: architecture-ideas/dapr.md

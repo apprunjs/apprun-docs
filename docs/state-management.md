@@ -20,7 +20,7 @@ We can define the initial state as a function. And even an asynchronous function
 ```js
 // Init State as an Async Function
 const state = async () => {
-  const response = await fetch('https://my-xkcd-api.glitch.me');
+  const response = await fetch('https://xkcd-api.netlify.app');
   const comic = await response.json();
   return { comic };
 };
