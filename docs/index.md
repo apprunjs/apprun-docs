@@ -35,7 +35,7 @@ app.start(document.body, state, view, update);
 
 * AppRun is lightweight, only 6KB gzipped, but includes state management, rendering, event handling, and routing.
 
-* With only three functions: `app.start`, `app.run`, and `app.on` in its API makes it easy to learn and use. It can be used directly in the browser or with a compiler/bundler like Webpack or Vite.
+* You only need three functions to get started — `app.start`, `app.run`, and `app.on` — which makes it easy to learn and use. (The full [API Reference](api.md) covers the rest when you need it.) It can be used directly in the browser or with a compiler/bundler like Webpack or Vite.
 
 * One more thing, you can use AppRun with React to simplify state management and routing of your React applications.
 

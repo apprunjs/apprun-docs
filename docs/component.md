@@ -153,28 +153,35 @@ app.render(document.body, <MyApp />);
 
 ### mounted
 
-The _mounted_ function is called after the component instance is mounted to a DOM element. The _mounted_ function can be used to set the initialize _state_.
+The _mounted_ function runs after the component instance is mounted. It receives the
+component's `props`, `children`, and the current `state`, and may **return a new state** —
+which makes it a convenient place to merge incoming props into the state.
+
 ```js
 mounted: (props: any, children: any[], state: T) => T | void;
-
 ```
-> Note: the _mounted_ function is only called in the child component.
+
+It is called:
+
+* when you `start()` a component (with empty `props` and `children`), and
+* when the component is rendered as a **child** component in JSX (with its actual `props`
+  and `children`).
 
 ```js
 class Child extends Component {
   state = {} // you can define the initial state
-  view = state => <div></div>
+  view = state => <div>{state.name}</div>
   update = {}
-  mounted = (props, children) => { ...state, ...props } // this will be called, you can merge props into the state
+  // merge the props passed from the parent into the state
+  mounted = (props, children, state) => ({ ...state, ...props })
 }
 
 class Parent extends Component {
-  state = {} // you can define the initial state
+  state = {}
   view = state => <div>
-    <Child />
+    <Child name="AppRun" />
   </div>
   update = {}
-  mounted = () => { } // this will NOT be called when component is created using the constructor
 }
 new Parent().start(document.body);
 ```

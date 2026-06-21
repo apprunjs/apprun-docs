@@ -10,7 +10,7 @@ theme:
   features:
     - navigation.sections
 
-copyright: Copyright &copy; 2015 - 2025 Yiyi Sun
+copyright: Copyright &copy; 2015 - 2026 Yiyi Sun
 
 markdown_extensions:
   - md_in_html
@@ -39,21 +39,22 @@ extra_javascript:
   - assets/vendor/codemirror/mode/xml/xml.js
   - assets/vendor/codemirror/mode/jsx/jsx.js
   - assets/apprun-play.js
-  - assets/apprun-code.js
-
-extra:
-  analytics:
-    provider: google
-    property: UA-123786786-1
 
 nav:
   - Home: index.md
+  - Getting started:
+    - Installation: installation.md
+    - Tutorial: tutorial.md
+    - Use in the Browser (ESM): esm.md
+    - Create AppRun App: create-apprun-app.md
+    - Single Page App: spa.md
   - Concepts:
     - Architecture:
       - Overview: architecture.md
       - Event Pubsub: event-pubsub.md
       - State Management: state-management.md
       - Component: component.md
+      - Routing: routing.md
       - Architecture Practices: architecture-practices.md
       - Reactivity: reactivity.md
     - Examples:
@@ -63,11 +64,6 @@ nav:
       - Webassembly app with Rust: architecture-ideas/rust-app.md
       - State Machine: architecture-ideas/state-machine.md
       - Showcase: showcase.md
-  - Getting started:
-    - Installation: installation.md
-    - Tutorial: tutorial.md
-    - Create AppRun App: create-apprun-app.md
-    - Single Page App: spa.md
   - Advanced:
     - JSX: view-patterns.md
     - Directive: directive.md
@@ -78,6 +74,7 @@ nav:
     - Strong Typing: strong-typing.md
     - Unit Testing: unit-testing.md
     - Notebooks: notebooks.md
+    - API Reference: api.md
   - AppRun Site:
     - Create: apprun-site.md
     - Build: apprun-site-build.md

@@ -4,7 +4,7 @@ Event publication and subscription, also known as event emitter, is a commonly u
 
 * Publishing an event means raising an event for some other code to handle. Publishing an event is also referred to as firing an event or
 triggering an event.
-* Subscribing an event means registering an event handler function to the event. The event handler function executes when the correspondent event
+* Subscribing to an event means registering an event handler function to the event. The event handler function executes when the corresponding event is published.
 
 At the core, AppRun is an event pub-sub system.
 
@@ -122,6 +122,29 @@ The _run_ directive will:
 * Call the _view_ function
 * Render the HTML element (document.body)
 
+
+## Choosing your event syntax
+
+AppRun gives you several ways to wire a DOM event to a state change. They all do the same
+thing — they end up running an event handler that returns a new state. Pick the one that
+reads best for your code:
+
+| Syntax | Example | When to use |
+|--------|---------|-------------|
+| `app.run` in a handler | `onclick={() => app.run('+1')}` | Explicit global event; works in plain JS. |
+| `this.run` in a handler | `onclick={() => this.run('+1')}` | Local event inside a [component](component.md). |
+| `$on` directive (named) | `<button $onclick="+1">` | Concise; publishes a named event. |
+| `$on` directive (function) | `<button $onclick={s => s + 1}>` | Inline handler, no `update` entry needed. |
+| `$on` directive (tuple) | `<button $onclick={['add', 1]}>` | Pass extra arguments to a named event. |
+| lit-html `run` directive | `@click=${run('add', 1)}` | The `html` template equivalent of `$on`. |
+
+Notes:
+
+* `app.run` publishes **global** events; `this.run` publishes **local** component events.
+  Prefix a name with `#`, `/`, or `@` to make a component event global.
+* The `$on` directive and the lit-html `run` directive are equivalent — use `$on` with JSX
+  and `run` with the `html` template function.
+* When you pass a **function** (not a name), you don't need an `update` object at all.
 
 ## Asynchronous Events
 

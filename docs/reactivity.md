@@ -11,9 +11,9 @@ Reactivity has been a hot buzzword for modern JavaScript UI frameworks in the pa
 
 Reactivity means that the changed application state will automatically reflect in the DOM.
 
-> Don't be confuse the _reactivity_ with another buzz word, _reactive programming_. Reactive programming is programming with asynchronous data streams. I will have another post to explain _reactive programming_.
+> Don't confuse _reactivity_ with another buzz word, _reactive programming_. Reactive programming is programming with asynchronous data streams. I will have another post to explain _reactive programming_.
 
-Reactivity is related to the _data binding_ concept. _Data binding_ is the process that establishes a connection between the application state and the application UI. There are two major types of _data binding_: _one-way bing_ and _two-binding_.
+Reactivity is related to the _data binding_ concept. _Data binding_ is the process that establishes a connection between the application state and the application UI. There are two major types of _data binding_: _one-way binding_ and _two-way binding_.
 
 * _One-way binding_ means that changes in the application state cause changes to the application UI.
 
@@ -30,7 +30,7 @@ Many frameworks use the concept of "variable assignments trigger UI updates." E.
 Unlike other frameworks, AppRun uses the [events](https://observablehq.com/@yysun/apprun-events-evolved) to trigger UI updates following the event-driven web programming model naturally. During an AppRun _event lifecycle_:
 
 * AppRun gives you the current _state_ for you to create a new _state_
-* AppRun calls your _view_ function to create a virtual
+* AppRun calls your _view_ function to create a virtual DOM
 * AppRun renders the virtual DOM if it is not null.
 
 You can feel the [Hollywood Principle](https://wiki.c2.com/?HollywoodPrinciple) (Don't call us. We call you.) here, which usually means things are loosely coupled. We provide code pieces. The framework calls them when needed.
@@ -40,7 +40,7 @@ In the example below, the AppRun $onclick directive calls the event handler, the
 ```js
 const view = state => <div>
   <h1>{state}</h1>
-  <button $onclick={state => state - 1}>+1</button>
+  <button $onclick={state => state - 1}>-1</button>
   <button $onclick={state => state + 1}>+1</button>
 </div>;
 

@@ -1,6 +1,6 @@
 # Directives
 
-AppRun directives are syntax sugars that help simplify the code. They are custom attributes in JSX that have names starting with $. AppRun two out-of-the-box directives: $on and $bind.
+AppRun directives are syntax sugars that help simplify the code. They are custom attributes in JSX that have names starting with $. AppRun has two out-of-the-box directives: $on and $bind.
 
 ## $on...
 

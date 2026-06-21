@@ -1,6 +1,6 @@
 # State Management
 
-The _State_, one of three main parts of the AppRun architecture, plays an essential role in the AppRun event lifecycle. It is the equivalent of the _Model_ of Elm architecture. Elm defines the Model as the application state. Modal and State are two names of the same thing. Therefore, they are interchangeable in the AppRun architecture. Most of the time, we use the term State in AppRun.
+The _State_, one of three main parts of the AppRun architecture, plays an essential role in the AppRun event lifecycle. It is the equivalent of the _Model_ of Elm architecture. Elm defines the Model as the application state. Model and State are two names of the same thing. Therefore, they are interchangeable in the AppRun architecture. Most of the time, we use the term State in AppRun.
 
 The State is the application state at any given time of your application. The State is the data flow between Update and View. It acts as the data transfer object (DTO) in traditional multilayered application architecture, where the DTO is an object that carries data between logical and physical layers.
 

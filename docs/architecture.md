@@ -1,6 +1,6 @@
 # AppRun Architecture
 
-AppRun is designed to simplify web application development by implementing the architecture, which ont only enhances code readability but also improves maintainability and scalability, making your development process more efficient.
+AppRun is designed to simplify web application development by implementing an architecture that not only enhances code readability but also improves maintainability and scalability, making your development process more efficient.
 
 ## Architecture Overview
 
@@ -32,7 +32,7 @@ app.start(document.body, state, view, update);
 
 ### State
 
-The _state_ can be any data structure, a number, an array, or an object that reflects the state of the application. In the _ Counter_ example, it is a number.
+The _state_ can be any data structure, a number, an array, or an object that reflects the state of the application. In the _Counter_ example, it is a number.
 
 ```js
 const state = 0;
@@ -47,7 +47,7 @@ The _view_ generates Virtual DOM based on the state. Finally, AppRun calculates 
 
 ```js
 const view = state => <div>
-  <h1>${state}</h1>
+  <h1>{state}</h1>
   <button $onclick="-1">-1</button>
   <button $onclick="+1">+1</button>
 </div>;
@@ -82,7 +82,7 @@ Next, let's review some of the benefits of AppRun Architecture.
 
 AppRun solves two challenging problems commonly found in application development:
 
-Let's make the _Counter_ a bitter complicated to show how many times each button clicked.
+Let's make the _Counter_ a bit more complicated to show how many times each button is clicked.
 
 ```js
 --8<-- "counter.js"
@@ -175,9 +175,9 @@ const view = ({ count, count_plus, count_minus }) => html`
   <button onclick="app.run('plus')">+ (${count_plus})</button>`
 ```
 
-The _view_ function always returns the same result as long as the _state_ is the same. It also does not change the _state_ or anything outside the function, which means it has no side effects. Therefore, the _view_ function is a _pure function_. There are many benefits of using the _pure__ function_, including but not limited to unit testing.
+The _view_ function always returns the same result as long as the _state_ is the same. It also does not change the _state_ or anything outside the function, which means it has no side effects. Therefore, the _view_ function is a _pure function_. There are many benefits of using the _pure function_, including but not limited to unit testing.
 
-Finally, We have a _ counter _ application shown below by putting the _state, _view_, and _update_ together.
+Finally, we have a _counter_ application shown below by putting the _state_, _view_, and _update_ together.
 
 ```js
 --8<-- "counter.js"

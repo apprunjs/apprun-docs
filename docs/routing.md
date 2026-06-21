@@ -1,63 +1,173 @@
 # Routing
 
-Routing in AppRun is event-driven. Therefore, handling routing using events is straightforward.
+Routing in AppRun is event-driven. When the URL changes, the AppRun router publishes an
+AppRun event using the URL as the event name. Components (or plain `app.on` handlers)
+subscribe to those events. There is no separate routing configuration — routing is just
+the event pub-sub system applied to the URL.
 
-## Routing Event
+## How it works
 
-AppRun router detects the _hash_ changes in the URL (by listening to the window's _onpopstate_ event) and publishes the AppRun events using the _hash_ as the event name. Components subscribe to the routing events.
+The router listens to the browser and publishes events automatically:
 
-E.g., when the URL in the browser address bar becomes http://..../#counter, it triggers the _#counter_ event. The _Counter_ component reacts to the _#counter_ and renders itself to the screen.
+* On `hashchange`, it routes `location.hash`.
+* On `popstate`, it routes `location.pathname`.
+* For path routing, it also intercepts same-origin `<a>` clicks, calls
+  `history.pushState`, and routes the new path — so plain links just work, no extra code.
 
-That's it. There is no other code for routing.
+When the URL becomes `#/contact`, the router publishes the `#/contact` event. A component
+that subscribes to `#/contact` reacts and renders itself. That's the whole mechanism.
 
-## Unhandled Routes
+```js
+class Contact extends Component {
+  view = () => <div>Contact</div>;
+  update = { '#/contact': state => state };
+}
+```
 
-When the AppRun router triggers an AppRun event with no listener for the route, the router will automatically generate a ROUTER_404_EVENT AppRun event giving the application a chance to degrade gracefully by, perhaps, displaying a 404 page. To bind to this event, here are a few examples of things you can do:
+## Hash routing vs. path routing
+
+AppRun supports three URL styles, and **auto-detects** which mode to use:
+
+| Style | Example event name | Notes |
+|-------|-------------------|-------|
+| Hash | `#contact` | Hash fragment, no slash |
+| Hash-slash | `#/contact` | Hash fragment with slash (recommended for SPAs) |
+| Path | `/contact` | Clean URLs via the History API |
+
+If any `#` or `#/` route handler is registered, AppRun uses **hash routing** and listens to
+`hashchange`. Otherwise it uses **path routing**, listens to `popstate`, and intercepts
+link clicks.
+
+* **Hash routing** works anywhere with no server configuration — the server only ever sees
+  the page before the `#`. It is the safest choice for static hosting and the interactive
+  examples in these docs.
+* **Path routing** produces clean URLs (`/contact`) but requires the server to serve your
+  `index.html` for every route (SPA fallback), so a deep-link reload like
+  `https://site/contact` doesn't 404.
+
+Pick one style and use it consistently across your routes.
+
+## Route parameters
+
+Routes can capture parameters with `:param` and a trailing `*` rest segment. Captured
+values are passed to the event handler as arguments.
+
+```js
+// #/users/123  ->  id = "123"
+app.on('#/users/:id', (state, id) => { /* ... */ });
+
+// #/files/a/b/c  ->  rest = "a/b/c"
+app.on('#/files/*', (state, rest) => { /* ... */ });
+```
+
+## Hierarchical routing
+
+If there is no exact (or pattern) match, the router walks **up** the path and fires the
+closest parent handler, passing the remaining segments as arguments.
+
+```
+For URL: /api/v1/users/123
+Router tries: /api/v1/users/123 → /api/v1/users → /api/v1 → /api → 404
+```
+
+If a handler is registered for `/api`, it receives the leftover segments:
+
+```js
+// matches /api/v1/users/123  ->  args = 'v1', 'users', '123'
+app.on('/api', (state, ...segments) => { /* ... */ });
+```
+
+The router stops before the root handlers (`/`, `#`, `#/`) and fires the 404 event instead,
+so a missing route never accidentally activates the home page.
+
+## Programmatic navigation
+
+Publish the built-in `route` event to navigate from code:
+
+```js
+app.run('route', '#/contact');
+```
+
+For path routing this updates the History API and routes the new path.
+
+## Sub-directory deployments (basePath)
+
+If your app is served from a sub-directory, set `app.basePath`. The router strips it before
+matching, and adds it back when navigating, so your route names stay relative.
+
+```js
+app.basePath = '/myapp';
+// Navigation goes to /myapp/users/123
+// Routing matches    /users/123
+```
+
+## Declarative routes with addComponents
+
+`app.addComponents` maps routes directly to components (instances, classes, or functions
+that return them), mounting each to a shared element.
+
+```js
+import app from 'apprun';
+import Home from './Home';
+import About from './About';
+
+app.addComponents('#pages', {
+  '#/':       Home,
+  '#/about':  About,
+  // lazy-loaded:
+  '#/contact': () => import('./Contact').then(m => m.default),
+});
+```
+
+## Unhandled routes (404)
+
+When no handler matches a route, the router publishes `ROUTER_404_EVENT`, giving the app a
+chance to degrade gracefully (for example, a 404 page).
 
 ```js
 import app, { Component, ROUTER_404_EVENT } from 'apprun';
 
-// Generate an error message when there's no handler for a URL.
-app.on(ROUTER_404_EVENT, (url, ..._rest) => console.error('No event handler for', url));
+// Log unmatched routes.
+app.on(ROUTER_404_EVENT, (url) => console.error('No route handler for', url));
 
-// Alternatively, create a component that will display a message.
-class NoRouteComponent extends Component {
-  state = {};
-
-  view = (state) => {
-    return <><h1>PAGE NOT FOUND! WE SUCK!</h1></>
-  }
-
-  // Handle the "no route found" events with this component
+// Or render a not-found page.
+class NotFound extends Component {
+  view = () => <h1>Page not found</h1>;
   update = {
     [ROUTER_404_EVENT]: state => state
-  }
+  };
 }
-
-new NoRouteComponent().mount( on some element );
+new NotFound().mount('#pages');
 ```
 
-## Pretty Links
+## The ROUTER_EVENT
 
-If you would prefer to use pretty links (i.e., non-hash links) and have HTML5 browser history, then you can implement a new router yourself or use the pretty router from the [apprun-router](https://github.com/phBalance/apprun-router) package. This router also handles unknown routes via the ROUTER_404_EVENT and has a few other goodies to make life easier.
-
-## Replacing Default Router
-
-Replacing AppRun's default router couldn't be easier. Just overwrite _app.route_, and you're off to the races. You'll also want to bind to the _popstate_ events and trigger the first URL event (via the DOMContentLoaded event handler in the code example below):
+After every routing attempt (matched or not), the router also publishes `ROUTER_EVENT` with
+the route name and arguments. Subscribe to it for cross-cutting concerns such as analytics
+or highlighting the active menu item.
 
 ```js
-// A simplistic but not great router.
-function newRouter(url: string) {
+import app, { ROUTER_EVENT } from 'apprun';
+app.on(ROUTER_EVENT, (url, ...args) => console.log('routed to', url, args));
+```
+
+## Replacing the default router
+
+Routing is just `app.route`. To use a custom router, overwrite `app.route` and wire up the
+browser events yourself:
+
+```js
+import app, { ROUTER_EVENT } from 'apprun';
+
+function myRouter(url) {
   app.run(url);
   app.run(ROUTER_EVENT, url);
 }
 
-// Kick off the first URL event when the DOM is loaded.
-document.addEventListener("DOMContentLoaded", () => {
-  window.onpopstate = app["route"](location.pathname, true);
-  newRouter(location.pathname);
+app.route = myRouter;
+
+document.addEventListener('DOMContentLoaded', () => {
+  window.onpopstate = () => myRouter(location.pathname);
+  myRouter(location.pathname);
 });
-
-app["route"] = newRouter;
 ```
-

@@ -1,5 +1,21 @@
 # Use AppRun in the browser
 
+## Which bundle to use
+
+AppRun ships several builds. Choose by how you write your views and whether you want ES
+modules:
+
+| Entry | Globals exposed | Template style | Use when |
+|-------|-----------------|----------------|----------|
+| `dist/apprun-html.js` | `app`, `html`, `svg`, `run`, `Component` | `html` template literals | Quick start in a `<script>` tag, no build step. |
+| `dist/apprun-html.esm.js` | (ESM imports) | `html` template literals | `<script type="module">`, no build step. |
+| `dist/apprun.esm.js` | (ESM imports) | Bring your own renderer | ESM + a third-party renderer via `app.use_render`. |
+| `npm install apprun` | (ESM imports) | JSX (with a compiler) | Projects using Vite/webpack/esbuild and JSX. |
+
+The `html` and `svg` functions are lit-html template tags. The `run` function is the
+lit-html equivalent of the `$on` directive. JSX requires a compiler, so it is not available
+in the script-tag builds.
+
 ## Get AppRun from CDN
 
 You can use AppRun directly from the unpkg.com CDN:

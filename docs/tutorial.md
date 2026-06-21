@@ -72,34 +72,34 @@ Let's re-create the _Counter_ app as a component.
 <apprun-play></apprun-play>
 
 !!! note
-    Components have local event events. We use _this.run_ instead of _app.run_ to publish local events.
+    Components have local events. We use _this.run_ instead of _app.run_ to publish local events.
 
 
 ## Use Components for SPA
 
-We can easily make a single-page page (SPA) using AppRun components. Each page is a component that can be activated by anchor links like #Home, #contact, and #about.
+We can easily make a single-page app (SPA) using AppRun components. Each page is a component that can be activated by anchor links like #/home, #/contact, and #/about.
 
 ```js
 class Home extends Component {
   view = () => <div>Home</div>;
-  update = {'#, #home': state => state };
+  update = {'#/, #/home': state => state };
 }
 
 class Contact extends Component {
   view = () => <div>Contact</div>;
-  update = {'#contact': state => state };
+  update = {'#/contact': state => state };
 }
 
 class About extends Component {
   view = () => <div>About</div>;
-  update = {'#about': state => state };
+  update = {'#/about': state => state };
 }
 
 const App = () => <>
   <div id="menus">
-    <a href="#home">Home</a>{' | '}
-    <a href="#contact">Contact</a>{' | '}
-    <a href="#about">About</a></div>
+    <a href="#/home">Home</a>{' | '}
+    <a href="#/contact">Contact</a>{' | '}
+    <a href="#/about">About</a></div>
   <div id="pages"></div>
 </>
 
@@ -153,7 +153,7 @@ AppRun components can be defined as web components/custom elements and used in H
 <apprun-play></apprun-play>
 
 !!! note
-    We have create a web component / custom element and used it three times.
+    We have created a web component / custom element and used it three times.
 
 <br />
 

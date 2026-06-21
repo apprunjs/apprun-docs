@@ -19,7 +19,7 @@ AppRun SPA usually includes an HTML file, the main program that renders the scre
 │  ├─ About.tsx
 │  ├─ Contact.tsx
 │  ├─ Home.tsx
-│  ├─ Layour.tsx
+│  ├─ Layout.tsx
 │  └─ main.tsx
 └─ index.html
 ```
@@ -47,11 +47,13 @@ import About from './About';
 import Contact from './Contact';
 import Layout from './Layout';
 
+// The Layout renders the page shell, including the <div id="pages"></div> host.
 new Layout().start(document.getElementById('main'));
-const element = document.getElementById('my-app');
-new Home().start(element);
-new About().mount(element);
-new Contact().mount(element);
+
+// Mount every page to the same host element. Each page is activated by its route.
+new Home().start('pages');     // start renders the default/home page right away
+new About().mount('pages');    // mount waits for its route event
+new Contact().mount('pages');
 ```
 
 ![](imgs/Figure_7-2.png)
@@ -68,21 +70,24 @@ import Layout from './Layout';
 
 new Layout().start(document.getElementById('main'));
 
-app.on('#,#home', async () => {
+app.on('#/, #/home', async () => {
   const module = await import('./home');
-  new module.default().mount(element);
+  new module.default().mount('pages');
 });
 
-app.on('#about', async () => {
+app.on('#/about', async () => {
   const module = await import('./about');
-  new module.default().mount(element);
+  new module.default().mount('pages');
 });
 
-app.on('#contact', async () => {
+app.on('#/contact', async () => {
   const module = await import('./contact');
-  new module.default().mount(element);
+  new module.default().mount('pages');
 })
 ```
+
+See [Routing](routing.md) for hash vs. path routing, route parameters, and lazy loading
+with `app.addComponents`.
 
 
 
